@@ -25,4 +25,8 @@ function solution(number){
     return sum;
   }
 //TESTCASES--
- 
+console.log(solution(-1))//0
+console.log(solution(0))//0
+console.log(solution(2))//0
+console.log(solution(5))//8
+console.log(solution(10))//23
