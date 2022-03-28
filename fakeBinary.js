@@ -17,7 +17,7 @@ Then I will join the elements together into one array
 */ 
 function fakeBin(x){
     return x.split('')
-            .map(x=>x<5?0:1)
+            .map(x => x < 5 ? 0 : 1)
             .join('');
   }
 //TESTCASES--
