@@ -26,18 +26,48 @@ If it is divisible by 3, add Fizz to the end of the array
 If it is divisible by 5, add Buzz to the end of the array
 If it is divisible by neither, add the number to the end of the array
  */
+// function fizzbuzz(n) {
+// 	let arr = [];
+// 	for (let i = 1; i <= n; i++) {
+// 		if (i % 5 === 0 && i % 3 === 0) {
+// 			arr.push('FizzBuzz');
+// 		} else if (i % 5 === 0) {
+// 			arr.push('Buzz');
+// 		} else if (i % 3 === 0) {
+// 			arr.push('Fizz');
+// 		} else arr.push(i);
+// 	}
+// 	return arr;
+// }
+
+// function fizzbuzz(n) {
+// 	let arr = Array(n);
+// 	for (let i = 1; i <= n; i++) {
+// 		if (i % 5 === 0 && i % 3 === 0) {
+// 			arr[i - 1] = 'FizzBuzz';
+// 		} else if (i % 5 === 0) {
+// 			arr[i - 1] = 'Buzz';
+// 		} else if (i % 3 === 0) {
+// 			arr[i - 1] = 'Fizz';
+// 		} else arr[i - 1] = i;
+// 	}
+// 	return arr;
+// }
+
 function fizzbuzz(n) {
-	let arr = [];
-	for (let i = 1; i <= n; i++) {
+	return [...Array(n)].map((x, i) => {
+		++i;
 		if (i % 5 === 0 && i % 3 === 0) {
-			arr.push('FizzBuzz');
-		} else if (i % 5 === 0) {
-			arr.push('Buzz');
-		} else if (i % 3 === 0) {
-			arr.push('Fizz');
-		} else arr.push(i);
-	}
-	return arr;
+			return 'FizzBuzz';
+		}
+		if (i % 5 === 0) {
+			return 'Buzz';
+		}
+		if (i % 3 === 0) {
+			return 'Fizz';
+		}
+		return i;
+	});
 }
 //TESTCASES--
 console.log(fizzbuzz(15));
