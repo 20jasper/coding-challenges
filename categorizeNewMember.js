@@ -25,12 +25,25 @@ I will use map to replace the array with the appropriate string
 I will check to see if the player is 55 or older and if if the player's handicap is greater than 7
 If not return 'Open'
 If so, return 'Senior'
+
+After finding out about destructuring, I refactored my solution
 */
 
+// original solution
+// function openOrSenior(data) {
+//     return data.map(player => {
+//         const age = player[0]
+//         const handicap = player[1]
+//         if (age >= 55 && handicap > 7) {
+//             return 'Senior'
+//         }
+//         return 'Open'
+//     })
+// }
+
+//refactored version
 function openOrSenior(data) {
-    return data.map(player => {
-        const age = player[0]
-        const handicap = player[1]
+    return data.map(([age, handicap]) => {
         if (age >= 55 && handicap > 7) {
             return 'Senior'
         }
