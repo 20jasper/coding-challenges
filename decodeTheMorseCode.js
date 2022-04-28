@@ -46,7 +46,7 @@ Good luck!
 //SOLUTION--
 /* I am going to split the string into an array by spaces and then use map to replace the string with the appropriate value given by the Morse code dictionary
 
-I didn't account for spaces, so I trimmed extra spaces around the beginning and end, and implemented logic to add a space if the current element and last element are empty characters
+I didn't account for spaces, so I trimmed extra spaces around the beginning and end, and implemented logic to add a space if there are three empty characters in a row
 */
 const decodeMorse = function (morseCode) {
     let lastElementIsEmpty = false
