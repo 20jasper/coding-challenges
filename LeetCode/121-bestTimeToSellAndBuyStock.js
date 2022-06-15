@@ -85,6 +85,10 @@ This solution has a time complexity of O(n) and a time complexity of O(1)
  * @return {number}
  */
 const maxProfit = function (prices) {
+    //if the array is one long or empty, return 0
+    if (prices.length < 2) {
+        return 0
+    }
     let maxProfit = 0
     let buyPrice = prices[0]
     //iterate through the array
