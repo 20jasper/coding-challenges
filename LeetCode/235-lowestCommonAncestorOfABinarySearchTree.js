@@ -101,6 +101,7 @@ I realized that the first two checks (check if the root is equal to p or q) are 
  * @return {TreeNode}
  */
 const lowestCommonAncestor = function (root, p, q) {
+    //forever
     while (root !== undefined) {
         // If the value of the root node is more than the value of p and q, 
         if (root.val > p.val && root.val > q.val) {
