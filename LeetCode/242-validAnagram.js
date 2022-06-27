@@ -52,7 +52,7 @@ const isAnagram = function (str, strTest) {
     const letters = {}
     for (let i = 0; i < str.length; i++) {
         const char = str[i];
-        //if the key doesn't exist, set it equal to 0
+        //if the key doesn't exist, set it equal to 1
         if (letters[char] === undefined) {
             letters[char] = 1
         }
