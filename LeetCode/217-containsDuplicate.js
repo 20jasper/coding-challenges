@@ -45,11 +45,11 @@ return false
 const containsDuplicate = function (nums) {
 	const obj = {}
 	for (let i = 0; i < nums.length; i++) {
-		// if the number exists in the array, return true
+		// if the number does not exist in the array, define it (the value is arbitrary, but I chose "whatever you want" here—anything that isn't undefined should work
 		if (obj[nums[i]] === undefined) {
-			obj[nums[i]] = true
+			obj[nums[i]] = "whatever you want"
 		}
-		// else add the key to the hashmap
+		// else if the key already exists in the hashmap, return true
 		else {
 			return true
 		}
