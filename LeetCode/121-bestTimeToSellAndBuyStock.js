@@ -78,7 +78,7 @@ Iterate through the array
         If so, set the buy price to the current price
 return the maxProfit
 
-This solution has a time complexity of O(n) and a time complexity of O(1)
+This solution has a time complexity of O(n) and a space complexity of O(1)
 */
 /**
  * @param {number[]} prices
