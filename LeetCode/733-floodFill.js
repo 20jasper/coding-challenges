@@ -29,12 +29,12 @@ Explanation: The starting pixel is already colored 0, so no changes are made to 
 
 Constraints:
 
-    m == image.length
-    n == image[i].length
-    1 <= m, n <= 50
-    0 <= image[i][j], color < 216
-    0 <= sr < m
-    0 <= sc < n
+		m == image.length
+		n == image[i].length
+		1 <= m, n <= 50
+		0 <= image[i][j], color < 216
+		0 <= sr < m
+		0 <= sc < n
 
 
 */
@@ -54,48 +54,99 @@ change run the function on the pixels in the four surrounding directions that ar
  * @return {number[][]}
  */
 const floodFill = (image, startRow, startColumn, newColor, firstColor = image[startRow][startColumn]) => {
+	// If the starting pixel is outside of the image or the starting pixel is the same color as the new color, or the color is different from the original pixel, return the image
+	if (startRow < 0 ||
+		startColumn < 0 ||
+		startRow >= image.length ||
+		startColumn >= image[0].length ||
+		image[startRow][startColumn] !== firstColor ||
+		image[startRow][startColumn] === newColor) {
+		return image
+	}
 
-    // If the starting pixel is outside of the image or the starting pixel is the same color as the new color, or the color is different from the original pixel, return the image
-    if (startRow < 0 ||
-        startColumn < 0 ||
-        startRow >= image.length ||
-        startColumn >= image[0].length ||
-        image[startRow][startColumn] !== firstColor ||
-        image[startRow][startColumn] === newColor) {
-        return image
-    }
+	// change the pixel color to the new color
+	image[startRow][startColumn] = newColor
 
-    // change the pixel color to the new color
-    image[startRow][startColumn] = newColor
-
-    //run the function on all the pixels surrounding the original four directionally
-    floodFill(image, startRow, startColumn + 1, newColor, firstColor);
-    floodFill(image, startRow, startColumn - 1, newColor, firstColor);
-    floodFill(image, startRow + 1, startColumn, newColor, firstColor);
-    floodFill(image, startRow - 1, startColumn, newColor, firstColor);
-    //return the image
-    return image
+	//run the function on all the pixels surrounding the original four directionally
+	floodFill(image, startRow, startColumn + 1, newColor, firstColor);
+	floodFill(image, startRow, startColumn - 1, newColor, firstColor);
+	floodFill(image, startRow + 1, startColumn, newColor, firstColor);
+	floodFill(image, startRow - 1, startColumn, newColor, firstColor);
+	//return the image
+	return image
 };
 
 // TESTCASES--
 console.log(floodFill([
-    [1, 1, 1],
-    [1, 1, 0],
-    [1, 0, 1]], 1, 1, 2), [
-    [2, 2, 2],
-    [2, 2, 0],
-    [2, 0, 1]]);
+	[1, 1, 1],
+	[1, 1, 0],
+	[1, 0, 1]], 1, 1, 2), [
+	[2, 2, 2],
+	[2, 2, 0],
+	[2, 0, 1]]);
 console.log(floodFill([
-    [1, 1, 1],
-    [1, 1, 0],
-    [1, 0, 1]], 1, 2, 2), [
-    [1, 1, 1],
-    [1, 1, 2],
-    [1, 0, 1]]);
+	[1, 1, 1],
+	[1, 1, 0],
+	[1, 0, 1]], 1, 2, 2), [
+	[1, 1, 1],
+	[1, 1, 2],
+	[1, 0, 1]]);
 console.log(floodFill([
-    [0]], 0, 0, 1), [
-    [1]]);
+	[0]], 0, 0, 1), [
+	[1]]);
 console.log(floodFill([
-    [1]], 0, 0, 1), [
-    [1]]);
+	[1]], 0, 0, 1), [
+	[1]]);
 
+/* Optimizations
+Used optional chaining for readability
+*/
+/**
+ * @param {*} image 
+ * @param {*} startRow 
+ * @param {*} startColumn 
+ * @param {*} newColor 
+ * @return {number[][]}
+ */
+const floodFill2 = (image, startRow, startColumn, newColor, firstColor = image[startRow][startColumn]) => {
+
+	// If the starting pixel is outside of the image or the starting pixel is the same color as the new color, or the color is different from the original pixel, return the image
+	if (image?.[startRow]?.[startColumn] === undefined ||
+		image[startRow][startColumn] !== firstColor ||
+		image[startRow][startColumn] === newColor) {
+		return image
+	}
+
+	// change the pixel color to the new color
+	image[startRow][startColumn] = newColor
+
+	//run the function on all the pixels surrounding the original four directionally
+	floodFill2(image, startRow, startColumn + 1, newColor, firstColor);
+	floodFill2(image, startRow, startColumn - 1, newColor, firstColor);
+	floodFill2(image, startRow + 1, startColumn, newColor, firstColor);
+	floodFill2(image, startRow - 1, startColumn, newColor, firstColor);
+	//return the image
+	return image
+};
+
+// TESTCASES--
+console.log(floodFill2([
+	[1, 1, 1],
+	[1, 1, 0],
+	[1, 0, 1]], 1, 1, 2), [
+	[2, 2, 2],
+	[2, 2, 0],
+	[2, 0, 1]]);
+console.log(floodFill2([
+	[1, 1, 1],
+	[1, 1, 0],
+	[1, 0, 1]], 1, 2, 2), [
+	[1, 1, 1],
+	[1, 1, 2],
+	[1, 0, 1]]);
+console.log(floodFill2([
+	[0]], 0, 0, 1), [
+	[1]]);
+console.log(floodFill2([
+	[1]], 0, 0, 1), [
+	[1]]);
