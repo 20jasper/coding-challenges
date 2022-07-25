@@ -140,3 +140,78 @@ console.log(gameOfLife([
 	[1, 0]]), [
 	[1, 1],
 	[1, 1]]);
+
+//version 2 uses a for loop instead of manually checking each surrounding square
+//This solution is O(n) where n is the amount of tiles on the board and the space complexity is O(1) since it is done in place
+const gameOfLife2 = function (board) {
+
+	//iterate through the board from the top left corner
+	for (let row = 0; row < board.length; row++) {
+		for (let col = 0; col < board[0].length; col++) {
+			const liveNeighborCount = liveNeighborCheck(row, col)
+			const tile = board[row][col]
+			//if the cell is live
+			if (tile === 1 || tile === "liveToDead") {
+				//if it has less than two or more than 3 live neighbors
+				if (liveNeighborCount < 2 || liveNeighborCount > 3) {
+					//set the value to an arbitrary value that isn't 0 or 1
+					//I chose "liveToDead" since it's easy to remember what to do with it later
+					board[row][col] = "liveToDead"
+				}
+			}
+			//else (it's dead), if it has 3 neighbors
+			else if (liveNeighborCount === 3)
+				//set the value to an arbitrary value that isn't 0, 1, or the last arbitrary value chosen
+				//I chose "deadToLive" since it's easy to remember what to do with it later
+				board[row][col] = "deadToLive"
+		}
+	}
+
+	//chenge each cell with "liveToDead" to 0 and any cell with "deadToLive" to 1
+	for (let row = 0; row < board.length; row++) {
+		for (let col = 0; col < board[0].length; col++) {
+			const tile = board[row][col]
+			if (tile === "liveToDead") {
+				board[row][col] = 0
+			}
+			else if (tile === "deadToLive") {
+				board[row][col] = 1
+			}
+		}
+	}
+	function liveNeighborCheck(rowMiddle, colMiddle) {
+		let count = 0
+		//iterate through a 3x3 square with the center being the row and column passed in
+		for (let row = rowMiddle - 1; row <= rowMiddle + 1; row++) {
+			for (let col = colMiddle - 1; col <= colMiddle + 1; col++) {
+				//if the tile is not the center
+				if (!(row === rowMiddle && col === colMiddle)) {
+					const tile = board?.[row]?.[col]
+					//if the tile is in bounds and live
+					if (tile === 1 || tile === "liveToDead") {
+						//increment the count
+						count++
+					}
+				}
+			}
+		}
+		//return the count
+		return count
+	}
+}
+
+//TESTCASES--
+console.log(gameOfLife2([
+	[0, 1, 0],
+	[0, 0, 1],
+	[1, 1, 1],
+	[0, 0, 0]]), [
+	[0, 0, 0],
+	[1, 0, 1],
+	[0, 1, 1],
+	[0, 1, 0]]);
+console.log(gameOfLife2([
+	[1, 1],
+	[1, 0]]), [
+	[1, 1],
+	[1, 1]]);
