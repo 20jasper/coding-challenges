@@ -18,7 +18,7 @@ const orderedCount = function (text) {
 	const arr = []
 	//make a hashmap to record the indexes of each char in the array
 	const hashMap = {}
-	let uniqueCharCount = 0
+	let keyCount = 0
 	//iterate through the string
 	for (let i = 0; i < text.length; i++) {
 		const char = text[i];
@@ -32,10 +32,10 @@ const orderedCount = function (text) {
 		else {
 			//add the tuple to the array
 			arr.push([char, 1])
-			//record the tuple's index in the array
-			hashMap[char] = uniqueCharCount
-			//increment the current number of indexes in the hashMap
-			uniqueCharCount++
+			//record the tuple's index in the hashmap
+			hashMap[char] = keyCount
+			//increment the number of keys in the hashMap
+			keyCount++
 		}
 	}
 	//return the resultant array
