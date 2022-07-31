@@ -79,11 +79,11 @@ const pacificAtlantic = function (heights) {
 	//check which tiles intersect between the atlantic and pacific and add them to the resultant array
 	const intersectionArr = []
 	//iterate through each visited tile in the atlantic hash map
-	for (const key in atlanticHashMap) {
+	for (const coordinate in atlanticHashMap) {
 		//if that tile is also in the pacific hashmap
-		if (pacificHashMap[key] !== undefined) {
+		if (pacificHashMap[coordinate] !== undefined) {
 			//convert the string to a tuple of numbers and push it to the array
-			const arr = key.split("-")
+			const arr = coordinate.split("-")
 			const [row, col] = arr
 			intersectionArr.push([+row, +col])
 		}
