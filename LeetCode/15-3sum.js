@@ -47,9 +47,9 @@ const threeSum = function (nums) {
 	for (let i = 0; i < nums.length - 2; i++) {
 		for (let j = i + 1; j < nums.length - 1; j++) {
 			for (let k = j + 1; k < nums.length; k++) {
-				const num1 = array[i];
-				const num2 = array[j];
-				const num3 = array[k];
+				const num1 = nums[i];
+				const num2 = nums[j];
+				const num3 = nums[k];
 
 				if (num1 + num2 + num3 === 0) {
 					res.push([num1, num2, num3])
