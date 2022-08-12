@@ -36,6 +36,7 @@ Constraints:
 //SOLUTION--
 /* 
 The first solution that comes to mind is using a triply nested for loop and just check if they all add up to 0
+if so, add them to a set so no triplets are repeated
 This solution is O(n^3) for time and O(1) for space where n is the length of the array
 */
 /**
@@ -43,21 +44,34 @@ This solution is O(n^3) for time and O(1) for space where n is the length of the
  * @return {number[][]}
  */
 const threeSum = function (nums) {
-	const res = []
+	const set = new Set()
+	// iterate through the array from 3 points
 	for (let i = 0; i < nums.length - 2; i++) {
 		for (let j = i + 1; j < nums.length - 1; j++) {
 			for (let k = j + 1; k < nums.length; k++) {
 				const num1 = nums[i];
 				const num2 = nums[j];
 				const num3 = nums[k];
-
+				//if the 3 nums add up to 0
 				if (num1 + num2 + num3 === 0) {
-					res.push([num1, num2, num3])
+					const tripletHash = [num1, num2, num3]
+						// sort so the hash is the same every time
+						.sort((a, z) => a - z)
+						// join by a non number character to separate the numbers
+						.join("|")
+					//add the hash to the set
+					set.add(tripletHash)
 				}
 			}
 		}
 	}
-	return res
+	return [...set].map(hash => {
+		return hash
+			//split the hash back into the three nums
+			.split("|")
+			// convert the strings back into numbers
+			.map(Number)
+	})
 };
 //TESTCASES--
 console.log(threeSum([0, 1, 1]), []);
