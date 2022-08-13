@@ -86,7 +86,7 @@ const threeSum = function (nums) {
 
 //SOLUTION--
 /* 
-This time, I will loop through the array and set the target as the first number then iterate through the rest of the string
+This time, I will loop through the array and set the target as the first number then iterate through the rest of the array
 	if the number exists, add it to the hashmap with a value of 1, otherwise increment the value 
 after each loop decrement the value of that key
 
