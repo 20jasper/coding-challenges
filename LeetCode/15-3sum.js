@@ -48,32 +48,36 @@ This solution ended up timing out
 const threeSum = function (nums) {
 	const set = new Set()
 	// iterate through the array with three pointers that never overlap 
-	for (let i = 0; i < nums.length - 2; i++) {
-		for (let j = i + 1; j < nums.length - 1; j++) {
-			for (let k = j + 1; k < nums.length; k++) {
-				const left = nums[i];
-				const mid = nums[j];
-				const right = nums[k];
+	for (let left = 0; left < nums.length - 2; left++) {
+		for (let mid = left + 1; mid < nums.length - 1; mid++) {
+			for (let right = mid + 1; right < nums.length; right++) {
+				const num1 = nums[left];
+				const num2 = nums[mid];
+				const num3 = nums[right];
 				//if the 3 nums add up to 0
-				if (left + mid + right === 0) {
-					const tripletHash = [left, mid, right]
-						// sort so the hash is the same for each unique combination
-						.sort((a, z) => a - z)
-						// join by a non number character to separate the numbers
-						.join("|")
-					//add the hash to the set
+				if (num1 + num2 + num3 === 0) {
+					//hash the three values and add it to the set
+					const tripletHash = getTripletHash(num1, num2, num3)
 					set.add(tripletHash)
 				}
 			}
 		}
 	}
-	return [...set].map(hash => {
+	return [...set].map(hash => decodeHash(hash))
+	function getTripletHash(num1, num2, num3) {
+		return [num1, num2, num3]
+			// sort so the hash is the same for each unique combination
+			.sort((a, z) => a - z)
+			// join by a non number character to separate the numbers
+			.join("|")
+	}
+	function decodeHash(hash) {
 		return hash
 			//split the hash back into the three nums
 			.split("|")
 			// convert the strings back into numbers
 			.map(Number)
-	})
+	}
 };
 //TESTCASES--
 console.log(threeSum([0, 1, 1]), []);
@@ -82,18 +86,61 @@ console.log(threeSum([0, 0, 0]), [[0, 0, 0]]);
 
 //SOLUTION--
 /* 
-This time, I will sort the array first
-When iterating through the array, if the next value for a pointer is the same as the current, skip it
+This time, I will loop through the array and set the target as the first number then iterate through the rest of the string
+	if the number exists, add it to the hashmap with a value of 1, otherwise increment the value 
+after each loop decrement the value of that key
+
 */
 /**
  * @param {number[]} nums
  * @return {number[][]}
  */
 const threeSum2 = function (nums) {
-	const res = []
-	nums.sort((a, z) => a - z)
+	const set = new Set()
+	const hashMap = {}
+	for (let left = 0; left < nums.length - 1; left++) {
+		const target = nums[left]
+		//remove the current target from the pool of possible
+		hashMap[target]--
+		for (let right = left + 1; right < nums.length; right++) {
+			const num1 = nums[right]
+			const num2 = target - num1
 
-	return nums
+			//if a second number exists after the target and before num1
+			if (hashMap[num2] !== undefined) {
+				//hash the three values and add it to the set
+				const tripletHash = getTripletHash(num1, num2, target)
+				set.add(tripletHash)
+			}
+			addToHashMap(num1)
+		}
+	}
+	return [...set].map(hash => decodeHash(hash))
+	function addToHashMap(key) {
+		//if the value doesn't exist in the hashmap
+		if (hashMap[key] === undefined) {
+			//set its value equal to 1
+			hashMap[key] = 1
+		}
+		//otherwise increment the value
+		else {
+			hashMap[key]++
+		}
+	}
+	function getTripletHash(num1, num2, num3) {
+		return [num1, num2, num3]
+			// sort so the hash is the same for each unique combination
+			.sort((a, z) => a - z)
+			// join by a non number character to separate the numbers
+			.join("|")
+	}
+	function decodeHash(hash) {
+		return hash
+			//split the hash back into the three nums
+			.split("|")
+			// convert the strings back into numbers
+			.map(Number)
+	}
 };
 //TESTCASES--
 console.log(threeSum2([0, 1, 1]), []);
