@@ -152,6 +152,8 @@ const threeSum2 = function (nums) {
 
 //SOLUTION--
 /* 
+This solution first sorts the array, then uses the same three pointer approach as before, but skips duplicate values. Since the array is sorted, there is no need to store visited values anywhere
+
 This solution has a time complexity of O(n^2) and a space complexity of O(1) where n is the length of the array
 */
 /**
