@@ -80,9 +80,9 @@ const threeSum = function (nums) {
 	}
 };
 //TESTCASES--
-console.log(threeSum([0, 1, 1]), []);
-console.log(threeSum([-1, 0, 1, 2, -1, -4]), [[-1, -1, 2], [-1, 0, 1]]);
-console.log(threeSum([0, 0, 0]), [[0, 0, 0]]);
+// console.log(threeSum([0, 1, 1]), []);
+// console.log(threeSum([-1, 0, 1, 2, -1, -4]), [[-1, -1, 2], [-1, 0, 1]]);
+// console.log(threeSum([0, 0, 0]), [[0, 0, 0]]);
 
 //SOLUTION--
 /* 
@@ -143,9 +143,67 @@ const threeSum2 = function (nums) {
 	}
 };
 //TESTCASES--
-console.log(threeSum2([0, 1, 1]), []);
-console.log(threeSum2([-4, -1, -1, 0, 1, 2]), [[-1, -1, 2], [-1, 0, 1]]);
-console.log(threeSum2([0, 0, 0]), [[0, 0, 0]]);
-console.log(threeSum2([0, 0, 0, 0, 0]), [[0, 0, 0]]);
-console.log(threeSum2([-1, 0, 1, 2, -1, -4]), [[-1, -1, 2], [-1, 0, 1]]);
-console.log(threeSum2([1, 2, -2, -1]), []);
+// console.log(threeSum2([0, 1, 1]), []);
+// console.log(threeSum2([-4, -1, -1, 0, 1, 2]), [[-1, -1, 2], [-1, 0, 1]]);
+// console.log(threeSum2([0, 0, 0]), [[0, 0, 0]]);
+// console.log(threeSum2([0, 0, 0, 0, 0]), [[0, 0, 0]]);
+// console.log(threeSum2([-1, 0, 1, 2, -1, -4]), [[-1, -1, 2], [-1, 0, 1]]);
+// console.log(threeSum2([1, 2, -2, -1]), []);
+
+//SOLUTION--
+/* 
+This solution has a time complexity of O(n^2) and a space complexity of O(1) where n is the length of the array
+*/
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+const threeSum3 = function (nums) {
+	const res = []
+	nums.sort((a, z) => a - z)
+
+	//iterate through the array until the left pointer reaches the 3rd to last element or is more than 0
+	for (let left = 0; left < nums.length - 2 && nums[left] <= 0; left++) {
+		//if it's not the first iteration and the the last number is more the current, go to the next element
+		if (left > 0 && nums[left] === nums[left - 1]) continue
+
+		let mid = left + 1
+		let right = nums.length - 1
+
+		//while mid does not overlap with right
+		while (mid < right) {
+			const sum = nums[left] + nums[mid] + nums[right]
+			//if the sum is 0, push the triplet array to the resultant array and move mid and right inwards
+			if (sum === 0) {
+				res.push([nums[mid], nums[right], nums[left]])
+				//move the mid pointer to the next unique element
+				mid++
+				while (nums[mid] === nums[mid - 1] && mid < right) mid++
+				//move the right pointer to the next unique element
+				right--
+				while (nums[right] === nums[right + 1] && mid < right) right--
+			}
+			//otherwise, if the sum is too big, move the right pointer left to the next unique number
+			else if (sum > 0) {
+				right--
+				while (nums[right] === nums[right + 1] && mid < right) right--
+			}
+			//otherwise, if the sum is too small, move the mid pointer right to the next unique number
+			else {
+				mid++
+				while (nums[mid] === nums[mid - 1] && mid < right) mid++
+			}
+		}
+	}
+	return res
+};
+//TESTCASES--
+console.log(threeSum3([0, 1, 1]), []);
+console.log(threeSum3([-4, -1, -1, -1, 0, 1, 2]), [[-1, -1, 2], [-1, 0, 1]]);
+console.log(threeSum3([-4, -1, -1, 0, 1, 2, 3, 4]), [[-4, 1, 3], [-4, 0, 4], [-1, 0, 1], [-1, -1, 2]]);
+console.log(threeSum3([0, 0, 0]), [[0, 0, 0]]);
+console.log(threeSum3([0, 0, 0, 0, 0]), [[0, 0, 0]]);
+console.log(threeSum3([1, 2, -2, -1]), []);
+console.log(threeSum3([-2, 0, 1, 1, 2]), [[-2, 0, 2], [-2, 1, 1]]);
+console.log(threeSum3([1, 2, 3, 4, 5]), []);
+
