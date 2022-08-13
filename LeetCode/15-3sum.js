@@ -90,6 +90,7 @@ This time, I will loop through the array and set the target as the first number 
 	if the number exists, add it to the hashmap with a value of 1, otherwise increment the value 
 after each loop decrement the value of that key
 
+This solution has a time complexity of O(n^2) and a space complexity of O(n) where n is the length of the array
 */
 /**
  * @param {number[]} nums
@@ -97,17 +98,16 @@ after each loop decrement the value of that key
  */
 const threeSum2 = function (nums) {
 	const set = new Set()
-	const hashMap = {}
+	let hashMap = {}
+
 	for (let left = 0; left < nums.length - 1; left++) {
 		const target = nums[left]
-		//remove the current target from the pool of possible
-		hashMap[target]--
+		hashMap = {}
 		for (let right = left + 1; right < nums.length; right++) {
 			const num1 = nums[right]
-			const num2 = target - num1
-
+			const num2 = -target - num1
 			//if a second number exists after the target and before num1
-			if (hashMap[num2] !== undefined) {
+			if (hashMap[num2] !== undefined && hashMap[num2] !== 0) {
 				//hash the three values and add it to the set
 				const tripletHash = getTripletHash(num1, num2, target)
 				set.add(tripletHash)
@@ -147,3 +147,5 @@ console.log(threeSum2([0, 1, 1]), []);
 console.log(threeSum2([-4, -1, -1, 0, 1, 2]), [[-1, -1, 2], [-1, 0, 1]]);
 console.log(threeSum2([0, 0, 0]), [[0, 0, 0]]);
 console.log(threeSum2([0, 0, 0, 0, 0]), [[0, 0, 0]]);
+console.log(threeSum2([-1, 0, 1, 2, -1, -4]), [[-1, -1, 2], [-1, 0, 1]]);
+console.log(threeSum2([1, 2, -2, -1]), []);
