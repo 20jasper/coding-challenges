@@ -38,6 +38,8 @@ Constraints:
 
 //SOLUTION--
 /* 
+For this solution, iterate over the string until the a repeated char is reached. Then move the left pointer to the right to the character after the next instance of the char in the string
+
 The time complexity of this solution is O(n) and the space complexity is O(n) where n is the length of the string
 */
 /**
