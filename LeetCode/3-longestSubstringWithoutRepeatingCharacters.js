@@ -38,7 +38,7 @@ Constraints:
 
 //SOLUTION--
 /* 
-The time complexity of this solution would be O(n) and the space complexity would be O(n) where n is the length of the string
+The time complexity of this solution is O(n) and the space complexity is O(n) where n is the length of the string
 */
 /**
  * @param {string} s
