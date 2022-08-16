@@ -40,6 +40,8 @@ if the right pointer hits the end of the string, break
 if (maxLength >= right - left || right === length - 1) {
 				return maxLength
 			}
+
+This solution still needs work
 */
 /**
  * @param {string} s
