@@ -86,6 +86,9 @@ const characterReplacement = function (s, k) {
 	return Math.max(maxLength, right - left + 1)
 };
 //TESTCASES--
+//longest is the first character
 console.log(characterReplacement("ABAB", 2), 4);
+// longest is first character, but the flips are used up before the end of the string
+console.log(characterReplacement("ABA", 1), 3);
 console.log(characterReplacement("ABABCB", 2), 5);
 console.log(characterReplacement("AABABBA", 1), 4);
