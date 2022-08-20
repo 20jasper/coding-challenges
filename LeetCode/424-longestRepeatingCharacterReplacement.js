@@ -47,42 +47,20 @@ const characterReplacement = function (s, k) {
 	if (k >= s.length - 1) {
 		return k
 	}
-
+	const hashMap = {}
 	let maxLength = 0
-	const length = s.length
-	let left = 0, right = 0;
+	for (let left = 0, right = 0; right < array.length; right++) {
+		const element = array[left];
 
-	while (right < length) {
-		const char = s[left];
-		let flipCount = 0
-
-		//while more flips can be done and the right pointer is in bounds
-		while (right < length - 1 && flipCount < k) {
-			right++
-			//if the right char is different than the left char
-			if (s[right] !== char) {
-				//increase the number of flips
-				flipCount++
-			}
-		}
-
-		//while the char to the right of the right pointer is the same as the char at the left pointer and the right pointer is in bounds
-		while (right < length && s[right + 1] === char) {
-			right++
-		}
-		maxLength = Math.max(maxLength, right - left + 1)
-		//move the left pointer until it's on a different character
-		while (s[left] === char) {
-			left++
-		}
-		// if it the rest of the string isn't long enough to set a new max length
-		if (length - left <= maxLength) {
-			return maxLength
-		}
-		//move the right pointer to the left pointer
-		right = left
 	}
-	return Math.max(maxLength, right - left + 1)
+	//iterate through the string from left to right
+	//add the value of the current letter to the hashmap
+	//if there are too many characters that need flipped, move the left pointer right until the window is valid
+	//set new max value
+
+	//return the maxLength
+
+
 };
 //TESTCASES--
 //longest is the first character
