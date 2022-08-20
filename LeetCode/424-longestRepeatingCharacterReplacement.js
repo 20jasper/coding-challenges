@@ -35,13 +35,7 @@ Constraints:
 
 //SOLUTION--
 /* 
-if the right pointer hits the end of the string, break
 
-if (maxLength >= right - left || right === length - 1) {
-				return maxLength
-			}
-
-This solution still needs work
 */
 /**
  * @param {string} s
@@ -63,7 +57,7 @@ const characterReplacement = function (s, k) {
 		let flipCount = 0
 
 		//while more flips can be done and the right pointer is in bounds
-		while (right < length && flipCount < k) {
+		while (right < length - 1 && flipCount < k) {
 			right++
 			//if the right char is different than the left char
 			if (s[right] !== char) {
@@ -72,15 +66,20 @@ const characterReplacement = function (s, k) {
 			}
 		}
 
-		while (right < length && s[right] === char) {
+		//while the char to the right of the right pointer is the same as the char at the left pointer and the right pointer is in bounds
+		while (right < length && s[right + 1] === char) {
 			right++
 		}
-
 		maxLength = Math.max(maxLength, right - left + 1)
 		//move the left pointer until it's on a different character
 		while (s[left] === char) {
 			left++
 		}
+		// if it the rest of the string isn't long enough to set a new max length
+		if (length - left <= maxLength) {
+			return maxLength
+		}
+		//move the right pointer to the left pointer
 		right = left
 	}
 	return Math.max(maxLength, right - left + 1)
@@ -88,7 +87,10 @@ const characterReplacement = function (s, k) {
 //TESTCASES--
 //longest is the first character
 console.log(characterReplacement("ABAB", 2), 4);
-// longest is first character, but the flips are used up before the end of the string
+// // longest is first character, but the flips are used up before the end of the string
 console.log(characterReplacement("ABA", 1), 3);
 console.log(characterReplacement("ABABCB", 2), 5);
 console.log(characterReplacement("AABABBA", 1), 4);
+console.log(characterReplacement("AAAANBBB", 0), 4);
+console.log(characterReplacement("AAAA", 2), 4);
+console.log(characterReplacement("ABBB", 2), 4);
