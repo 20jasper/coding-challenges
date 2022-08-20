@@ -53,9 +53,9 @@ const characterReplacement = function (str, maxFlipCount) {
 	const hashMap = {}
 	let maxLength = 0
 	let maxLetterFrequency = 0
-
+	let left = 0
 	//iterate from left to right until the right pointer is at the end of the string
-	for (let left = 0, right = left; right < str.length; right++) {
+	for (right = left; right < str.length; right++) {
 		const rightLetter = str[right];
 		let length = right - left + 1
 		//add the current letter to  the hashmap
@@ -68,15 +68,13 @@ const characterReplacement = function (str, maxFlipCount) {
 			const leftLetter = str[left]
 			//decrement the count of the left letter in the hashmap
 			hashMap[leftLetter]--
-			//increment the left pointer and decrement the current length
+			//move the left pointer right and update window size
 			left++
 			length--
 		}
-		//set new max value
-		maxLength = Math.max(maxLength, length)
 	}
-	//return the maxLength
-	return maxLength
+	//return the size of the window
+	return str.length - left
 };
 //TESTCASES--
 //longest is the first character
