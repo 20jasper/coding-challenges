@@ -37,14 +37,35 @@ Constraints:
 */
 /**
  * @param {number[]} nums
- * @param {number} maxFlips
+ * @param {number} maxFlipCount
  * @return {number}
  */
-const longestOnes = function (nums, maxFlips) {
+const longestOnes = function (nums, maxFlipCount) {
+	//if all nums can be flipped, return the length of the array
+	if (maxFlipCount >= nums.length) return nums.length
+
+	let left = 0
+	let flipCount = 0
+
 	//iterate through the string from left to right
-	//move the right pointer right
-		//if the subarray is invalid, move the left pointer right
+	for (let right = left; right < nums.length; right++) {
+		const rightNum = nums[right];
+		//increment the flipCount if the num is 0
+		if (rightNum === 0) flipCount++
+
+		//if too many nums need flipped
+		if (flipCount > maxFlipCount) {
+			const leftNum = nums[left]
+			//decrement the flipCount if the num is 0
+			if (leftNum === 0) {
+				flipCount--
+			}
+			//move the left pointer right
+			left++
+		}
+	}
 	//return the window size
+	return nums.length - left
 };
 //TESTCASES--
 console.log(longestOnes([1], 1), 1);
