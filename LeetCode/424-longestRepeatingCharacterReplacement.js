@@ -35,32 +35,46 @@ Constraints:
 
 //SOLUTION--
 /* 
-
+This solution is O(n) for both time and O(1) for space where n is the length of the string
 */
 /**
- * @param {string} s
- * @param {number} k
+ * @param {string} str
+ * @param {number} maxFlipCount
  * @return {number}
  */
-const characterReplacement = function (s, k) {
-	//if k is can change at least k-1 letters, then all can be changed to one letter
-	if (k >= s.length - 1) {
-		return k
+const characterReplacement = function (str, maxFlipCount) {
+	//if every char or all but one char can be flipped, return the length of the string 
+	if (maxFlipCount >= str.length - 1) {
+		return str.length
 	}
+
 	const hashMap = {}
 	let maxLength = 0
-	for (let left = 0, right = 0; right < array.length; right++) {
-		const element = array[left];
+	let maxLetterFrequency = 0
 
+	//iterate from left to right until the right pointer is at the end of the string
+	for (let left = 0, right = left; right < str.length; right++) {
+		const rightLetter = str[right];
+		let length = right - left + 1
+		//add the current letter to  the hashmap
+		if (hashMap[rightLetter] === undefined) hashMap[rightLetter] = 1
+		else hashMap[rightLetter]++
+
+		maxLetterFrequency = Math.max(...Object.values(hashMap))
+		//if there are too many characters that need flipped, move the left pointer right until the window is valid
+		while (length - maxLetterFrequency > maxFlipCount) {
+			const leftLetter = str[left]
+			//decrement the count of the left letter in the hashmap
+			hashMap[leftLetter]--
+			//increment the left pointer and decrement the current length
+			left++
+			length--
+		}
+		//set new max value
+		maxLength = Math.max(maxLength, length)
 	}
-	//iterate through the string from left to right
-	//add the value of the current letter to the hashmap
-	//if there are too many characters that need flipped, move the left pointer right until the window is valid
-	//set new max value
-
 	//return the maxLength
-
-
+	return maxLength
 };
 //TESTCASES--
 //longest is the first character
