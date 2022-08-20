@@ -35,7 +35,7 @@ Constraints:
 
 //SOLUTION--
 /* 
-For this solution, only the maximimum ever frequency is recorded, since a longer valid substring can only be created with more of the same character
+For this solution, only the maximimum ever frequency is recorded, since a longer valid substring can only be created with more characters that don't need flipped
 
 This solution is O(n) for both time and O(1) for space where n is the length of the string
 */
@@ -51,26 +51,27 @@ const characterReplacement = function (str, maxFlipCount) {
 	}
 
 	const hashMap = {}
-	let maxLength = 0
 	let maxLetterFrequency = 0
 	let left = 0
+
 	//iterate from left to right until the right pointer is at the end of the string
 	for (right = left; right < str.length; right++) {
 		const rightLetter = str[right];
-		let length = right - left + 1
 		//add the current letter to  the hashmap
 		if (hashMap[rightLetter] === undefined) hashMap[rightLetter] = 1
 		else hashMap[rightLetter]++
 
 		maxLetterFrequency = Math.max(maxLetterFrequency, hashMap[rightLetter])
-		//if there are too many characters that need flipped, move the left pointer right until the window is valid
-		while (length - maxLetterFrequency > maxFlipCount) {
+
+		//if  too many characters need flipped, move the left pointer right until the window is valid
+		let windowSize = right - left + 1
+		while (windowSize - maxLetterFrequency > maxFlipCount) {
 			const leftLetter = str[left]
 			//decrement the count of the left letter in the hashmap
 			hashMap[leftLetter]--
 			//move the left pointer right and update window size
 			left++
-			length--
+			windowSize--
 		}
 	}
 	//return the size of the window
