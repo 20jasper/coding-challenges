@@ -63,9 +63,9 @@ const characterReplacement = function (str, maxFlipCount) {
 
 		maxLetterFrequency = Math.max(maxLetterFrequency, hashMap[rightLetter])
 
-		//if  too many characters need flipped, move the left pointer right until the window is valid
+		//if too many characters need flipped, move the left pointer right
 		let windowSize = right - left + 1
-		while (windowSize - maxLetterFrequency > maxFlipCount) {
+		if (windowSize - maxLetterFrequency > maxFlipCount) {
 			const leftLetter = str[left]
 			//decrement the count of the left letter in the hashmap
 			hashMap[leftLetter]--
