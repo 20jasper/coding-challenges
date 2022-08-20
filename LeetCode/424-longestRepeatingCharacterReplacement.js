@@ -35,6 +35,8 @@ Constraints:
 
 //SOLUTION--
 /* 
+For this solution, only the maximimum ever frequency is recorded, since a longer valid substring can only be created with more of the same character
+
 This solution is O(n) for both time and O(1) for space where n is the length of the string
 */
 /**
@@ -86,3 +88,4 @@ console.log(characterReplacement("AABABBA", 1), 4);
 console.log(characterReplacement("AAAANBBB", 0), 4);
 console.log(characterReplacement("AAAA", 2), 4);
 console.log(characterReplacement("ABBB", 2), 4);
+console.log(characterReplacement("ABBB", 10), 4);
