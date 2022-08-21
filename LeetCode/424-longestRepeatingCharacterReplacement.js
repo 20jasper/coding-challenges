@@ -69,9 +69,8 @@ const characterReplacement = function (str, maxFlipCount) {
 			const leftLetter = str[left]
 			//decrement the count of the left letter in the hashmap
 			hashMap[leftLetter]--
-			//move the left pointer right and update window size
+			//move the left pointer right
 			left++
-			windowSize--
 		}
 	}
 	//return the size of the window
