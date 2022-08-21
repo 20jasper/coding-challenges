@@ -32,7 +32,10 @@ Constraints:
 
 //SOLUTION--
 /* 
-
+The first solution I thought of is doing a sliding window approach where the size of the window is the same as the length of the first string
+I will sort the first string and the letters within the window
+	if they are the same, return true
+if there is no match, return false
 */
 /**
  * @param {string} s1
@@ -43,5 +46,8 @@ const checkInclusion = function (s1, s2) {
 
 };
 //TESTCASES--
+console.log(checkInclusion("abcdefg", "b"), false);
 console.log(checkInclusion("ab", "ba"), true);
 console.log(checkInclusion("ab", "boa"), false);
+console.log(checkInclusion("abb", "sdfsdbbae"), true);
+console.log(checkInclusion("abc", "bcboaase"), false);
