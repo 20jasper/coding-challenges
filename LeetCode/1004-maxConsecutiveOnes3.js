@@ -34,6 +34,7 @@ Constraints:
 
 //SOLUTION--
 /* 
+This solution is O(n) for time and O(1) for space where n is the length of the array
 */
 /**
  * @param {number[]} nums
