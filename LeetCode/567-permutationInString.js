@@ -52,9 +52,9 @@ const checkInclusion = function (str1, str2) {
 	const str1Hash = getHash(str1)
 
 	//iterate through the string until the end of the window hits the end
-	for (let i = 0; i + str1.length - 1 < str2.length; i++) {
+	for (let left = 0, right = left + str1.length - 1; right < str2.length; left++, right++) {
 		//hash the current window
-		const str2Hash = getHash(str2.slice(i, i + str1.length))
+		const str2Hash = getHash(str2.slice(left, right + 1))
 		//if the hashes are the same, return true
 		if (str1Hash === str2Hash) {
 			return true
@@ -74,6 +74,8 @@ console.log(checkInclusion("ab", "ba"), true);
 console.log(checkInclusion("ab", "boa"), false);
 console.log(checkInclusion("abb", "sdfsdbbae"), true);
 console.log(checkInclusion("acb", "bcboaase"), false);
+console.log(checkInclusion("adc", "dcda"), true);
+
 
 //SOLUTION--
 /* 
@@ -94,9 +96,9 @@ const checkInclusion2 = function (str1, str2) {
 	const str1Hash = getHash(str1)
 
 	//iterate through the string until the end of the window hits the end
-	for (let i = 0; i + str1.length - 1 < str2.length; i++) {
+	for (let left = 0, right = left + str1.length - 1; right < str2.length; left++, right++) {
 		//hash the current window
-		const str2Hash = getHash(str2.slice(i, i + str1.length))
+		const str2Hash = getHash(str2.slice(left, right + 1))
 		//if the hashes are the same, return true
 		if (str1Hash === str2Hash) {
 			return true
@@ -124,6 +126,8 @@ console.log(checkInclusion2("ab", "ba"), true);
 console.log(checkInclusion2("ab", "boa"), false);
 console.log(checkInclusion2("abb", "sdfsdbbae"), true);
 console.log(checkInclusion2("acb", "bcboaase"), false);
+console.log(checkInclusion2("adc", "dcda"), true);
+
 
 //SOLUTION--
 /* 
