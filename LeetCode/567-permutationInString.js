@@ -36,18 +36,41 @@ The first solution I thought of is doing a sliding window approach where the siz
 I will sort the first string and the letters within the window
 	if they are the same, return true
 if there is no match, return false
+
+The time complexity of this solution is O(m*nlogn) and the space complexity is O(m+n) where n is the length of the first string, and m is the length of the second
 */
 /**
- * @param {string} s1
- * @param {string} s2
+ * @param {string} str1
+ * @param {string} str2
  * @return {boolean}
  */
-const checkInclusion = function (s1, s2) {
+const checkInclusion = function (str1, str2) {
+	//if the first string is longer than the second, return false
+	if (str1.length > str2.length) {
+		return false
+	}
+	const str1Hash = getHash(str1)
 
+	//iterate through the string until the end of the window hits the end of the second string
+	for (let i = 0; i + str1.length - 1 < str2.length; i++) {
+		//hash the current window
+		const str2Hash = getHash(str2.slice(i, i + str1.length))
+		//if the hashes are the same, return true
+		if (str1Hash === str2Hash) {
+			return true
+		}
+	}
+
+	//if no matches are found, return false
+	return false
+	function getHash(str) {
+		//alphabetically sort the string
+		return [...str].sort().join("")
+	}
 };
 //TESTCASES--
 console.log(checkInclusion("abcdefg", "b"), false);
 console.log(checkInclusion("ab", "ba"), true);
 console.log(checkInclusion("ab", "boa"), false);
 console.log(checkInclusion("abb", "sdfsdbbae"), true);
-console.log(checkInclusion("abc", "bcboaase"), false);
+console.log(checkInclusion("acb", "bcboaase"), false);
