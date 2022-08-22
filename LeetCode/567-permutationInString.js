@@ -150,8 +150,8 @@ const checkInclusion3 = function (str1, str2) {
 	const str1Dictionary = Array(26).fill(0)
 	const str2Dictionary = Array(26).fill(0)
 	for (let i = 0; i < str1.length; i++) {
-		updateDictionary(str1Dictionary, str1[i], 1)
-		updateDictionary(str2Dictionary, str2[i], 1)
+		updateLetterFrequency(str1Dictionary, str1[i], 1)
+		updateLetterFrequency(str2Dictionary, str2[i], 1)
 	}
 
 	if (isPermutation()) {
@@ -161,8 +161,8 @@ const checkInclusion3 = function (str1, str2) {
 	//iterate through the string until the end of the window hits the end
 	for (let left = 0, right = left + str1.length; right < str2.length; left++, right++) {
 		//update the letter frequency for the new window
-		updateDictionary(str2Dictionary, str2[left], -1)
-		updateDictionary(str2Dictionary, str2[right], 1)
+		updateLetterFrequency(str2Dictionary, str2[left], -1)
+		updateLetterFrequency(str2Dictionary, str2[right], 1)
 
 		//if the frequencies of the changed letters are the same and the current window is a permutation
 		if (haveSameFrequency(str2[left]) && haveSameFrequency(str2[right]) && isPermutation()) {
@@ -179,7 +179,7 @@ const checkInclusion3 = function (str1, str2) {
 		return charCode - 97
 	}
 	//update the frequency of a letter in the dictionary
-	function updateDictionary(dictionary, char, mod) {
+	function updateLetterFrequency(dictionary, char, mod) {
 		// update the appropriate index in the array where a is 0 and z is 25
 		const alphaIndex = getAlphaIndex(char)
 		dictionary[alphaIndex] += mod
