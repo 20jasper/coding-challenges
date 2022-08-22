@@ -214,7 +214,7 @@ console.log(checkInclusion3("adc", "dcda"), true);
 /* 
 This time, I will use a rolling dictionary and keep track of how many differences in frequency there are
 
-The time complexity of this solution is O(m) and the space complexity is O(1) where n is the length of the first string, and m is the length of the second
+The time complexity of this solution is O(m) and the space complexity is O(1) where m is the length of the second string
 */
 /**
  * @param {string} str1
@@ -286,7 +286,7 @@ console.log(checkInclusion4("adc", "dcda"), true);
 /* 
 This time, I will only store the difference in letter frequency instead of each dictionary
 
-The time complexity of this solution is O(m) and the space complexity is O(1) where n is the length of the first string, and m is the length of the second
+The time complexity of this solution is O(m) and the space complexity is O(1) where m is the length of the second string
 */
 /**
  * @param {string} str1
