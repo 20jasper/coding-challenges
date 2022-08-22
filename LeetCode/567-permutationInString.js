@@ -131,9 +131,9 @@ console.log(checkInclusion2("adc", "dcda"), true);
 
 //SOLUTION--
 /* 
-This time, I will use a rolling dictionary and only compare them when the current letter in the window is equal to the first string
+This time, I will use a rolling dictionary and only compare them when the frequencies of the changed letters is the same in both dictionaries
 
-The time complexity of this solution is O(m) and the space complexity is O(m+n) where n is the length of the first string, and m is the length of the second
+The time complexity of this solution is O(m) and the space complexity is O(1) where m is the length of the second string
 */
 /**
  * @param {string} str1
@@ -145,9 +145,14 @@ const checkInclusion3 = function (str1, str2) {
 	if (str1.length > str2.length) {
 		return false
 	}
-	//create dictionaries recording each letter's frequency that is the same length as str1 
-	const str1Dictionary = createDictionary(str1)
-	const str2Dictionary = createDictionary(str2)
+
+	//create dictionaries recording each letter's frequency in the initial window 
+	const str1Dictionary = Array(26).fill(0)
+	const str2Dictionary = Array(26).fill(0)
+	for (let i = 0; i < str1.length; i++) {
+		updateDictionary(str1Dictionary, str1[i], 1)
+		updateDictionary(str2Dictionary, str2[i], 1)
+	}
 
 	if (isPermutation()) {
 		return true
@@ -179,15 +184,6 @@ const checkInclusion3 = function (str1, str2) {
 		const alphaIndex = getAlphaIndex(char)
 		dictionary[alphaIndex] += mod
 	}
-	//create a dictionary of letter frequencies the same length as str1
-	function createDictionary(str) {
-		const dictionary = Array(26).fill(0)
-		for (let i = 0; i < str1.length; i++) {
-			const char = str[i]
-			updateDictionary(dictionary, char, 1)
-		}
-		return dictionary
-	}
 	//check if the current window is a permutation of the first string
 	function isPermutation() {
 		//check if all letter frequencies are equal
@@ -213,3 +209,74 @@ console.log(checkInclusion3("ab", "boa"), false);
 console.log(checkInclusion3("abb", "sdfsdbbae"), true);
 console.log(checkInclusion3("acb", "bcboaase"), false);
 console.log(checkInclusion3("adc", "dcda"), true);
+
+//SOLUTION--
+/* 
+This time, I will use a rolling dictionary and only compare them when the current letter in the window is equal to the first string
+
+The time complexity of this solution is O(m) and the space complexity is O(1) where n is the length of the first string, and m is the length of the second
+*/
+/**
+ * @param {string} str1
+ * @param {string} str2
+ * @return {boolean}
+ */
+const checkInclusion4 = function (str1, str2) {
+	//if the first string is longer than the second, return false
+	if (str1.length > str2.length) {
+		return false
+	}
+
+	let sameFrequencyCount = 26
+
+	//create dictionaries recording each letter's frequency in the initial window 
+	const str1Dictionary = Array(26).fill(0)
+	const str2Dictionary = Array(26).fill(0)
+	for (let i = 0; i < str1.length; i++) {
+		updateLetterFrequency(str1Dictionary, str1[i], 1)
+		updateLetterFrequency(str2Dictionary, str2[i], 1)
+	}
+
+	if (sameFrequencyCount === 26) {
+		return true
+	}
+
+	//iterate through the string until the end of the window hits the end
+	for (let left = 0, right = left + str1.length; right < str2.length; left++, right++) {
+		//update the letter frequency for the new window
+		updateLetterFrequency(str2Dictionary, str2[left], -1)
+		updateLetterFrequency(str2Dictionary, str2[right], 1)
+
+		//if the frequencies of the changed letters are the same and the current window is a permutation
+		if (sameFrequencyCount === 26) {
+			return true
+		}
+	}
+
+	//if no matches are found, return false
+	return false
+
+	//update the frequency of a letter in the dictionary
+	function updateLetterFrequency(dictionary, char, mod) {
+		// get the index in the array where a is 0 and z is 25
+		const charCode = char.charCodeAt();
+		const alphaIndex = charCode - 97
+		//if the frequencies are equal before they are changed, decrement sameFrequencyCount
+		if (str1Dictionary[alphaIndex] === str2Dictionary[alphaIndex]) {
+			sameFrequencyCount--
+		}
+		//change the character frequency
+		dictionary[alphaIndex] += mod
+		//if the frequencies are equal after they are changed, increment sameFrequencyCount
+		if (str1Dictionary[alphaIndex] === str2Dictionary[alphaIndex]) {
+			sameFrequencyCount++
+		}
+	}
+};
+//TESTCASES--
+console.log(checkInclusion4("abcdefg", "b"), false);
+console.log(checkInclusion4("ab", "ba"), true);
+console.log(checkInclusion4("ab", "boa"), false);
+console.log(checkInclusion4("abb", "sdfsdbbae"), true);
+console.log(checkInclusion4("acb", "bcboaase"), false);
+console.log(checkInclusion4("adc", "dcda"), true);
