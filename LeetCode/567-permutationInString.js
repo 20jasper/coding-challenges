@@ -212,7 +212,7 @@ console.log(checkInclusion3("adc", "dcda"), true);
 
 //SOLUTION--
 /* 
-This time, I will use a rolling dictionary and only compare them when the current letter in the window is equal to the first string
+This time, I will use a rolling dictionary and keep track of how many differences in frequency there are
 
 The time complexity of this solution is O(m) and the space complexity is O(1) where n is the length of the first string, and m is the length of the second
 */
