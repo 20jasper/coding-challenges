@@ -237,6 +237,7 @@ const checkInclusion4 = function (str1, str2) {
 		updateLetterFrequency(str2Dictionary, str2[i], 1)
 	}
 
+	//if all letters have the same frequency in both dictionaries
 	if (sameFrequencyCount === 26) {
 		return true
 	}
@@ -247,7 +248,7 @@ const checkInclusion4 = function (str1, str2) {
 		updateLetterFrequency(str2Dictionary, str2[left], -1)
 		updateLetterFrequency(str2Dictionary, str2[right], 1)
 
-		//if the frequencies of the changed letters are the same and the current window is a permutation
+		//if all letters have the same frequency in both dictionaries
 		if (sameFrequencyCount === 26) {
 			return true
 		}
