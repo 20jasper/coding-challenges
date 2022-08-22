@@ -281,3 +281,74 @@ console.log(checkInclusion4("ab", "boa"), false);
 console.log(checkInclusion4("abb", "sdfsdbbae"), true);
 console.log(checkInclusion4("acb", "bcboaase"), false);
 console.log(checkInclusion4("adc", "dcda"), true);
+
+//SOLUTION--
+/* 
+This time, I will only store the difference in letter frequency instead of each dictionary
+
+The time complexity of this solution is O(m) and the space complexity is O(1) where n is the length of the first string, and m is the length of the second
+*/
+/**
+ * @param {string} str1
+ * @param {string} str2
+ * @return {boolean}
+ */
+const checkInclusion5 = function (str1, str2) {
+	//if the first string is longer than the second, return false
+	if (str1.length > str2.length) {
+		return false
+	}
+
+	let sameFrequencyCount = 26
+
+	//create dictionaries recording each letter's frequency in the initial window 
+	const dictionary = Array(26).fill(0)
+	for (let i = 0; i < str1.length; i++) {
+		updateLetterFrequency(str1[i], -1)
+		updateLetterFrequency(str2[i], 1)
+	}
+
+	//if all letters have the same frequency in both dictionaries
+	if (sameFrequencyCount === 26) {
+		return true
+	}
+
+	//iterate through the string until the end of the window hits the end
+	for (let left = 0, right = left + str1.length; right < str2.length; left++, right++) {
+		//update the letter frequency for the new window
+		updateLetterFrequency(str2[left], -1)
+		updateLetterFrequency(str2[right], 1)
+
+		//if all letters have the same frequency in both dictionaries
+		if (sameFrequencyCount === 26) {
+			return true
+		}
+	}
+
+	//if no matches are found, return false
+	return false
+
+	//update the frequency of a letter in the dictionary
+	function updateLetterFrequency(char, mod) {
+		// get the index in the array where a is 0 and z is 25
+		const charCode = char.charCodeAt();
+		const alphaIndex = charCode - 97
+		//if the frequencies are equal before they are changed, decrement sameFrequencyCount
+		if (dictionary[alphaIndex] === 0) {
+			sameFrequencyCount--
+		}
+		//change the character frequency
+		dictionary[alphaIndex] += mod
+		//if the frequencies are equal after they are changed, increment sameFrequencyCount
+		if (dictionary[alphaIndex] === 0) {
+			sameFrequencyCount++
+		}
+	}
+};
+//TESTCASES--
+console.log(checkInclusion5("abcdefg", "b"), false);
+console.log(checkInclusion5("ab", "ba"), true);
+console.log(checkInclusion5("ab", "boa"), false);
+console.log(checkInclusion5("abb", "sdfsdbbae"), true);
+console.log(checkInclusion5("acb", "bcboaase"), false);
+console.log(checkInclusion5("adc", "dcda"), true);
