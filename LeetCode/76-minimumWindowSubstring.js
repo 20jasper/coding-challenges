@@ -92,12 +92,13 @@ const minWindow = function (str1, str2) {
 
 	console.log(right, str1.length)
 
-	while (true) {
+	while (left < str1.length) {
 		const windowSize = right - left + 1
 
 		console.log(invalidFrequencies, str1.slice(left, right + 1), { left, right })
 		//if window is invalid, move right pointer out
 		if (invalidFrequencies > 0) {
+			console.log(str1[right])
 			updateLetterFrequency(str1[right], 1)
 			right++
 		}
@@ -106,7 +107,7 @@ const minWindow = function (str1, str2) {
 			//update the minimum substring's indices and length
 			console.log({ left, right })
 			console.log(windowSize)
-			console.log(str1.slice(minWindowIndices[0], minWindowIndices[1] + 1))
+			console.log(str1.slice(left, right + 1))
 			minWindowIndices = [left, right]
 			minWindowSize = windowSize
 			//if the window size is the length of the second string, break the loop
@@ -144,9 +145,9 @@ const minWindow = function (str1, str2) {
 		//update the letter's frequency in the dictionary
 		dictionary[alphaIndex] += mod
 		//if the frequency was valid and become invalid, decrement the validFrequencyCount
-		if (temp === 0) invalidFrequencies++
+		if (temp === 0 && dictionary[alphaIndex] < 0) invalidFrequencies++
 		//if the frequency was invalid and become valid, increment the validFrequencyCount
-		else if (temp !== 0 && dictionary[alphaIndex] === 0) invalidFrequencies--
+		else if (temp > 0 && dictionary[alphaIndex] === 0) invalidFrequencies--
 	}
 };
 //TESTCASES--
