@@ -55,105 +55,68 @@ Follow up: Could you find an algorithm that runs in O(m + n) time?
  * @return {string}
  */
 const minWindow = function (str1, str2) {
-	if (str2.length > str1.length) {
-		return ""
-	}
+	//if 2nd string is bigger than the first or the second string is empty, return an empty string
+	if (str2.length > str1.length || str2 === "") return ""
 
 	const set = new Set()
+	const hashMap = {}
 	let invalidFrequencies = 0
-	//add all the letters in the second string to a set and update their frequencies in the dictionary
-	const dictionary = Array(52).fill(0)
+	//add all the letters in the second string to a set and update their frequencies in the hashMap
 	for (let i = 0; i < str2.length; i++) {
 		set.add(str2[i])
 		updateLetterFrequency(str2[i], -1)
 	}
-	console.log(invalidFrequencies)
 
-	let left = 0
-	let right = 0
-	//until the right pointer hits the end of the 1st string
-	while (right < str1.length) {
+	let minWindowSize = Infinity
+	let minWindowIndices = [-1, -1]
+
+	//iterate over the string until the right pointer hits the end
+	for (let left = 0, right = 0; right < str1.length; right++) {
 		updateLetterFrequency(str1[right], 1)
-		console.log(invalidFrequencies)
-		console.log(right)
-		if (invalidFrequencies === 0) {
-			break
-		}
-		right++
-	}
-
-	if (right === str1.length - 1) {
-		if (invalidFrequencies !== 0) return ""
-		return str2
-	}
-
-	let minWindowSize = right + 1
-	let minWindowIndices = [0, right]
-
-	console.log(right, str1.length)
-
-	while (left < str1.length) {
-		const windowSize = right - left + 1
-
-		console.log(invalidFrequencies, str1.slice(left, right + 1), { left, right })
-		//if window is invalid, move right pointer out
-		if (invalidFrequencies > 0) {
-			console.log(str1[right])
-			updateLetterFrequency(str1[right], 1)
-			right++
-		}
-		//if window is valid and windowSize is smaller than min windowSize
-		else if (windowSize < minWindowSize) {
-			//update the minimum substring's indices and length
-			console.log({ left, right })
-			console.log(windowSize)
-			console.log(str1.slice(left, right + 1))
-			minWindowIndices = [left, right]
-			minWindowSize = windowSize
-			//if the window size is the length of the second string, break the loop
-			if (minWindowSize === str2.length) {
-				break
+		//while the window is valid
+		while (invalidFrequencies === 0) {
+			const windowSize = right - left + 1
+			//if the current window is less than the minimum
+			if (windowSize < minWindowSize) {
+				//update the min window size and indices
+				minWindowSize = windowSize
+				minWindowIndices = [left, right]
+				//if the window is the minimum possible valid size, break
+				if (minWindowSize === str2.length) break
 			}
+			//move the left pointer in and update the letter's frequency 
+			updateLetterFrequency(str1[left], -1)
+			left++
 		}
-		//move left pointer in
-		updateLetterFrequency(str1[left], -1)
-		left++
 	}
-	console.log(minWindowSize)
+	//if there is no valid window, return empty string
+	if (minWindowSize === Infinity) return ""
+	//return the window
 	return str1.slice(minWindowIndices[0], minWindowIndices[1] + 1)
 
-	//get index of letter in the dictionary where a is 0, z is 25, A is 26, and Z is 51
-	function getAlphaIndex(char) {
-		const charCode = char.charCodeAt()
-		let alphaIndex
-		//if letter is lower case
-		if (charCode >= 97 && charCode <= 122) {
-			alphaIndex = charCode - 97
-		}
-		//if letter is uppercase
-		else {
-			alphaIndex = charCode - 65 + 26
-		}
-		return alphaIndex
-	}
 	function updateLetterFrequency(char, mod) {
-		if (!set.has(char)) {
-			return
-		}
-		const alphaIndex = getAlphaIndex(char)
-		const temp = dictionary[alphaIndex]
-		//update the letter's frequency in the dictionary
-		dictionary[alphaIndex] += mod
-		//if the frequency was valid and become invalid, decrement the validFrequencyCount
-		if (temp === 0 && dictionary[alphaIndex] < 0) invalidFrequencies++
-		//if the frequency was invalid and become valid, increment the validFrequencyCount
-		else if (temp > 0 && dictionary[alphaIndex] === 0) invalidFrequencies--
+		//if the char isn't in the second string, break out of the function
+		if (!set.has(char)) return
+		//if the character doesn't exist yet in the hashmap, set its value to 0
+		if (hashMap[char] === undefined) hashMap[char] = 0
+
+		const temp = hashMap[char]
+		hashMap[char] += mod
+		const curr = hashMap[char]
+		//if the frequency was valid and became invalid, increment invalidFrequencies
+		if (temp === 0 && curr === -1) invalidFrequencies++
+		//if the frequency was invalid and became valid, decrement invalidFrequencies
+		else if (temp === -1 && curr === 0) invalidFrequencies--
 	}
 };
 //TESTCASES--
-// console.log(minWindow("a", "aa"), "");
-// console.log(minWindow("a", "a"), "a");
-// console.log(minWindow("abcdefge", "cba"), "abc");
+console.log(minWindow("", ""), "")
+console.log(minWindow("", "a"), "")
+console.log(minWindow("a", ""), "")
+console.log(minWindow("a", "aa"), "");
+console.log(minWindow("a", "a"), "a");
+console.log(minWindow("a", "b"), "");
+console.log(minWindow("ab", "a"), "a");
+console.log(minWindow("abcdefge", "cba"), "abc");
 console.log(minWindow("ADOBECODEBANC", "ABC"), "BANC");
-// console.log(minWindow("ADOBECODEBANC", "ABC"), "BANC");
-// console.log(minWindow("ADOBECODEBANC", "ABCZ"), "");
+console.log(minWindow("ADOBECODEBANC", "ABCZ"), "");
