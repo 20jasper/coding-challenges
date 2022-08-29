@@ -48,6 +48,7 @@ Follow up: Could you find an algorithm that runs in O(m + n) time?
 
 //SOLUTION--
 /* 
+This solution has a time complexity of O(m+n) and a space complexity of O(1) where m is the length of the first string, and n is the length of the second
 */
 /**
  * @param {string} str
@@ -94,6 +95,7 @@ const minWindow = function (str1, str2) {
 	//return the window
 	return str1.slice(minWindowIndices[0], minWindowIndices[1] + 1)
 
+	//update the letter's frequency then update the invalidFrequencies
 	function updateLetterFrequency(char, mod) {
 		//if the char isn't in the second string, break out of the function
 		if (!set.has(char)) return
