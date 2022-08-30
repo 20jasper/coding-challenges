@@ -27,39 +27,16 @@ Output: [0]
 
 Constraints:
 
-    The number of nodes in both lists is in the range [0, 50].
-    -100 <= Node.val <= 100
-    Both list1 and list2 are sorted in non-decreasing order.
+		The number of nodes in both lists is in the range [0, 50].
+		-100 <= Node.val <= 100
+		Both list1 and list2 are sorted in non-decreasing order.
 
 
 */
 
 //SOLUTION--
 /* 
-to make a dummy node
-start the current node at the dummy node
-while each list still has more values in it
-    if the values are equal
-        set the dummy node's pointer to the current node of the first list
-        set the node's pointer of the first list to the next value
-        set the dummy node's pointer to the next node of the dummy node
-        set the dummy node's pointer to the current element of the second list
-        set the current node of the second list's pointer to the the next value
-    if the value of the current node of the first list is less than the current node of the second list
-        set the dummy node's pointer to the current element of the first list
-        set the current node's pointer of the first list to the next value
-    else
-        set the dummy node's pointer to the current element of the second list
-        set the current node of the second list's pointer to the the next value
-    set the dummy node's pointer to the next node of the current node
-if the first list isn't empty
-    set the dummy node's pointer to the current element of the first list
-if the second list isn't empty
-    set the dummy node's pointer to the current element of the second list
-return the next value of head
-
-
-
+The time comlexity of this solution is O(m+n) and the space complexity is O(1) where m is the length of the first linked list and n is the length of the second
 */
 /**
  * Definition for singly-linked list.
@@ -69,8 +46,8 @@ return the next value of head
  * }
  */
 function ListNode(val, next) {
-    this.val = (val === undefined ? 0 : val)
-    this.next = (next === undefined ? null : next)
+	this.val = (val === undefined ? 0 : val)
+	this.next = (next === undefined ? null : next)
 }
 /**
  * @param {ListNode} list1
@@ -78,54 +55,31 @@ function ListNode(val, next) {
  * @return {ListNode}
  */
 const mergeTwoLists = function (list1, list2) {
-    //make a dummy node
-    let dummy = new ListNode(-1)
-    //start current node at the dummy node
-    let head = dummy
-    // while each list still has more values in it
-    while (list1 !== null && list2 !== null) {
-        // if the values are equal
-        if (list1.val === list2.val) {
-            //set the dummy node's pointer to the current node of the first list
-            dummy.next = list1
-            //set the node's pointer of the first list to the next value
-            list1 = list1.next
+	//start the head at an arbitrary value
+	const head = new ListNode(Infinity)
+	let curr = head
 
-            //set the dummy node's pointer to the next node of the dummy node
-            dummy = dummy.next
-
-            //set the dummy node's pointer to the current element of the second list
-            dummy.next = list2
-            //set the current node of the second list's pointer to the the next value
-            list2 = list2.next
-        }
-        //if the value of the current node of the first list is less than the current node of the second list
-        else if (list1.val < list2.val) {
-            //set the dummy node's pointer to the current element of the first list
-            dummy.next = list1
-            //set the current node's pointer of the first list to the next value
-            list1 = list1.next
-        }
-        else {
-            //set the dummy node's pointer to the current element of the second list
-            dummy.next = list2
-            //set the current node of the second list's pointer to the the next value
-            list2 = list2.next
-        }
-        //set the dummy node's pointer to the next node of the current node
-        dummy = dummy.next
-    }
-
-    //if the first list isn't empty
-    if (list1 !== null) {
-        //set the dummy node's pointer to the current element of the first list
-        dummy.next = list1
-    }
-    //if the second list isn't empty
-    else {
-        //set the dummy node's pointer to the current element of the second list
-        dummy.next = list2
-    }
-    //return the next value of head
-    return head.next
+	//iterate until one of the pointers hits the end of the linked list
+	while (list1 !== null && list2 !== null) {
+		//if the first linked list's value is less than the second's
+		if (list1.val < list2.val) {
+			//set the next value for the merged list to list1
+			curr.next = list1
+			//move the list1 pointer forward
+			list1 = list1.next
+		}
+		else {
+			//set the next value for the merged list to list2
+			curr.next = list2
+			//move the list2 pointer forward
+			list2 = list2.next
+		}
+		//move the merged list pointer forward
+		curr = curr.next
+	}
+	//if either list is empty, add the other list to the end of the merged list
+	if (list1 === null) curr.next = list2
+	else curr.next = list1
+	//return the node after the head in the merged linked list
+	return head.next
 };
