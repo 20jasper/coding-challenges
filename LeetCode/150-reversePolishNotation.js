@@ -58,10 +58,10 @@ const evalRPN = function (tokens) {
 	const stack = []
 	//lookup table for callback functions
 	const operations = {
-		"*": multiply,
-		"+": add,
-		"/": divide,
-		"-": subtract,
+		"*": (num1, num2) => num1 * num2,
+		"+": (num1, num2) => num1 + num2,
+		"/": (num1, num2) => Math.trunc(num1 / num2),
+		"-": (num1, num2) => num1 - num2,
 	}
 	for (let i = 0; i < tokens.length; i++) {
 		const token = tokens[i];
@@ -78,11 +78,6 @@ const evalRPN = function (tokens) {
 	}
 	//return the top element on the stack
 	return stack[0]
-
-	function multiply(num1, num2) { return num1 * num2 }
-	function add(num1, num2) { return num1 + num2 }
-	function subtract(num1, num2) { return num1 - num2 }
-	function divide(num1, num2) { return Math.trunc(num1 / num2) }
 };
 //TESTCASES--
 console.log(evalRPN(["2", "1", "+", "3", "*"]), 9);
