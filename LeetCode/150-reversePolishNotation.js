@@ -71,6 +71,7 @@ const evalRPN = function (tokens) {
 			const rightNum = stack.pop()
 			const leftNum = stack.pop()
 			const operation = operations[token]
+			//replace them with the result of the operation
 			stack.push(operation(leftNum, rightNum))
 		}
 		//convert to a string then push the number onto the stack
