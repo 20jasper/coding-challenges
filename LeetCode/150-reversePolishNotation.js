@@ -68,13 +68,13 @@ const evalRPN = function (tokens) {
 		//if the token is an operation
 		if (operations[token] !== undefined) {
 			//take the first 2 nums off the top of the stack
-			const rightNum = Number(stack.pop())
-			const leftNum = Number(stack.pop())
+			const rightNum = stack.pop()
+			const leftNum = stack.pop()
 			const operation = operations[token]
 			stack.push(operation(leftNum, rightNum))
 		}
-		//push the number onto the stack
-		else stack.push(token)
+		//convert to a string then push the number onto the stack
+		else stack.push(Number(token))
 	}
 	//return the top element on the stack
 	return stack[0]
