@@ -45,6 +45,7 @@ then subtract the number to the left and add the number to the right from the ha
 	if the right number is more than the max, set it to the max
 	else if the left number is the max, reset the hashmap and iterate through the window again
 
+	The time complexity of this solution is still O((n-(k-1))*k)) or O(nk), but the space complexity is O(n) where n is the length of the array and k is the length of the window
 */
 /**
  * @param {number[]} nums
@@ -74,3 +75,60 @@ const maxSlidingWindow = function (nums, k) {
 console.log(maxSlidingWindow([1, 3, -1, -3, 5, 3, 6, 7], 3), [3, 3, 5, 5, 6, 7]);
 console.log(maxSlidingWindow([1, 3, -1, -3, 5, 3, 6, 7, -1], 3), [3, 3, 5, 5, 6, 7, 7]);
 console.log(maxSlidingWindow([1], 1), [1]);
+
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number[]}
+ */
+const maxSlidingWindow2 = function (nums, k) {
+	let left = 0
+	let right = 0
+	let max = -Infinity
+	const res = []
+	let hashMap = {}
+
+	getWindowMax()
+	res.push(max)
+
+	//while the window is in bounds
+	while (left + k < nums.length) {
+		const leftNum = nums[left]
+		const rightNum = nums[right]
+		updateFrequency(leftNum, -1)
+		left++
+		updateFrequency(rightNum, 1)
+		right++
+		//if the right num is more than or equal to the max, set it equal to the max 
+		if (rightNum >= max) max = rightNum
+		//otherwise, if the left num's frequency is 0 and the left num is the max iterate over the window to get the max
+		else if (hashMap[leftNum] === 0 && leftNum === max) getWindowMax()
+
+		res.push(max)
+		//shift the window right
+	}
+	return res
+
+	function updateFrequency(num, mod) {
+		if (hashMap[num] === undefined) hashMap[num] = 0
+		hashMap[num] += mod
+	}
+	function getWindowMax() {
+		hashMap = {}
+		max = -Infinity
+		right = left
+		while (right - left < k) {
+			updateFrequency(nums[right], 1)
+
+			max = Math.max(max, nums[right])
+
+			right++
+		}
+	}
+};
+//TESTCASES--
+console.log(maxSlidingWindow2([1, 3, -1, -3, 5, 3, 6, 7], 3), [3, 3, 5, 5, 6, 7]);
+console.log(maxSlidingWindow2([1, 3, -1, -3, 5, 3, 6, 7, -1], 3), [3, 3, 5, 5, 6, 7, 7]);
+console.log(maxSlidingWindow2([1], 1), [1]);
+console.log(maxSlidingWindow2([1, -1], 1), [1, -1]);
+console.log(maxSlidingWindow2([-1], 1), [-1]);
