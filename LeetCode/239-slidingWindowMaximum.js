@@ -32,6 +32,19 @@ Output: [1]
 
 //SOLUTION--
 /* 
+The first solution I thought of was brute force 
+iterate through the window
+	add the max to a resultant array
+
+The time complexity of this solution is O((n-(k-1))*k)) or O(nk) and the space complexity is O(1) where n is the length of the array and k is the length of the window
+
+A more optimized solution would be to keep a record of how many of each number exist in a hashmap
+
+Iterate through the first window and get the maximum
+then subtract the number to the left and add the number to the right from the hashmap
+	if the right number is more than the max, set it to the max
+	else if the left number is the max, reset the hashmap and iterate through the window again
+
 */
 /**
  * @param {number[]} nums
