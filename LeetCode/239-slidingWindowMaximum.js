@@ -52,8 +52,25 @@ then subtract the number to the left and add the number to the right from the ha
  * @return {number[]}
  */
 const maxSlidingWindow = function (nums, k) {
-
+	let left = 0
+	let right = 0
+	const res = []
+	//while the window is in bounds
+	while (left + k - 1 < nums.length) {
+		let max = -Infinity
+		//while the right pointer is in the window
+		while (right - left < k) {
+			max = Math.max(max, nums[right])
+			right++
+		}
+		res.push(max)
+		//increment the left pointer and reset the right pointer
+		left++
+		right = left
+	}
+	return res
 };
 //TESTCASES--
 console.log(maxSlidingWindow([1, 3, -1, -3, 5, 3, 6, 7], 3), [3, 3, 5, 5, 6, 7]);
+console.log(maxSlidingWindow([1, 3, -1, -3, 5, 3, 6, 7, -1], 3), [3, 3, 5, 5, 6, 7, 7]);
 console.log(maxSlidingWindow([1], 1), [1]);
