@@ -27,8 +27,8 @@ Explanation: In this case, no transactions are done and the max profit = 0.
 
 Constraints:
 
-    1 <= prices.length <= 105
-    0 <= prices[i] <= 104
+		1 <= prices.length <= 105
+		0 <= prices[i] <= 104
 
 
 */
@@ -37,9 +37,9 @@ Constraints:
 /* 
 set max price to 0
 Iterate through the array
-    set the current element as the buy price
-    check every element after to see what the profit would be at every sell price
-        if the current profit is more than the max profit, set the max profit as the current profit
+		set the current element as the buy price
+		check every element after to see what the profit would be at every sell price
+				if the current profit is more than the max profit, set the max profit as the current profit
 return the maxProfit
 
 This solution has an O(n^2) time comlexity and O(1) space complexity
@@ -72,10 +72,10 @@ The first solution was too slow to be accepted, so this time I am going to keep 
 Set max price to 0
 Set buy price to the first price
 Iterate through the array
-    check the profit if the stock were sold now
-        if the current profit is more than the max profit, set the max profit as the current profit
-    check if the current price is less than the buy price
-        If so, set the buy price to the current price
+		check the profit if the stock were sold now
+				if the current profit is more than the max profit, set the max profit as the current profit
+		check if the current price is less than the buy price
+				If so, set the buy price to the current price
 return the maxProfit
 
 This solution has a time complexity of O(n) and a space complexity of O(1)
@@ -85,30 +85,51 @@ This solution has a time complexity of O(n) and a space complexity of O(1)
  * @return {number}
  */
 const maxProfit = function (prices) {
-    //if the array is one long or empty, return 0
-    if (prices.length < 2) {
-        return 0
-    }
-    let maxProfit = 0
-    let buyPrice = prices[0]
-    //iterate through the array
-    for (let i = 1; i < prices.length; i++) {
-        //iterate through the array after the buy price
-        const sellPrice = prices[i];
-        const profit = sellPrice - buyPrice
-        //if profit is more than maxProfit, set max profit to profit
-        if (profit > maxProfit) {
-            maxProfit = profit
-        }
-        //if buy price is less than the sell price, set buy price to the sell price
-        else if (buyPrice > sellPrice) {
-            buyPrice = sellPrice
-        }
-    }
-    // return the difference of the sell price and the buy price
-    return maxProfit
+	//if the array is one long or empty, return 0
+	if (prices.length < 2) {
+		return 0
+	}
+	let maxProfit = 0
+	let buyPrice = prices[0]
+	//iterate through the array
+	for (let i = 1; i < prices.length; i++) {
+		//iterate through the array after the buy price
+		const sellPrice = prices[i];
+		const profit = sellPrice - buyPrice
+		//if profit is more than maxProfit, set max profit to profit
+		if (profit > maxProfit) {
+			maxProfit = profit
+		}
+		//if buy price is less than the sell price, set buy price to the sell price
+		else if (buyPrice > sellPrice) {
+			buyPrice = sellPrice
+		}
+	}
+	// return the difference of the sell price and the buy price
+	return maxProfit
 };
 
 //TESTCASES--
 console.log(maxProfit(prices = [7, 6, 4, 3, 1]), 0);
 console.log(maxProfit(prices = [7, 1, 5, 3, 6, 4]), 5);
+
+/**
+ * @param {number[]} prices
+ * @return {number}
+ */
+const maxProfit2 = function (prices) {
+	let maxProfit = 0
+	let min = Infinity
+
+	for (let i = 0; i < prices.length; i++) {
+		const price = prices[i]
+		if (price <= min) min = price
+		//if the price is more than the min, get the new max Profit
+		else maxProfit = Math.max(maxProfit, price - min)
+	}
+	return maxProfit
+};
+
+//TESTCASES--
+console.log(maxProfit2([7, 6, 4, 3, 1]), 0);
+console.log(maxProfit2([7, 1, 5, 3, 6, 4]), 5);
