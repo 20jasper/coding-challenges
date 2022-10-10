@@ -113,6 +113,12 @@ const maxProfit = function (prices) {
 console.log(maxProfit(prices = [7, 6, 4, 3, 1]), 0);
 console.log(maxProfit(prices = [7, 1, 5, 3, 6, 4]), 5);
 
+/*
+if the current price is less than or equal to the min, set the min to the new price
+else if the price is more than the min, get the new max profit
+This solution has a time complexity of O(n) and a space complexity of O(1) where n is the number of prices
+*/
+
 /**
  * @param {number[]} prices
  * @return {number}
