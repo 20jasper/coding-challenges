@@ -55,7 +55,7 @@ console.log(subarraySum([0, 1, -1], 0), 3);
 
 //SOLUTION--
 /* 
-The running sum at any index i - the running sum at any index j shows gives us the running sum from i to j
+The running sum at any index i - the running sum at another index j shows gives us the running sum from i to j
 So to solve this problem, we need to find each pair i and j where i-j =k and each time a running sum is k
 This solution has a space complexity of O(n) and a time complexity of O(n) where n is the length of the array
 */
