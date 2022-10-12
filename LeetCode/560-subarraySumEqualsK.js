@@ -68,7 +68,7 @@ const subarraySum2 = function (nums, k) {
 		sum += nums[i]
 
 		if (sum === k) total++
-		//check if the complementary sum is in the hashmap
+		//Get the amount of complementary sums in the hashmap
 		const sumFrequency = hashMap[sum - k]
 		if (sumFrequency !== undefined) total += sumFrequency
 		//update the frequency of the sum in the hashMap
