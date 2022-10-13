@@ -75,3 +75,34 @@ console.log(maxScore("011101"), 5);
 console.log(maxScore("00111"), 5);
 console.log(maxScore("111"), 2);
 
+//SOLUTION--
+/* 
+The time complexity of this solution is O(n) and the space complexity is O(1) where n is the length of the string, but it does remove one pass
+
+We are looking for the maximum of leftZeros + rightOnes, and rightOnes is the same as totalOnes-leftOnes, so we can rewrite the equation as leftZeros + totalOnes-leftOnes
+
+totalOnes is constant, so we just need to find the split with the maximum leftZeros-leftOnes
+*/
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var maxScore2 = function (s) {
+	let maxScore = -Infinity
+	let zeros = 0
+	let ones = 0
+
+	for (let i = 0; i < s.length - 1; i++) {
+		if (s[i] === "0") zeros++
+		else ones++
+
+		maxScore = Math.max(zeros - ones, maxScore)
+	}
+
+	if (s.at(-1) === "1") ones++
+	return maxScore + ones
+};
+//TESTCASES--
+console.log(maxScore2("011101"), 5);
+console.log(maxScore2("00111"), 5);
+console.log(maxScore2("111"), 2);
