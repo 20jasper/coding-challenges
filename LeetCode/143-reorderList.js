@@ -37,7 +37,9 @@ Constraints:
 
 //SOLUTION--
 /* 
+This solution can be broken into three steps—find the middle of the list, split the list at that point and reverse the list after the middle, then merge the lists together
 
+The time complexity of this solution is O(n) and the space complexity is O(1) where n is the length of the linked list
 */
 /**
  * Definition for singly-linked list.
