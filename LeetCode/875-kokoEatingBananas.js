@@ -41,6 +41,8 @@ Constraints:
 
 //SOLUTION--
 /* 
+Setting the right bound to the maximum possible number rather than search the whole array for the biggest pile gives a better worst case. There can be up to 10,000 piles to check, and at worst the max value is still 10^9
+The time complexity of this solution is O(n) and the space complexity is O(1) where n is the amount of piles
 */
 /**
  * @param {number[]} piles
