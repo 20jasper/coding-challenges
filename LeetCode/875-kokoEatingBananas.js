@@ -42,6 +42,41 @@ Constraints:
 //SOLUTION--
 /* 
 */
+/**
+ * @param {number[]} piles
+ * @param {number} maxHours
+ * @return {number}
+ */
+var minEatingSpeed = function (piles, maxHours) {
+	let left = 1
+	let right = 10 ** 9
 
+	//binary search
+	while (left <= right) {
+		const mid = Math.floor((right - left) / 2) + left
+		if (canEatAllBananas(mid)) {
+			right = mid - 1
+			continue
+		}
+		left = mid + 1
+	}
+
+	return left
+
+
+	function canEatAllBananas(bananasPerHour) {
+		let hours = 0
+
+		//iterate until all bananas are eaten or the guards return
+		for (let i = 0; i < piles.length && hours <= maxHours; i++) {
+			const hoursToEatPile = Math.ceil(piles[i] / bananasPerHour)
+			hours += hoursToEatPile
+		}
+		//return if all bananas were eaten in time
+		return hours <= maxHours
+	}
+};
 //TESTCASES--
-console.log();
+console.log(minEatingSpeed([3, 6, 7, 11], 8), 4);
+console.log(minEatingSpeed([100, 1, 1, 1, 1], 5), 100);
+console.log(minEatingSpeed([30, 11, 23, 4, 20], 6), 23);
