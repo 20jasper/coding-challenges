@@ -53,13 +53,15 @@ var minEatingSpeed = function (piles, maxHours) {
 	let left = 1
 	let right = 10 ** 9
 
-	//binary search
+	//binary search to find left bound
 	while (left <= right) {
 		const mid = Math.floor((right - left) / 2) + left
 		if (canEatAllBananas(mid)) {
+			//move the right bound to the left of mid so right doesn't get stuck at the left bound
 			right = mid - 1
 			continue
 		}
+		//if all bananas can't be eaten, move the left bound to the next possible valid element
 		left = mid + 1
 	}
 
