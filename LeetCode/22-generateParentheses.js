@@ -26,7 +26,12 @@ Constraints:
 
 //SOLUTION--
 /* 
-The time and space complexity of this solution is O(4^n) where n is the number of pairs of parentheses since there are 2 decisions per parenthesis (I definitely did not just Google the singular form of parentheses), and there are 2 parentheses per pair, or 4^n possible pairs to check through. The actual number is closer to 3.7^n since a decision that will make invalid parentheses will not be made
+This problem can be visualized as a decision tree. We can either add an opening or closing parenthesis (I definitely did not just Google the singular form of parentheses). In this case, it's more efficient to only pursue paths that generate valid parentheses, so some rules need to be followed.
+- there should never be more opening or closing parentheses than the maximum pairs allowed
+- if the number of opening and closing parentheses are equal, an opening parenthesis should be added. Something like ')' can never become valid (assuming we are only adding to the right of the string)
+
+
+The time and space complexity of this solution is O(4^n) where n is the number of pairs of parentheses since there are 2 decisions per parenthesis, and there are 2 parentheses per pair, or 4^n possible pairs to check through. The actual number is closer to 3.7^n since a decision that will make invalid parentheses will not be made
 */
 /**
  * @param {number} n
