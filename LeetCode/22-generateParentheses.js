@@ -26,6 +26,7 @@ Constraints:
 
 //SOLUTION--
 /* 
+The time and space complexity of this solution is O(4^n) where n is the number of pairs of parentheses since there are 2 decisions per parenthesis (I definitely did not just Google the singular form of parentheses), and there are 2 parentheses per pair, or 4^n possible pairs to check through. The actual number is closer to 3.7^n since a decision that will make invalid parentheses will not be made
 */
 /**
  * @param {number} n
