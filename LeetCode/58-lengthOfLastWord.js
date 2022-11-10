@@ -42,7 +42,7 @@ Constraints:
 
 //SOLUTION--
 /* 
-This solution has a time complexity of O(n) and a space complexity of O(1)
+This solution has a time complexity of O(n) and a space complexity of O(1) where n is the length of the string
 */
 var lengthOfLastWord = function (s) {
 	//start at the end of the string
