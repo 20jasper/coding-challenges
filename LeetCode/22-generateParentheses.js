@@ -51,4 +51,6 @@ const generateParenthesis = function (n) {
 	}
 };
 //TESTCASES--
-console.log(generateParenthesis(3));
+console.log(generateParenthesis(1), ['()']);
+console.log(generateParenthesis(2), ['(())', '()()']);
+console.log(generateParenthesis(3), ['((()))', '(()())', '(())()', '()(())', '()()()']);
