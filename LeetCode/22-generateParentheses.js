@@ -38,13 +38,18 @@ const generateParenthesis = function (n) {
 	return res
 
 	function nextChar(string, opening, closing) {
+		//if n pairs of parentheses have been generated
 		if (string.length === n * 2) {
 			res.push(string)
 			return
 		}
+		//if there are less opening parentheses than the max
 		if (opening < n) {
 			nextChar(`${string}(`, opening + 1, closing)
 		}
+		//if there are less closing parentheses than opening parentheses
+		//Note this implicitly covers closing < opening
+		//This is necessary since '))' can never become valid
 		if (closing < opening) {
 			nextChar(`${string})`, opening, closing + 1)
 		}
