@@ -8,6 +8,3 @@
 //SOLUTION--
 /* 
 */ 
-
-//TESTCASES--
-console.log();
