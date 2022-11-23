@@ -18,11 +18,7 @@ class Name{
 	}
 
 	roll(pinsKnockedDown){
-		this._points+=pinsKnockedDown
-		if(this._lastFrameWasSpare){
-			this._points+=pinsKnockedDown
-		}
-		
+		this.updateScore(pinsKnockedDown)
 		this._pinsLeft-=pinsKnockedDown
 		
 		this._rollsThisFrame++
@@ -45,6 +41,13 @@ class Name{
 		}
 
 		return false
+	}
+
+	updateScore(pinsKnockedDown){
+		this._points+=pinsKnockedDown
+		if(this._lastFrameWasSpare){
+			this._points+=pinsKnockedDown
+		}
 	}
 
 	score(){
