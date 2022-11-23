@@ -35,5 +35,12 @@ describe('bowling game', ()=>{
 		name.roll(4)
 		expect(name._frame).toBe(1)
 	})
+	// The bonus for a spare is the number of pins knocked down by the next roll.
+	test('Bonus points should be added after a spare', ()=>{
+		name.roll(5)
+		name.roll(5)
+		name.roll(5)
+		expect(name._frame).toBe(20)
+	})
 })
 
