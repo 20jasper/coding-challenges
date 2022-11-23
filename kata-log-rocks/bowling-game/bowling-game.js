@@ -27,20 +27,15 @@ class Name{
 			this._lastFrameWasSpare = true
 		}
 
-		if(this.shouldFrameAdvance()){
-			this._frame++
-		}
+		this.frameAdvanceCheck()
 	}
 	
-	shouldFrameAdvance(){
-		if(this._rollsThisFrame===2){
-			return true
+	frameAdvanceCheck(){
+		if(this._rollsThisFrame===2 || 
+			this._pinsLeft===0
+			){
+			this._frame++
 		}
-		if(this._pinsLeft===0){
-			return true
-		}
-
-		return false
 	}
 
 	updateScore(pinsKnockedDown){
