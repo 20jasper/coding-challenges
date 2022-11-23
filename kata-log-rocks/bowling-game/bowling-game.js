@@ -23,13 +23,18 @@ class Name{
 		
 		this._rollsThisFrame++
 
-		if(this._rollsThisFrame===2&&this._pinsLeft===0){
-			this._lastFrameWasSpare = true
-		}
-
+		this.spareCheck()
 		this.frameAdvanceCheck()
 	}
 	
+	spareCheck(){
+		if(this._rollsThisFrame===2 &&
+			this._pinsLeft===0
+			){
+			this._lastFrameWasSpare = true
+		}
+	}
+
 	frameAdvanceCheck(){
 		if(this._rollsThisFrame===2 || 
 			this._pinsLeft===0
