@@ -16,6 +16,9 @@ class Name{
 
 	roll(pinsKnockedDown){
 		this._points+=pinsKnockedDown
+		if(pinsKnockedDown===10){
+			this._frame++
+		}
 	}
 }
 
