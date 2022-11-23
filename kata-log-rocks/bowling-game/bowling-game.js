@@ -34,8 +34,12 @@ class Name{
 		if(this._pinsLeft===0){
 			return true
 		}
-		
+
 		return false
+	}
+
+	score(){
+		return this._points
 	}
 }
 
