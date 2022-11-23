@@ -11,6 +11,7 @@
 class Name{
 	constructor(){
 		this._frame = 0
+		this._points = 0
 	}
 }
 
