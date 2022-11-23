@@ -40,7 +40,7 @@ describe('bowling game', ()=>{
 		name.roll(5)
 		name.roll(5)
 		name.roll(5)
-		expect(name._frame).toBe(20)
+		expect(name._points).toBe(20)
 	})
 })
 
