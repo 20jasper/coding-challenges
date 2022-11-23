@@ -14,13 +14,22 @@ class Name{
 		this._points = 0
 		this._pinsLeft = 10
 		this._rollsThisFrame = 0
+		this._lastFrameWasSpare = false
 	}
 
 	roll(pinsKnockedDown){
 		this._points+=pinsKnockedDown
+		if(this._lastFrameWasSpare){
+			this._points+=pinsKnockedDown
+		}
+		
 		this._pinsLeft-=pinsKnockedDown
 		
 		this._rollsThisFrame++
+
+		if(this._rollsThisFrame===2&&this._pinsLeft===0){
+			this._lastFrameWasSpare = true
+		}
 
 		if(this.shouldFrameAdvance()){
 			this._frame++
