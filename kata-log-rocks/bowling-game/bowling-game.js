@@ -8,3 +8,10 @@
 //SOLUTION--
 /* 
 */ 
+class Name{
+	constructor(){
+		this._frame = 0
+	}
+}
+
+module.exports = Name
