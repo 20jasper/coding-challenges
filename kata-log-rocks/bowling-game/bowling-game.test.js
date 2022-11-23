@@ -17,6 +17,10 @@ describe('bowling game', ()=>{
 		name.roll(5)
 		expect(name._points).toBe(5)
 	})
+	test('The score method should return the score', ()=>{
+		name.roll(5)
+		expect(name.score()).toBe(5)
+	})
 	test('The frame should advance when all 10 pins are knocked down', ()=>{
 		name.roll(10)
 		expect(name._frame).toBe(1)
