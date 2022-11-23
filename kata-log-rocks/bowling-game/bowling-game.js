@@ -33,6 +33,9 @@ class Name{
 			){
 			this._lastFrameWasSpare = true
 		}
+		else {
+			this._lastFrameWasSpare=false
+		}
 	}
 
 	frameAdvanceCheck(){
