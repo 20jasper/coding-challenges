@@ -42,5 +42,12 @@ describe('bowling game', ()=>{
 		name.roll(5)
 		expect(name._points).toBe(20)
 	})
+	test('Bonus points should not be added 2 rolls after a spare', ()=>{
+		name.roll(5)
+		name.roll(5)
+		name.roll(5)
+		name.roll(4)
+		expect(name._points).toBe(24)
+	})
 })
 
