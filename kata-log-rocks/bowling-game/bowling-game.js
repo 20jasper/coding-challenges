@@ -14,9 +14,7 @@ class Name{
 		this._points = 0
 		this._pinsLeft = 10
 		this._rollsThisFrame = 0
-		this._lastFrameWasSpare = false
-		this._lastFrameWasStrike = false
-		this._secondToLastFrameWasStrike = false
+		this._scoreMultiplierQueue = [1, 1]
 	}
 
 	roll(pinsKnockedDown){
@@ -25,32 +23,26 @@ class Name{
 		
 		this._rollsThisFrame++
 
-		this.spareCheck()
-		this.strikeCheck()
+		this.updateScoreMultiplier()
 		this.frameAdvanceCheck()
 	}
 	
-	spareCheck(){
-		if(this._rollsThisFrame===2 &&
-			this._pinsLeft===0
-			){
-			this._lastFrameWasSpare = true
-		}
-		else {
-			this._lastFrameWasSpare=false
-		}
-	}
+	updateScoreMultiplier(){
+		this._scoreMultiplierQueue.pop()
+		this._scoreMultiplierQueue.unshift(1)
 
-	strikeCheck(){
-		this._secondToLastFrameWasStrike = this._lastFrameWasStrike
-		
-		if(this._rollsThisFrame===1 &&
-			this._pinsLeft===0
-			){
-			this._lastFrameWasStrike = true
+		if(this._pinsLeft!==0){
+			return
 		}
+
+		// if it's a strike
+		if(this._rollsThisFrame===1){
+			this._scoreMultiplierQueue[0]++
+			this._scoreMultiplierQueue[1]++
+		}
+		// if it's a spare
 		else {
-			this._lastFrameWasStrike=false
+			this._scoreMultiplierQueue[1]++
 		}
 	}
 
@@ -63,10 +55,9 @@ class Name{
 	}
 
 	updateScore(pinsKnockedDown){
-		this._points+=pinsKnockedDown
-		if(this._lastFrameWasSpare || this._lastFrameWasStrike || this._secondToLastFrameWasStrike){
-			this._points+=pinsKnockedDown
-		}
+		const scoreMultiplier = this._scoreMultiplierQueue[1]
+		
+		this._points += pinsKnockedDown * scoreMultiplier
 	}
 
 	score(){
