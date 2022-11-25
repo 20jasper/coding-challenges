@@ -78,7 +78,7 @@ describe('bowling game', ()=>{
 
 		expect(name._points).toBe(40)
 	})
-	test('Frame should not advance if a strike is rolled on the tenth frame', ()=>{
+	test('Frame should not advance if a strike is rolled at the start of the tenth frame', ()=>{
 		name._frame = 10
 		
 		name.roll(10)
