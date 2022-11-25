@@ -58,5 +58,13 @@ describe('bowling game', ()=>{
 
 		expect(name._points).toBe(24)
 	})
+	test('Bonus points should be added for two rolls after a strike', ()=>{
+		name.roll(10)
+
+		name.roll(7)
+		name.roll(2)
+
+		expect(name._points).toBe(28)
+	})
 })
 
