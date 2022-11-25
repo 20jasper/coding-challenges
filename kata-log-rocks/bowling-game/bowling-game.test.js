@@ -66,5 +66,17 @@ describe('bowling game', ()=>{
 
 		expect(name._points).toBe(28)
 	})
+	test('Bonus point multiplier should stack', ()=>{
+		name.roll(10)
+		
+		name.roll(10)
+		
+		// should get triple points for this roll
+		name.roll(2)
+		// should get double points for this roll
+		name.roll(2)
+
+		expect(name._points).toBe(40)
+	})
 })
 
