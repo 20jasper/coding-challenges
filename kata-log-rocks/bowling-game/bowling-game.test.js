@@ -93,5 +93,13 @@ describe('bowling game', ()=>{
 
 		expect(name._frame).toBe(11)
 	})
+	test('Frame should not advance after 2 strikes on the tenth frame', ()=>{
+		name._frame = 10
+		
+		name.roll(10)
+		name.roll(10)
+
+		expect(name._frame).toBe(10)
+	})
 })
 
