@@ -15,6 +15,8 @@ class Name{
 		this._pinsLeft = 10
 		this._rollsThisFrame = 0
 		this._lastFrameWasSpare = false
+		this._lastFrameWasStrike = false
+		this._secondToLastFrameWasStrike = false
 	}
 
 	roll(pinsKnockedDown){
@@ -24,6 +26,7 @@ class Name{
 		this._rollsThisFrame++
 
 		this.spareCheck()
+		this.strikeCheck()
 		this.frameAdvanceCheck()
 	}
 	
@@ -38,6 +41,19 @@ class Name{
 		}
 	}
 
+	strikeCheck(){
+		this._secondToLastFrameWasStrike = this._lastFrameWasStrike
+		
+		if(this._rollsThisFrame===1 &&
+			this._pinsLeft===0
+			){
+			this._lastFrameWasStrike = true
+		}
+		else {
+			this._lastFrameWasStrike=false
+		}
+	}
+
 	frameAdvanceCheck(){
 		if(this._rollsThisFrame===2 || 
 			this._pinsLeft===0
@@ -48,7 +64,7 @@ class Name{
 
 	updateScore(pinsKnockedDown){
 		this._points+=pinsKnockedDown
-		if(this._lastFrameWasSpare){
+		if(this._lastFrameWasSpare || this._lastFrameWasStrike || this._secondToLastFrameWasStrike){
 			this._points+=pinsKnockedDown
 		}
 	}
