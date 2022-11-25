@@ -47,6 +47,9 @@ class Name{
 	}
 
 	frameAdvanceCheck(){
+		if(this._frame === 10){
+			this._pinsLeft = 10
+		}
 		if(this._rollsThisFrame===2 || 
 			this._pinsLeft===0
 			){
