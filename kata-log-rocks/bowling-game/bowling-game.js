@@ -51,12 +51,14 @@ class Name{
 			this._pinsLeft===0
 			){
 			this._frame++
+			this._pinsLeft = 10
+			this._rollsThisFrame = 0
 		}
 	}
 
 	updateScore(pinsKnockedDown){
 		const scoreMultiplier = this._scoreMultiplierQueue[1]
-		
+
 		this._points += pinsKnockedDown * scoreMultiplier
 	}
 
