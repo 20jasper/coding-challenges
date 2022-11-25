@@ -47,12 +47,12 @@ class Name{
 	}
 
 	frameAdvanceCheck(){
-		if(this._frame === 10){
+		//reset lane after all pins are knocked down before the third roll on the tenth frame
+		if(this._frame === 10 && this._rollsThisFrame<3 && this._pinsLeft === 0){
 			this._pinsLeft = 10
 		}
-		if(this._rollsThisFrame===2 || 
-			this._pinsLeft===0
-			){
+		else if(this._rollsThisFrame===2 || this._pinsLeft===0){
+			//advance frame 
 			this._frame++
 			this._pinsLeft = 10
 			this._rollsThisFrame = 0
