@@ -3,8 +3,8 @@ class Game{
 		this._score = 0
 	}
 
-	roll(){
-		this._score = 3
+	roll(pinsKnockedDown){
+		this._score = pinsKnockedDown
 	}
 
 	score(){
