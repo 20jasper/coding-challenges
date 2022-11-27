@@ -36,9 +36,15 @@ describe('bowling game', ()=>{
 		expect(model._score).toBe(8)
 	})
 
-	test('score method returns current score', ()=>{
+	test('score method returns 11 if current score is 11', ()=>{
 		model._score = 11
 
 		expect(model.score()).toBe(11)
+	})
+
+	test('score method returns 25 if current score is 25', ()=>{
+		model._score = 25
+
+		expect(model.score()).toBe(25)
 	})
 })
