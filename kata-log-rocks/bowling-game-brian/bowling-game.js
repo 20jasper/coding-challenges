@@ -4,7 +4,7 @@ class Game{
 	}
 
 	roll(pinsKnockedDown){
-		this._score = pinsKnockedDown
+		this._score += pinsKnockedDown
 	}
 
 	score(){
