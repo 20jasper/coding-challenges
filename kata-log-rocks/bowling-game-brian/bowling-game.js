@@ -1,6 +1,7 @@
 class Game{
 	constructor(){
 		this._score = 0
+		this._frame = 2
 	}
 
 	roll(pinsKnockedDown){
