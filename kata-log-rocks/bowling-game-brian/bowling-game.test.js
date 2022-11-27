@@ -47,4 +47,10 @@ describe('bowling game', ()=>{
 
 		expect(model.score()).toBe(25)
 	})
+
+	test('Frame should advance if a strike is rolled', ()=>{
+		model.roll(10)
+
+		expect(model._frame).toBe(2)
+	})
 })
