@@ -8,7 +8,7 @@ class Game{
 	}
 
 	score(){
-		return 11
+		return this._score
 	}
 }
 
