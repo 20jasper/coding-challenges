@@ -1,10 +1,14 @@
 class Game{
 	constructor(){
-		this.score = 0
+		this._score = 0
 	}
 
 	roll(){
-		this.score = 3
+		this._score = 3
+	}
+
+	score(){
+		return 11
 	}
 }
 
