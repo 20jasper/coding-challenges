@@ -15,12 +15,18 @@ describe('bowling game', ()=>{
 
 	test('score is initialized as 0', ()=>{
 		
-		expect(model.score).toBe(0)
+		expect(model._score).toBe(0)
 	})
 
 	test('score should increase by pins knocked down after a roll', ()=>{
 		model.roll(3)
 
-		expect(model.score).toBe(3)
+		expect(model._score).toBe(3)
+	})
+
+	test('score method returns current score', ()=>{
+		model.score = 11
+
+		expect(model.score).toBe(11)
 	})
 })
