@@ -24,7 +24,7 @@ Strings are always lowercase letters only
 */ 
 
 function stringArrayDuplicates(){
-
+	return []
 }
 
 module.exports = {stringArrayDuplicates}
