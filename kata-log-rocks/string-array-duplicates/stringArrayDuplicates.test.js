@@ -28,4 +28,10 @@ describe('String Array Duplicates', () => {
 
 		expect(stringArrayDuplicates(data)).toStrictEqual(["a"])
 	});
+
+	test('should remove multiple unique duplicates', () => {
+		const data = ['aabb']
+
+		expect(stringArrayDuplicates(data)).toStrictEqual(["ab"])
+	});
 });
