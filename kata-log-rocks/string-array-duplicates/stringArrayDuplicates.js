@@ -23,8 +23,13 @@ return array of strings with duplicate chars in each string removed
 Strings are always lowercase letters only
 */ 
 
-function stringArrayDuplicates(){
-	return []
+function stringArrayDuplicates(arr){
+	return arr.map((string)=>{
+		if(string[0]===string[1]){
+			return string[0]
+		}
+		return string
+	})
 }
 
 module.exports = {stringArrayDuplicates}
