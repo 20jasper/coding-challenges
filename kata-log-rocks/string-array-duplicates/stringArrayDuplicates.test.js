@@ -34,4 +34,10 @@ describe('String Array Duplicates', () => {
 
 		expect(stringArrayDuplicates(data)).toStrictEqual(["ab"])
 	});
+
+	test('should not remove non–consecutive duplicates', () => {
+		const data = ['aabba']
+
+		expect(stringArrayDuplicates(data)).toStrictEqual(["aba"])
+	});
 });
