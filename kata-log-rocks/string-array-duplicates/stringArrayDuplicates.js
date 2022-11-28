@@ -23,3 +23,8 @@ return array of strings with duplicate chars in each string removed
 Strings are always lowercase letters only
 */ 
 
+function stringArrayDuplicates(){
+
+}
+
+module.exports = {stringArrayDuplicates}
