@@ -22,4 +22,10 @@ describe('String Array Duplicates', () => {
 
 		expect(stringArrayDuplicates(data)).toStrictEqual(["a"])
 	});
+
+	test('Should remove 5 consecutive duplicate letters', () => {
+		const data = ['a'.repeat(5)]
+
+		expect(stringArrayDuplicates(data)).toStrictEqual(["a"])
+	});
 });
