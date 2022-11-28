@@ -10,4 +10,10 @@ describe('String Array Duplicates', () => {
 
 		expect(stringArrayDuplicates(data).length).toBe(0)
 	});
+
+	test('Should not change strings without duplicates', () => {
+		const data = ["abc"]
+
+		expect(stringArrayDuplicates(data)).toStrictEqual(["abc"])
+	});
 });
