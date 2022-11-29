@@ -58,4 +58,11 @@ describe('String Array Duplicates', () => {
 
 		expect(stringArrayDuplicates(data)).toStrictEqual([])
 	});
+	test('code wars test cases should pass', () => {
+		
+		expect(stringArrayDuplicates(["abracadabra","allottee","assessee"])).toStrictEqual(["abracadabra","alote","asese"])
+		expect(stringArrayDuplicates(["kelless","keenness"])).toStrictEqual(["keles","kenes"])
+		expect(stringArrayDuplicates(["ccooddddddewwwaaaaarrrrsssss","piccaninny","hubbubbubboo"])).toStrictEqual(['codewars','picaniny','hubububo'])
+		expect(stringArrayDuplicates(["abracadabra","allottee","assessee"])).toStrictEqual(['abracadabra','alote','asese'])
+	});
 });
