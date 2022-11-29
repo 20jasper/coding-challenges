@@ -46,4 +46,10 @@ describe('String Array Duplicates', () => {
 
 		expect(stringArrayDuplicates(data)).toStrictEqual(['ab', 'cd'])
 	});
+
+	test('should not change empty strings', () => {
+		const data = ['']
+
+		expect(stringArrayDuplicates(data)).toStrictEqual([''])
+	});
 });
