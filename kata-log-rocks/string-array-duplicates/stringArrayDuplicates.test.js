@@ -40,4 +40,10 @@ describe('String Array Duplicates', () => {
 
 		expect(stringArrayDuplicates(data)).toStrictEqual(["aba"])
 	});
+
+	test('should remove duplicates from multiple elements', () => {
+		const data = ['aaabbb', 'cccddd']
+
+		expect(stringArrayDuplicates(data)).toStrictEqual(['ab', 'cd'])
+	});
 });
