@@ -52,4 +52,10 @@ describe('String Array Duplicates', () => {
 
 		expect(stringArrayDuplicates(data)).toStrictEqual([''])
 	});
+
+	test('should return empty array if array is empty', () => {
+		const data = []
+
+		expect(stringArrayDuplicates(data)).toStrictEqual([])
+	});
 });
