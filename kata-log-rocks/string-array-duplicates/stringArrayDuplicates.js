@@ -30,10 +30,9 @@ function stringArrayDuplicates(arr){
 		let newString = ''
 		
 		for (let i = 0; i < string.length; i++) {
-			const char = string[i];
 			
-			if(!newString.includes(char)) {
-				newString += char
+			if(string[i-1]!==string[i]){
+				newString+=string[i]
 			}
 		}
 
