@@ -27,16 +27,16 @@ function stringArrayDuplicates(arr){
 	return arr.map(removeConsecutiveDuplicates)
 
 	function removeConsecutiveDuplicates(string){
-		let newString = ''
+		let noDuplicates = ''
 		
 		for (let i = 0; i < string.length; i++) {
 			
 			if(string[i-1]!==string[i]){
-				newString+=string[i]
+				noDuplicates+=string[i]
 			}
 		}
 
-		return newString
+		return noDuplicates
 	}
 }
 
