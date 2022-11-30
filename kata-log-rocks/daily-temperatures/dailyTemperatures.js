@@ -43,15 +43,20 @@ const dailyTemperatures = function (temperatures) {
 	const res = []
 
 	temperatures.forEach((temp, i) => {
-		if (temp < temperatures[i + 1]) {
-			res.push(1)
-		}
-		else {
-			res.push(0)
-		}
+		res.push(getDaysUntilWarmer(temp, i))
 	})
 
 	return res
+
+	function getDaysUntilWarmer(originalTemp, startIndex) {
+		for (let i = startIndex; i < temperatures.length; i++) {
+			if (originalTemp < temperatures[i]) {
+				return i - startIndex
+			}
+		}
+
+		return 0
+	}
 };
 
 module.exports = { dailyTemperatures }
