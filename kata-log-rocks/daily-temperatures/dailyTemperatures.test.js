@@ -8,8 +8,8 @@ describe('Daily temperatures', () => {
 	});
 
 	it('should be 1 if the next day is warmer', () => {
-		const data = [30, 31]
 
-		expect(dailyTemperatures(data)).toStrictEqual([1, 0])
+		expect(dailyTemperatures([30, 31])).toStrictEqual([1, 0])
+		expect(dailyTemperatures([100, 30, 31])).toStrictEqual([0, 1, 0])
 	});
 });
