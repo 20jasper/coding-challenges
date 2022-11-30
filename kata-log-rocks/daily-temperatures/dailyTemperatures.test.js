@@ -12,4 +12,9 @@ describe('Daily temperatures', () => {
 		expect(dailyTemperatures([30, 31])).toStrictEqual([1, 0])
 		expect(dailyTemperatures([100, 30, 31])).toStrictEqual([0, 1, 0])
 	});
+
+	it('should calculate correct amount of days for any amount of days in the future', () => {
+
+		expect(dailyTemperatures([99, 30, 30, 30, 30, 100])).toStrictEqual([5, 4, 3, 2, 1, 0])
+	});
 });
