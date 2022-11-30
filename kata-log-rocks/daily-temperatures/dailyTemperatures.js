@@ -40,7 +40,18 @@ Constraints:
  * @return {number[]}
  */
 const dailyTemperatures = function (temperatures) {
-	return [0]
+	const res = []
+
+	temperatures.forEach((temp, i) => {
+		if (temp < temperatures[i + 1]) {
+			res.push(1)
+		}
+		else {
+			res.push(0)
+		}
+	})
+
+	return res
 };
 
 module.exports = { dailyTemperatures }
