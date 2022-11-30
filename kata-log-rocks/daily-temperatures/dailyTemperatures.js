@@ -40,5 +40,7 @@ Constraints:
  * @return {number[]}
  */
 const dailyTemperatures = function (temperatures) {
-
+	return [0]
 };
+
+module.exports = { dailyTemperatures }

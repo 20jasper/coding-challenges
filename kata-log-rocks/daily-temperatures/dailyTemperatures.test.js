@@ -1,3 +1,5 @@
+const { dailyTemperatures } = require('./dailyTemperatures')
+
 describe('Daily temperatures', () => {
 	it('should be 0 if date is never warmer', () => {
 		const data = [30]
