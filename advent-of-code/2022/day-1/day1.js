@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 function getMaxCalories(elves) {
 	let max = -Infinity
 
@@ -10,5 +12,14 @@ function getMaxCalories(elves) {
 	return max
 }
 
+function parseInput(relativePath) {
+	const absolutePath = `${__dirname}/${relativePath}`
 
-module.exports = { getMaxCalories }
+	const data = fs.readFileSync(absolutePath, { encoding: 'utf8' })
+
+	const caloriesArr = data.split('\n')
+
+	return caloriesArr
+}
+
+module.exports = { getMaxCalories, parseInput }
