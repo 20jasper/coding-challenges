@@ -26,6 +26,12 @@ describe('Max Calories', () => {
 
 		expect(await getMaxCalories('file.txt')).toBe(22)
 	});
+
+	it('should return a max at the end if the file ends with a newline', async () => {
+		mockReadlineReturn(['1', ''])
+
+		expect(await getMaxCalories('file.txt')).toBe(1)
+	});
 });
 
 describe('Parse input file', () => {
