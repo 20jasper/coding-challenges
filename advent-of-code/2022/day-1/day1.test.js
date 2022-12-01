@@ -1,4 +1,4 @@
-const { getMaxCalories } = require('./day1')
+const { getMaxCalories, parseInput } = require('./day1')
 
 describe('Max Calories', () => {
 	it('should return the total of the first elf if there is only one', () => {
@@ -14,10 +14,10 @@ describe('Max Calories', () => {
 });
 
 describe('Parse input file', () => {
-	it('should correctly parse numbers', () => {
-		const res = parseInput('input.test.txt')
+	it('should contain correct numbers', () => {
+		const res = parseInput('test.txt')
 
-		expect(res).toContain(9524)
-		expect(res).toContain(12411)
+		expect(res).toContain('9524')
+		expect(res).toContain('12411')
 	});
 });
