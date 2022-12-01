@@ -3,7 +3,7 @@ const readline = require('node:readline/promises');
 
 function mockReadlineReturn(lines) {
 	return jest.spyOn(readline, 'createInterface')
-		.mockImplementationOnce(() => lines)
+		.mockImplementationOnce(() => lines.map(line => line + '\n'))
 }
 
 describe('Max Calories', () => {
@@ -19,6 +19,12 @@ describe('Max Calories', () => {
 		mockReadlineReturn(['10', '', '11'])
 
 		expect(await getMaxCalories('file.txt')).toBe(11)
+	});
+
+	it('should return a total in the middle if it has more calories', async () => {
+		mockReadlineReturn(['10', '', '11', '11', '', '1'])
+
+		expect(await getMaxCalories('file.txt')).toBe(22)
 	});
 });
 
