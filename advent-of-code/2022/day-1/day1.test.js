@@ -7,7 +7,7 @@ describe('Max Calories', () => {
 		expect(9).toBe(getMaxCalories([[3, 3, 3]]))
 	});
 
-	it('should return the second elf\s total if it has more calories', () => {
+	it('should return the second elf\'s total if it has more calories', () => {
 
 		expect(11).toBe(getMaxCalories([[10], [11]]))
 	});
