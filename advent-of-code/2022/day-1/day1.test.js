@@ -17,7 +17,7 @@ describe('Parse input file', () => {
 	it('Each nested array should contain correct numbers', () => {
 		const res = parseInput('test.txt')
 
-		expect(res[0]).toContain('9524')
-		expect(res[1]).toContain('12411')
+		expect(res[0]).toContain(9524)
+		expect(res[1]).toContain(12411)
 	});
 });
