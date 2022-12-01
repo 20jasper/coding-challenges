@@ -1,13 +1,28 @@
 const fs = require('fs');
+const readline = require('node:readline/promises');
 
-function getMaxCalories(elves) {
-	let max = -Infinity
-
-	elves.forEach(elf => {
-		const total = elf.reduce((acc, val) => acc + val, 0)
-
-		max = Math.max(max, total)
+async function getMaxCalories(relativePath) {
+	const absolutePath = `${__dirname}/${relativePath}`
+	const rl = readline.createInterface({
+		input: fs.createReadStream(absolutePath),
+		crlfDelay: Infinity
 	});
+
+	let max = -Infinity
+	let elfCalories = 0
+
+	for await (const line of rl) {
+		// if end of elf's calories
+		if (line.trim() === '') {
+			max = Math.max(max, elfCalories)
+			elfCalories = 0
+			continue
+		}
+
+		elfCalories += Number(line)
+	}
+
+	max = Math.max(max, elfCalories)
 
 	return max
 }
