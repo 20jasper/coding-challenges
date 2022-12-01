@@ -12,3 +12,12 @@ describe('Max Calories', () => {
 		expect(getMaxCalories([[10], [11]])).toBe(11)
 	});
 });
+
+describe('Parse input file', () => {
+	it('should correctly parse numbers', () => {
+		const res = parseInput('input.test.txt')
+
+		expect(res).toContain(9524)
+		expect(res).toContain(12411)
+	});
+});
