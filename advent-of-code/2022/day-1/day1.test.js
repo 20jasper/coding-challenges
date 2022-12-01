@@ -1,15 +1,24 @@
 const { getMaxCalories, parseInput } = require('./day1')
+const readline = require('node:readline/promises');
+
+function mockReadlineReturn(lines) {
+	return jest.spyOn(readline, 'createInterface')
+		.mockImplementationOnce(() => lines)
+}
 
 describe('Max Calories', () => {
-	it('should return the total of the first elf if there is only one', () => {
+	it('should return the total of the first elf if there is only one', async () => {
+		mockReadlineReturn(['10'])
+		mockReadlineReturn(['3', '3', '3'])
 
-		expect(getMaxCalories([[10]])).toBe(10)
-		expect(getMaxCalories([[3, 3, 3]])).toBe(9)
+		expect(await getMaxCalories('file.txt')).toBe(10)
+		expect(await getMaxCalories('file.txt')).toBe(9)
 	});
 
-	it('should return the second elf\'s total if it has more calories', () => {
+	it('should return the second elf\'s total if it has more calories', async () => {
+		mockReadlineReturn(['10', '', '11'])
 
-		expect(getMaxCalories([[10], [11]])).toBe(11)
+		expect(await getMaxCalories('file.txt')).toBe(11)
 	});
 });
 
