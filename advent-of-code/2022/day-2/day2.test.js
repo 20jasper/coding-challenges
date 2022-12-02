@@ -31,6 +31,6 @@ describe('Rock paper Scissors', () => {
 
 describe('parse input', () => {
 	it('should change each letter to rock, paper, or scissors', () => {
-		expect(parseInput("A X\nB Y\nC Z\n")).toStrictEqual([['rock', 'rock'], ['paper', 'paper'], ['scissors', 'scissors']])
+		expect(parseInput("test.txt")).toStrictEqual([['rock', 'rock'], ['paper', 'paper'], ['scissors', 'scissors']])
 	});
 });
