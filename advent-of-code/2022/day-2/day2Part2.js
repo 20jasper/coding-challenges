@@ -55,13 +55,13 @@ function parseInput(relativePath) {
 	const data = readFileSync(`${__dirname}/${relativePath}`, { encoding: 'utf8' })
 
 	const rounds = data.trimEnd().split('\n')
-	const formattedRounds = rounds.map(round => {
-		const convertToRPS = { A: 'rock', X: 'rock', B: "paper", Y: "paper", C: "scissors", Z: "scissors" }
+	// change ambiguos names like A/B/C to more intuitive ones like rock, paper scissors 
+	return rounds.map(round => {
+		const updateOptionNames = (option) => ({ A: 'rock', B: "paper", C: "scissors", X: 'loss', Y: "tie", Z: "win" })[option]
 
 		const options = round.split(' ')
-		return options.map(option => convertToRPS[option])
+		return options.map(updateOptionNames)
 	})
-	return formattedRounds
 }
 
 module.exports = { rockPaperScissors, parseInput }
