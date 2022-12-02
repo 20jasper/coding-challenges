@@ -60,4 +60,15 @@ function rockPaperScissors(rounds) {
 	return totalPoints
 }
 
-module.exports = { rockPaperScissors }
+function parseInput(string) {
+	const rounds = string.trimEnd().split('\n')
+	const formattedRounds = rounds.map(round => {
+		const convertToRPS = { A: 'rock', X: 'rock', B: "paper", Y: "paper", C: "scissors", Z: "scissors" }
+
+		const options = round.split(' ')
+		return options.map(option => convertToRPS[option])
+	})
+	return formattedRounds
+}
+
+module.exports = { rockPaperScissors, parseInput }
