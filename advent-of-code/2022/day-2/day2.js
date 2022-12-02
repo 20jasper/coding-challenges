@@ -35,6 +35,8 @@ What would your total score be if everything goes exactly according to your stra
 //SOLUTION--
 /* 
 */
+const { readFileSync } = require("fs")
+
 function rockPaperScissors(rounds) {
 
 	const totalPoints = rounds.reduce((total, [opponentShape, yourShape]) => {
@@ -60,8 +62,10 @@ function rockPaperScissors(rounds) {
 	return totalPoints
 }
 
-function parseInput(string) {
-	const rounds = string.trimEnd().split('\n')
+function parseInput(relativePath) {
+	const data = readFileSync(`${__dirname}/${relativePath}`, { encoding: 'utf8' })
+
+	const rounds = data.trimEnd().split('\n')
 	const formattedRounds = rounds.map(round => {
 		const convertToRPS = { A: 'rock', X: 'rock', B: "paper", Y: "paper", C: "scissors", Z: "scissors" }
 
