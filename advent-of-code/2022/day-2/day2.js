@@ -35,3 +35,11 @@ What would your total score be if everything goes exactly according to your stra
 //SOLUTION--
 /* 
 */
+function rockPaperScissors(rounds) {
+	const yourShape = rounds[0][1]
+	const shapePointMap = { X: 1, Y: 2, Z: 3 }
+
+	return shapePointMap[yourShape]
+}
+
+module.exports = { rockPaperScissors }
