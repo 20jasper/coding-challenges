@@ -23,4 +23,8 @@ describe('Rock paper Scissors', () => {
 		expect(rockPaperScissors([['paper', 'scissors']])).toBe(9)
 		expect(rockPaperScissors([['scissors', 'rock']])).toBe(7)
 	});
+
+	it('should sum multiple rounds', () => {
+		expect(rockPaperScissors([['rock', 'paper'], ['rock', 'paper']])).toBe(16)
+	});
 });
