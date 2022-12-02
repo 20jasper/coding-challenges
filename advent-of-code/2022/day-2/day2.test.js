@@ -15,4 +15,11 @@ describe('Rock paper Scissors', () => {
 		//opponent: rock, you: scissors
 		expect(rockPaperScissors([['A', 'Z']])).toBe(3)
 	});
+
+	it('should add points based on round outcome', () => {
+		//opponent: rock, you: paper => win
+		expect(rockPaperScissors([['A', 'Y']])).toBe(8)
+		//oponent: rock, you: rock => tie
+		expect(rockPaperScissors([['A', 'X']])).toBe(4)
+	});
 });
