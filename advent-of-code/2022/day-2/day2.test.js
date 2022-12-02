@@ -4,7 +4,7 @@
 // add points for shape selected
 // parse input file
 // calculate each round
-const { rockPaperScissors } = require('./day2')
+const { rockPaperScissors, parseInput } = require('./day2')
 
 
 describe('Rock paper Scissors', () => {
@@ -26,5 +26,11 @@ describe('Rock paper Scissors', () => {
 
 	it('should sum multiple rounds', () => {
 		expect(rockPaperScissors([['rock', 'paper'], ['rock', 'paper']])).toBe(16)
+	});
+});
+
+describe('parse input', () => {
+	it('should change each letter to rock, paper, or scissors', () => {
+		expect(parseInput("A X\nB Y\nC Z\n")).toStrictEqual([['rock', 'rock'], ['paper', 'paper'], ['scissors', 'scissors']])
 	});
 });
