@@ -23,12 +23,14 @@ const { readFileSync } = require("fs")
 
 function rockPaperScissors(rounds) {
 
-	const totalPoints = rounds.reduce((total, [opponentShape, yourShape]) => {
+	const totalPoints = rounds.reduce((total, [opponentShape, gameOutcome]) => {
 		const shapePoints = { rock: 1, paper: 2, scissors: 3 }
 		const winningShape = { rock: 'paper', paper: 'scissors', scissors: 'rock' }
+		const losingShape = { paper: 'rock', scissors: 'paper', rock: 'scissors' }
 
 		let points = 0
 
+		const yourShape = losingShape[opponentShape]
 		points += shapePoints[yourShape]
 
 		// tie
