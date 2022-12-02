@@ -3,6 +3,7 @@
 // decode rock paper scissors for you/opponent
 // add points for shape selected
 // parse input file
+// calculate each round
 const { rockPaperScissors } = require('./day2')
 
 
