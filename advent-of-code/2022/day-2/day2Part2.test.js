@@ -4,7 +4,7 @@
 // add points for shape selected
 // parse input file
 // calculate each round
-const { rockPaperScissors, parseInput } = require('./day2')
+const { rockPaperScissors, parseInput } = require('./day2Part2')
 
 
 describe('Rock paper Scissors', () => {
