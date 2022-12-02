@@ -37,9 +37,19 @@ What would your total score be if everything goes exactly according to your stra
 */
 function rockPaperScissors(rounds) {
 	const yourShape = rounds[0][1]
+	const opponentShape = rounds[0][0]
 	const shapePointMap = { X: 1, Y: 2, Z: 3 }
 
-	return shapePointMap[yourShape]
+	let points = shapePointMap[yourShape]
+
+	if (opponentShape === 'A' && yourShape === 'Y') {
+		points += 6
+	}
+	else if (opponentShape === 'A' && yourShape === 'X') {
+		points += 3
+	}
+
+	return points
 }
 
 module.exports = { rockPaperScissors }
