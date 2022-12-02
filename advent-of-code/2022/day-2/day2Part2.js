@@ -23,29 +23,32 @@ const { readFileSync } = require("fs")
 
 function rockPaperScissors(rounds) {
 
-	const totalPoints = rounds.reduce((total, [opponentShape, gameOutcome]) => {
+	return rounds.reduce(getRoundPoints, 0)
+
+	function getRoundPoints(total, [opponentShape, gameOutcome]) {
 		const shapePoints = { rock: 1, paper: 2, scissors: 3 }
 		const winningShape = { rock: 'paper', paper: 'scissors', scissors: 'rock' }
 		const losingShape = { paper: 'rock', scissors: 'paper', rock: 'scissors' }
 
 		let points = 0
+		let yourShape = null
 
-		const yourShape = losingShape[opponentShape]
-		points += shapePoints[yourShape]
-
-		// tie
-		if (opponentShape === yourShape) {
+		if (gameOutcome === 'loss') {
+			yourShape = losingShape[opponentShape]
+		}
+		else if (gameOutcome === 'tie') {
+			yourShape = opponentShape
 			points += 3
 		}
-		// you win
-		else if (winningShape[opponentShape] === yourShape) {
+		else if (gameOutcome === 'win') {
+			yourShape = winningShape[opponentShape]
 			points += 6
 		}
 
-		return total + points
-	}, 0)
+		points += shapePoints[yourShape]
 
-	return totalPoints
+		return total + points
+	}
 }
 
 function parseInput(relativePath) {
