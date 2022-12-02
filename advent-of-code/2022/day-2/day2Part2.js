@@ -25,12 +25,11 @@ function rockPaperScissors(rounds) {
 
 	return rounds.reduce(getRoundPoints, 0)
 
-	function getRoundPoints(total, [opponentShape, gameOutcome]) {
+	function getRoundPoints(totalPoints, [opponentShape, gameOutcome]) {
 		const shapePoints = { rock: 1, paper: 2, scissors: 3 }
 		const winningShape = { rock: 'paper', paper: 'scissors', scissors: 'rock' }
 		const losingShape = { paper: 'rock', scissors: 'paper', rock: 'scissors' }
 
-		let points = 0
 		let yourShape = null
 
 		if (gameOutcome === 'loss') {
@@ -38,16 +37,16 @@ function rockPaperScissors(rounds) {
 		}
 		else if (gameOutcome === 'tie') {
 			yourShape = opponentShape
-			points += 3
+			totalPoints += 3
 		}
 		else {
 			yourShape = winningShape[opponentShape]
-			points += 6
+			totalPoints += 6
 		}
 
-		points += shapePoints[yourShape]
+		totalPoints += shapePoints[yourShape]
 
-		return total + points
+		return totalPoints
 	}
 }
 
