@@ -36,23 +36,28 @@ What would your total score be if everything goes exactly according to your stra
 /* 
 */
 function rockPaperScissors(rounds) {
-	const yourShape = rounds[0][1]
-	const opponentShape = rounds[0][0]
-	const shapePointMap = { rock: 1, paper: 2, scissors: 3 }
-	const winningShape = { rock: 'paper', paper: 'scissors', scissors: 'rock' }
 
-	let points = shapePointMap[yourShape]
+	const totalPoints = rounds.reduce((total, [opponentShape, yourShape]) => {
+		const shapePoints = { rock: 1, paper: 2, scissors: 3 }
+		const winningShape = { rock: 'paper', paper: 'scissors', scissors: 'rock' }
 
-	// tie
-	if (opponentShape === yourShape) {
-		points += 3
-	}
-	// you win
-	else if (winningShape[opponentShape] === yourShape) {
-		points += 6
-	}
+		let points = 0
 
-	return points
+		points += shapePoints[yourShape]
+
+		// tie
+		if (opponentShape === yourShape) {
+			points += 3
+		}
+		// you win
+		else if (winningShape[opponentShape] === yourShape) {
+			points += 6
+		}
+
+		return total + points
+	}, 0)
+
+	return totalPoints
 }
 
 module.exports = { rockPaperScissors }
