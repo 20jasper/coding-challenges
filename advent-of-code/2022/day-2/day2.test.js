@@ -13,8 +13,13 @@ describe('Rock paper Scissors', () => {
 		expect(rockPaperScissors([['rock', 'scissors']])).toBe(3)
 	});
 
-	it('should add points based on round outcome', () => {
-		expect(rockPaperScissors([['rock', 'paper']])).toBe(8)
+	it('should add points on tie', () => {
 		expect(rockPaperScissors([['rock', 'rock']])).toBe(4)
+	});
+
+	it('should add points based on win', () => {
+		expect(rockPaperScissors([['rock', 'paper']])).toBe(8)
+		expect(rockPaperScissors([['paper', 'scissors']])).toBe(8)
+		expect(rockPaperScissors([['scissors', 'rock']])).toBe(8)
 	});
 });
