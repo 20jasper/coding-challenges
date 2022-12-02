@@ -39,13 +39,16 @@ function rockPaperScissors(rounds) {
 	const yourShape = rounds[0][1]
 	const opponentShape = rounds[0][0]
 	const shapePointMap = { rock: 1, paper: 2, scissors: 3 }
+	const winningShape = { rock: 'paper', paper: 'scissors', scissors: 'rock' }
 
 	let points = shapePointMap[yourShape]
 
+	// tie
 	if (opponentShape === yourShape) {
 		points += 3
 	}
-	else if (opponentShape === 'rock' && yourShape === 'paper') {
+	// you win
+	else if (winningShape[opponentShape] === yourShape) {
 		points += 6
 	}
 
