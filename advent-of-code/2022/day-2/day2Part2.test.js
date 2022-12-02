@@ -1,14 +1,14 @@
 // cases
-// change X/Y/Z to lose/tie/win
+// change X/Y/Z to loss/tie/win
 
 const { rockPaperScissors, parseInput } = require('./day2Part2')
 
 
 describe('Rock paper Scissors', () => {
 	it('should award points for shape you selected', () => {
-		expect(rockPaperScissors([['paper', 'lose']])).toBe(1)
-		expect(rockPaperScissors([['scissors', 'lose']])).toBe(2)
-		expect(rockPaperScissors([['rock', 'lose']])).toBe(3)
+		expect(rockPaperScissors([['paper', 'loss']])).toBe(1)
+		expect(rockPaperScissors([['scissors', 'loss']])).toBe(2)
+		expect(rockPaperScissors([['rock', 'loss']])).toBe(3)
 	});
 
 	it('should add points on tie', () => {
@@ -28,6 +28,6 @@ describe('Rock paper Scissors', () => {
 
 describe('parse input', () => {
 	it('should change each letter to rock, paper, or scissors', () => {
-		expect(parseInput("test.txt")).toStrictEqual([['rock', 'lose'], ['paper', 'tie'], ['scissors', 'win']])
+		expect(parseInput("test.txt")).toStrictEqual([['rock', 'loss'], ['paper', 'tie'], ['scissors', 'win']])
 	});
 });
