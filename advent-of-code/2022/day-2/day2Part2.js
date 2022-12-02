@@ -40,7 +40,7 @@ function rockPaperScissors(rounds) {
 			yourShape = opponentShape
 			points += 3
 		}
-		else if (gameOutcome === 'win') {
+		else {
 			yourShape = winningShape[opponentShape]
 			points += 6
 		}
