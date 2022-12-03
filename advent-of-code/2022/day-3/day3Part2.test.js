@@ -1,7 +1,7 @@
 // TODO
 // update duplicate to be per 3 rucksacks instead of 2 halves of one
 // update parseinput to fit new requirements
-// get duplicate by getting union of all three sets
+// get duplicate by getting intersection of all three sets
 
 const { getPrioritySum, parseInput } = require('./day3Part2')
 
