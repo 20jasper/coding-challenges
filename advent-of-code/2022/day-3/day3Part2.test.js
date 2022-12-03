@@ -22,7 +22,7 @@ describe('Get priority sum', () => {
 });
 
 describe('parse input', () => {
-	it('should split input file by line', () => {
-		expect(parseInput('test.txt')).toStrictEqual(['aa', 'bb', 'baac'])
+	it('should split input file into 3 line groups', () => {
+		expect(parseInput('test2.txt')).toStrictEqual([['aa', 'bb', 'baac'], ['cc', 'dd', 'eebb']])
 	});
 });
