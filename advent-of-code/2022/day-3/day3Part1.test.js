@@ -18,4 +18,8 @@ describe('Get priority sum', () => {
 		expect(getPrioritySum(['abac'])).toBe(1)
 		expect(getPrioritySum(['baac'])).toBe(1)
 	});
+
+	it('should sum priorities of multiple rucksacks', () => {
+		expect(getPrioritySum(['abac', 'ZvcZ'])).toBe(53)
+	});
 });
