@@ -10,4 +10,9 @@ describe('Get priority sum', () => {
 		expect(getPrioritySum(['AA'])).toBe(27)
 		expect(getPrioritySum(['ZZ'])).toBe(52)
 	});
+
+	it('should get priority of the duplicate letter', () => {
+		expect(getPrioritySum(['abac'])).toBe(1)
+		expect(getPrioritySum(['baac'])).toBe(1)
+	});
 });
