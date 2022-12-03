@@ -55,16 +55,18 @@ function getPrioritySum(ruckSacks) {
 	}
 
 	function getDuplicate(ruckSack) {
-		const set = new Set()
+		const compartment1 = new Set()
 
 		for (let i = 0; i < ruckSack.length; i++) {
 			const letter = ruckSack[i]
-
-			if (set.has(letter)) {
+			//if index is in compartment 1
+			if (i < ruckSack.length / 2) {
+				compartment1.add(letter)
+				continue
+			}
+			if (compartment1.has(letter)) {
 				return letter
 			}
-
-			set.add(letter)
 		}
 	}
 	// get hashmap of priorities where a is 1, A is 27, and Z is 52
