@@ -11,14 +11,12 @@ describe('Get priority sum', () => {
 		expect(getPrioritySum([['ZZ', 'ZZ', 'ZZ']])).toBe(52)
 	});
 
-	it('should get priority of letter in all 3 elf', () => {
-		expect(getPrioritySum(['abac'])).toBe(1)
-		expect(getPrioritySum(['baac'])).toBe(1)
-		expect(getPrioritySum(['awwwwbbbba'])).toBe(1)
+	it('should get priority of letter in all 3 elve\'s rucksacks', () => {
+		expect(getPrioritySum(['aa', 'baab', 'awwwwbbbba'])).toBe(1)
 	});
 
-	it('should sum priorities of multiple rucksacks', () => {
-		expect(getPrioritySum(['abac', 'ZvcZ'])).toBe(53)
+	it('should sum priorities of three elf groups', () => {
+		expect(getPrioritySum([['aa', 'baab', 'awwwwbbbba'], ['bb', 'baab', 'awwwwbbbba']])).toBe(2)
 	});
 });
 
