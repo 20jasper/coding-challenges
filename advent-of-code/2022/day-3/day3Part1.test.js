@@ -4,8 +4,10 @@
 // sum all the priorities of each rucksack
 // change alphabet string to hashmap
 // get duplicate letter by adding each letter to a set
+// read from input file
+// parse input file
 
-const { getPrioritySum } = require('./day3Part1')
+const { getPrioritySum, parseInput } = require('./day3Part1')
 
 describe('Get priority sum', () => {
 	it('should get the priority of a letter', () => {
@@ -21,5 +23,11 @@ describe('Get priority sum', () => {
 
 	it('should sum priorities of multiple rucksacks', () => {
 		expect(getPrioritySum(['abac', 'ZvcZ'])).toBe(53)
+	});
+});
+
+describe('parse input', () => {
+	it('should split input file by line', () => {
+		expect(parseInput('test.txt')).toStrictEqual(['aa', 'bb', 'baac'])
 	});
 });
