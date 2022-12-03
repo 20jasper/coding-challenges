@@ -42,10 +42,21 @@ Find the item type that appears in both compartments of each rucksack. What is t
 */
 
 function getPrioritySum(ruckSacks) {
-	const letter = ruckSacks[0][0]
+	const ruckSack = ruckSacks[0]
+	let duplicateLetter = null
+
+	for (let i = 0; i < ruckSack.length; i++) {
+		const letter = ruckSack[i]
+
+		if (ruckSack.indexOf(letter) !== ruckSack.lastIndexOf(letter)) {
+			duplicateLetter = letter
+			break
+		}
+	}
+
 	const alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
-	return alphabet.indexOf(letter) + 1
+	return alphabet.indexOf(duplicateLetter) + 1
 }
 
 module.exports = { getPrioritySum }
