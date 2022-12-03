@@ -1,6 +1,8 @@
 //URL--
 // https://adventofcode.com/2022/day/3
 
+const { readFileSync } = require("fs")
+
 //INSTRUCTIONS--
 /* 
 One Elf has the important job of loading all of the rucksacks with supplies for the jungle journey. Unfortunately, that Elf didn't quite follow the packing instructions, and so a few items now need to be rearranged.
@@ -79,6 +81,10 @@ function getPrioritySum(ruckSacks) {
 	}
 }
 
+function parseInput(relativePath) {
+	const data = readFileSync(`${__dirname}/${relativePath}`, { encoding: 'utf8' })
+	// trim end to remove ending newline
+	return data.trimEnd().split('\n')
+}
 
-
-module.exports = { getPrioritySum }
+module.exports = { getPrioritySum, parseInput }
