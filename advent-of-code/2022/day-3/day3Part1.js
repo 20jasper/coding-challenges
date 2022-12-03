@@ -42,39 +42,43 @@ Find the item type that appears in both compartments of each rucksack. What is t
 */
 
 function getPrioritySum(ruckSacks) {
-	const ruckSack = ruckSacks[0]
+	const letterPriorityMap = getLetterPriorityMap()
 
-	let duplicateLetter = null
-	const set = new Set()
+	return ruckSacks.reduce(getPriority, 0)
 
-	for (let i = 0; i < ruckSack.length; i++) {
-		const letter = ruckSack[i]
+	function getPriority(totalPriority, ruckSack) {
+		const duplicateLetter = getDuplicate(ruckSack)
 
-		if (set.has(letter)) {
-			duplicateLetter = letter
-			break
+		return totalPriority + letterPriorityMap[duplicateLetter]
+	}
+
+	function getDuplicate(ruckSack) {
+		const set = new Set()
+
+		for (let i = 0; i < ruckSack.length; i++) {
+			const letter = ruckSack[i]
+
+			if (set.has(letter)) {
+				return letter
+			}
+
+			set.add(letter)
+		}
+	}
+	// get hashmap of priorities where a is 1, A is 27, and Z is 52
+	function getLetterPriorityMap() {
+		const alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
+		const hashMap = {}
+		for (let i = 0; i <= 51; i++) {
+			const letter = alphabet[i]
+			hashMap[letter] = i + 1
 		}
 
-		set.add(letter)
+		return hashMap
 	}
-
-	const letterPriorityMap = {
-		a: 1, b: 2, c: 3, d: 4, e: 5, f: 6, g: 7, h: 8, i: 9, j: 10, k: 11, l: 12, m: 13, n: 14, o: 15, p: 16, q: 17, r: 18, s: 19, t: 20, u: 21, v: 22, w: 23, x: 24, y: 25, z: 26, A: 27, B: 28, C: 29, D: 30, E: 31, F: 32, G: 33, H: 34, I: 35, J: 36, K: 37, L: 38, M: 39, N: 40, O: 41, P: 42, Q: 43, R: 44, S: 45, T: 46, U: 47, V: 48, W: 49, X: 50, Y: 51, Z: 52
-	}
-
-	return letterPriorityMap[duplicateLetter]
 }
 
-function generateLetterPriorityMap() {
-	const alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
-	const hashMap = {}
-	for (let i = 0; i <= 51; i++) {
-		const letter = alphabet[i]
-		hashMap[letter] = i + 1
-	}
-
-	return hashMap
-}
 
 module.exports = { getPrioritySum }
