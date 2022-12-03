@@ -59,8 +59,9 @@ function getPrioritySum(ruckSacks) {
 
 		for (let i = 0; i < ruckSack.length; i++) {
 			const letter = ruckSack[i]
-			//if index is in compartment 1
-			if (i < ruckSack.length / 2) {
+			const compartment2Start = ruckSack.length / 2
+
+			if (i < compartment2Start) {
 				compartment1.add(letter)
 				continue
 			}
