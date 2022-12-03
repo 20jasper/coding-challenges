@@ -16,9 +16,10 @@ describe('Get priority sum', () => {
 		expect(getPrioritySum(['ZZ'])).toBe(52)
 	});
 
-	it('should get priority of the duplicate letter', () => {
+	it('should get priority of the letter in both halves', () => {
 		expect(getPrioritySum(['abac'])).toBe(1)
 		expect(getPrioritySum(['baac'])).toBe(1)
+		expect(getPrioritySum(['awwwwbbbba'])).toBe(1)
 	});
 
 	it('should sum priorities of multiple rucksacks', () => {
