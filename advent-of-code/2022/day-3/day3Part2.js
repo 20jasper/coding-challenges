@@ -36,10 +36,10 @@ Find the item type that corresponds to the badges of each three-Elf group. What 
 /* 
 */
 
-function getPrioritySum(threeElfGroups) {
+function getPrioritySum(groups) {
 	const letterPriorityMap = getLetterPriorityMap()
 
-	return threeElfGroups.reduce(getPriority, 0)
+	return groups.reduce(getPriority, 0)
 
 	function getPriority(totalPriority, ruckSacks) {
 		const duplicateLetter = getDuplicate(ruckSacks)
@@ -48,16 +48,26 @@ function getPrioritySum(threeElfGroups) {
 	}
 
 	function getDuplicate(ruckSacks) {
-		const elfGroup1 = new Set([...ruckSacks][0])
-		const elfGroup2 = new Set([...ruckSacks][1])
+		const letterSets = ruckSacks.map(ruckSack => new Set(ruckSack))
 
-		for (let i = 0; i < ruckSacks[2].length; i++) {
-			const letter = ruckSacks[2][i]
-			if (elfGroup1.has(letter) && elfGroup2.has(letter)) {
-				return letter
-			}
+		const intersectionSet = letterSets.reduce(getIntersection)
+
+		// return the only letter in the set
+		return intersectionSet.keys().next().value
+
+		function getIntersection(set1, set2) {
+			const intersectionSet = new Set()
+
+			set1.forEach(letter => {
+				if (set2.has(letter)) {
+					intersectionSet.add(letter);
+				}
+			})
+
+			return intersectionSet
 		}
 	}
+
 	// get hashmap of priorities where a is 1, A is 27, and Z is 52
 	function getLetterPriorityMap() {
 		const alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
