@@ -3,7 +3,7 @@
 // Find fully contained section assignments
 // Get sum of all fully contained assignments
 
-const { getFullyContainedSum } = require('./day4Part1')
+const { getFullyContainedSum, parseInput } = require('./day4Part1')
 
 describe('Get fully contained sum', () => {
 
@@ -20,5 +20,12 @@ describe('Get fully contained sum', () => {
 
 	it('should sum multiple pairs', () => {
 		expect(getFullyContainedSum([[[2, 2], [1, 2]], [[2, 2], [1, 2]]])).toBe(2)
+	});
+});
+
+describe('parse input', () => {
+
+	it('should return an array of section arrays, each with 2 arrays of pairs', () => {
+		expect(parseInput('test.txt')).toStrictEqual([[[14, 28], [13, 28]], [[72, 81], [82, 91]]])
 	});
 });
