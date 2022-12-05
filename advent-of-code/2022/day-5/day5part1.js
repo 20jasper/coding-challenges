@@ -103,7 +103,11 @@ function parseInput(relativePath) {
 	const crateLines = lines.slice(0, stackIndexRow + 1)
 	const stacksOfCrates = parseStacks(crateLines)
 
-	return stacksOfCrates
+	const operationLines = lines.slice(stackIndexRow + 2)
+
+	const operations = parseOperations(operationLines)
+
+	return [stacksOfCrates, operations]
 }
 
 function getStackIndexRow(lines) {
@@ -134,5 +138,24 @@ function parseStacks(lines) {
 	}
 
 	return stacks
+}
+
+function parseOperations(lines) {
+	const createOperation = ([amount, start, end]) => ({
+		amount: Number(amount),
+		start: Number(start),
+		end: Number(end),
+	})
+
+	const res = []
+
+	lines.forEach(line => {
+		// remove everything but numbers
+		const nums = line.split(/[^0-9]/).filter(line => line.length > 0)
+
+		res.push(createOperation(nums))
+	})
+
+	return res
 }
 module.exports = { rearrangeStacks, parseInput }
