@@ -2,6 +2,7 @@
 // Parse input
 // Find fully contained section assignments
 // Get sum of all fully contained assignments
+// check for any overlap
 
 const { getFullyContainedSum, parseInput } = require('./day4Part2')
 
