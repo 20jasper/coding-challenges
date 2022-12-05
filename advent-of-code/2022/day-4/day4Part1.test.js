@@ -8,7 +8,10 @@ const { getFullyContainedSum } = require('./day4Part1')
 describe('Get fully contained sum', () => {
 
 	it('should add to the section if fully contained', () => {
-		expect(getFullyContainedSum([[[1, 2], [1, 2]]])).toBe(1)
+		// if starts are equal
+		expect(getFullyContainedSum([[[1, 2], [1, 3]]])).toBe(1)
+		// if ends are equal
+		expect(getFullyContainedSum([[[2, 2], [1, 2]]])).toBe(1)
 	});
 
 	it('should not add to the section if not fully contained', () => {
