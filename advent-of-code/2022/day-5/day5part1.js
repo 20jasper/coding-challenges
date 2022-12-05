@@ -66,12 +66,6 @@ To begin, get your puzzle input.
 */
 function rearrangeStacks(stacks, operations) {
 
-	moveCrates(stacks, operations)
-
-	return generateStackTopString(stacks)
-}
-
-function moveCrates(stacks, operations) {
 	operations.forEach(({ amount, start, end }) => {
 		const startIndex = start - 1
 		const endIndex = end - 1
@@ -81,6 +75,8 @@ function moveCrates(stacks, operations) {
 			stacks[endIndex].push(stackTop)
 		}
 	})
+
+	return generateStackTopString(stacks)
 }
 
 function generateStackTopString(stacks) {
