@@ -51,7 +51,12 @@ In how many assignment pairs does one range fully contain the other?
 /* 
 */
 function getFullyContainedSum(pairs) {
-	return 1
+	const [section1, section2] = pairs[0]
+
+	if (section1[0] === section2[0]) {
+		return 1
+	}
+	return 0
 }
 
 module.exports = { getFullyContainedSum }
