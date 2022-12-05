@@ -19,4 +19,11 @@ describe('rearrangeStacks', () => {
 			expect(rearrangeStacks([['C', 'A'], ['G', 'C', 'Q']])).toBe('AQ')
 		});
 	});
+
+	describe.only('Should move from one stack to another', () => {
+		const stacks = [['A', 'B', 'C'], ['D', 'E', 'F']]
+
+		expect(rearrangeStacks(stacks, { amount: 1, start: 1, end: 2 })).toBe('BC')
+		expect(rearrangeStacks(stacks, { amount: 2, start: 2, end: 1 })).toBe('FE')
+	});
 });
