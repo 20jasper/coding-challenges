@@ -1,6 +1,8 @@
 //URL--
 // 
 
+const { readFileSync } = require("fs")
+
 //INSTRUCTIONS--
 /* 
 Space needs to be cleared before the last supplies can be unloaded from the ships, and so several Elves have been assigned the job of cleaning up sections of the camp. Every section has a unique ID number, and each Elf is assigned a range of section IDs.
@@ -61,4 +63,34 @@ function getFullyContainedSum(pairs) {
 	}, 0)
 }
 
-module.exports = { getFullyContainedSum }
+
+function parseInput(relativePath) {
+	const path = `${__dirname}/${relativePath}`
+	//trim end to remove final newline
+	const data = readFileSync(path, { encoding: 'utf8' }).trimEnd()
+
+	const lines = data.split('\n')
+
+	lines.forEach((line, i) => {
+		// split line into section
+		lines[i] = line.split(',')
+
+		// split start and end of range
+		const ranges = lines[i]
+		ranges.forEach((range, j) => {
+			ranges[j] = range.split('-')
+
+			// convert to number type
+			const bounds = ranges[j]
+			bounds.forEach((num, k) => {
+				bounds[k] = Number(num)
+			})
+
+		})
+	})
+
+	return lines
+}
+
+
+module.exports = { getFullyContainedSum, parseInput }
