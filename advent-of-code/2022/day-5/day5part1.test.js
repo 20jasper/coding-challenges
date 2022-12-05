@@ -5,7 +5,8 @@
 // get top of crate string
 // do multiple operations
 
-const { rearrangeStacks } = require('./day5part1');
+const { rearrangeStacks, parseInput } = require('./day5part1');
+
 describe('rearrangeStacks', () => {
 
 	describe('should get correct stack tops', () => {
@@ -29,5 +30,11 @@ describe('rearrangeStacks', () => {
 		const stacks = [['A', 'B', 'C'], ['D', 'E']]
 
 		expect(rearrangeStacks(stacks, [{ amount: 1, start: 1, end: 2 }, { amount: 2, start: 2, end: 1 }])).toBe('ED')
+	});
+});
+
+describe('parse input', () => {
+	it('should parse stacks of crates', () => {
+		expect(parseInput('test.txt')).toStrictEqual([['R', 'P', 'C'], ['H', 'V']])
 	});
 });
