@@ -22,17 +22,17 @@ In how many assignment pairs do the ranges overlap?
 //SOLUTION--
 /* 
 */
-function getFullyContainedSum(pairs) {
+function getOverlappingPairAmount(pairs) {
 
 	return pairs.reduce((total, [section1, section2]) => {
-		if (isFullyContained(section1, section2) || isFullyContained(section2, section1)) {
+		if (doesStartOverlap(section1, section2) || doesStartOverlap(section2, section1)) {
 			return total + 1
 		}
 		return total
 	}, 0)
 
-	function isFullyContained([containedStart, containedEnd], [containingStart, containingEnd]) {
-		return containedStart <= containingStart && containedEnd >= containingEnd
+	function doesStartOverlap([start1], [start2, end2]) {
+		return start1 >= start2 && start1 <= end2
 	}
 }
 
@@ -66,4 +66,4 @@ function parseInput(relativePath) {
 }
 
 
-module.exports = { getFullyContainedSum, parseInput }
+module.exports = { getOverlappingPairAmount, parseInput }
