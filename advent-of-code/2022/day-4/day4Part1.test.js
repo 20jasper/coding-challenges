@@ -7,7 +7,7 @@ const { getFullyContainedSum, parseInput } = require('./day4Part1')
 
 describe('Get fully contained sum', () => {
 
-	describe('should add to the section if fully contained', () => {
+	describe('should be fully contained', () => {
 		it('starts are equal', () => {
 			expect(getFullyContainedSum([[[1, 2], [1, 3]]])).toBe(1)
 		});
@@ -20,7 +20,7 @@ describe('Get fully contained sum', () => {
 		});
 	});
 
-	describe('should not add to the section if not fully contained', () => {
+	describe('should not be fully contained', () => {
 		it('no overlap between sections ', () => {
 			expect(getFullyContainedSum([[[1, 2], [3, 4]]])).toBe(0)
 		});
