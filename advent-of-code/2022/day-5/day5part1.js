@@ -101,11 +101,10 @@ function parseInput(relativePath) {
 	const stackIndexRow = getStackIndexRow(lines)
 
 	const crateLines = lines.slice(0, stackIndexRow + 1)
-	const stacksOfCrates = getStacks(crateLines)
+	const stacksOfCrates = parseStacks(crateLines)
 
 	return stacksOfCrates
 }
-
 
 function getStackIndexRow(lines) {
 	let i = 0
@@ -117,7 +116,7 @@ function getStackIndexRow(lines) {
 	return i
 }
 
-function getStacks(lines) {
+function parseStacks(lines) {
 	const stacks = []
 	const stackIndexes = lines.at(-1)
 
