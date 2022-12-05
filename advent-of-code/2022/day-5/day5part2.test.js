@@ -1,7 +1,7 @@
 // TODO
 // change box move to move multiple
 
-const { rearrangeStacks, parseInput } = require('./day5part1');
+const { rearrangeStacks, parseInput } = require('./day5part2');
 
 describe('rearrangeStacks', () => {
 
@@ -19,13 +19,13 @@ describe('rearrangeStacks', () => {
 
 	it('Should move from one stack to another', () => {
 		expect(rearrangeStacks([['A', 'B'], ['D']], [{ amount: 1, start: 1, end: 2 }])).toBe('AB')
-		expect(rearrangeStacks([['A'], ['D', 'E', 'F']], [{ amount: 2, start: 2, end: 1 }])).toBe('ED')
+		expect(rearrangeStacks([['A'], ['D', 'E', 'F']], [{ amount: 2, start: 2, end: 1 }])).toBe('FD')
 	});
 
 	it('should do multiple operations', () => {
 		const stacks = [['A', 'B', 'C'], ['D', 'E']]
 
-		expect(rearrangeStacks(stacks, [{ amount: 1, start: 1, end: 2 }, { amount: 2, start: 2, end: 1 }])).toBe('ED')
+		expect(rearrangeStacks(stacks, [{ amount: 1, start: 1, end: 2 }, { amount: 2, start: 2, end: 1 }])).toBe('CD')
 	});
 });
 
