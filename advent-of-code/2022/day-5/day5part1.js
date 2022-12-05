@@ -104,7 +104,6 @@ function parseInput(relativePath) {
 	const stacksOfCrates = parseStacks(crateLines)
 
 	const operationLines = lines.slice(stackIndexRow + 2)
-
 	const operations = parseOperations(operationLines)
 
 	return [stacksOfCrates, operations]
