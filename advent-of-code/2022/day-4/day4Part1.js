@@ -53,7 +53,8 @@ In how many assignment pairs does one range fully contain the other?
 function getFullyContainedSum(pairs) {
 	const [section1, section2] = pairs[0]
 
-	if (section1[0] === section2[0]) {
+	// if section is fully contained
+	if (section1[0] === section2[0] || section1[1] === section2[1]) {
 		return 1
 	}
 	return 0
