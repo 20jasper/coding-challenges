@@ -58,15 +58,12 @@ Before the rearrangement process finishes, update your simulation so that the El
 const { readFileSync } = require("fs")
 
 function rearrangeStacks(stacks, operations) {
-
 	operations.forEach(({ amount, start, end }) => {
 		const startIndex = start - 1
 		const endIndex = end - 1
-		// move "amount" boxes from startIndex to endIndex
-		for (let i = 0; i < amount; i++) {
-			const stackTop = stacks[startIndex].pop()
-			stacks[endIndex].push(stackTop)
-		}
+		// move "amount" boxes from top of startIndex to endIndex
+		const cratesToMove = stacks[startIndex].splice(-amount)
+		stacks[endIndex].push(...cratesToMove)
 	})
 
 	return generateStackTopString(stacks)
