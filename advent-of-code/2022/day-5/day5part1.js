@@ -64,6 +64,8 @@ To begin, get your puzzle input.
 //SOLUTION--
 /* 
 */
+const { readFileSync } = require("fs")
+
 function rearrangeStacks(stacks, operations) {
 
 	operations.forEach(({ amount, start, end }) => {
@@ -89,4 +91,49 @@ function generateStackTopString(stacks) {
 	return stackTopString
 }
 
-module.exports = { rearrangeStacks }
+function parseInput(relativePath) {
+	const path = `${__dirname}/${relativePath}`
+	//trim end to remove final newline
+	const data = readFileSync(path, { encoding: 'utf8' }).trimEnd()
+
+	const lines = data.split('\n')
+
+	const stackIndexRow = getStackIndexRow(lines)
+
+	const crateLines = lines.slice(0, stackIndexRow + 1)
+	const stacksOfCrates = getStacks(crateLines)
+
+	return stacksOfCrates
+}
+
+
+function getStackIndexRow(lines) {
+	let i = 0
+
+	while (!lines[i].startsWith(' 1 ')) {
+		i++
+	}
+
+	return i
+}
+
+function getStacks(lines) {
+	const stacks = []
+	const stackIndexes = lines.at(-1)
+
+	// while the column exists, add new stacks of crates
+	for (let col = 1; stackIndexes.indexOf(col) !== -1; col++) {
+		const columnIndex = stackIndexes.indexOf(col)
+
+		stacks.push([])
+		// Add new crates to the stack while there are more crates and row is in bounds
+		for (let row = -1 - 1; row >= -lines.length && lines.at(row)[columnIndex] !== ' '; row--) {
+			const line = lines.at(row)
+			const crate = line[columnIndex]
+			stacks.at(-1).push(crate)
+		}
+	}
+
+	return stacks
+}
+module.exports = { rearrangeStacks, parseInput }
