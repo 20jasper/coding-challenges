@@ -17,4 +17,8 @@ describe('Get fully contained sum', () => {
 	it('should not add to the section if not fully contained', () => {
 		expect(getFullyContainedSum([[[1, 2], [3, 4]]])).toBe(0)
 	});
+
+	it('should sum multiple pairs', () => {
+		expect(getFullyContainedSum([[[2, 2], [1, 2]], [[2, 2], [1, 2]]])).toBe(2)
+	});
 });
