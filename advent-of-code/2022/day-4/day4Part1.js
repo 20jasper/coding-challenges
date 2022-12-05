@@ -55,12 +55,15 @@ In how many assignment pairs does one range fully contain the other?
 function getFullyContainedSum(pairs) {
 
 	return pairs.reduce((total, [section1, section2]) => {
-		// if section is fully contained
-		if (section1[0] >= section2[0] || section1[1] >= section2[1]) {
-			total += 1
+		if (isFullyContained(section1, section2) || isFullyContained(section2, section1)) {
+			return total + 1
 		}
 		return total
 	}, 0)
+
+	function isFullyContained([containedStart, containedEnd], [containingStart, containingEnd]) {
+		return containedStart <= containingStart && containedEnd >= containingEnd
+	}
 }
 
 
