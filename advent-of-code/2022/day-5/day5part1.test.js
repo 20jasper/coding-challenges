@@ -34,7 +34,12 @@ describe('rearrangeStacks', () => {
 });
 
 describe('parse input', () => {
+	const [stacks, instructions] = parseInput('test.txt')
 	it('should parse stacks of crates', () => {
-		expect(parseInput('test.txt')).toStrictEqual([['R', 'P', 'C'], ['H', 'V']])
+		expect(stacks).toStrictEqual([['R', 'P', 'C'], ['H', 'V']])
+	});
+
+	it('should parse instructions', () => {
+		expect(instructions).toStrictEqual([{ amount: 1, start: 2, end: 1 }, { amount: 21, start: 1, end: 2 }])
 	});
 });
