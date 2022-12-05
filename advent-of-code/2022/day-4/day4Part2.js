@@ -24,16 +24,13 @@ In how many assignment pairs do the ranges overlap?
 */
 function getOverlappingPairAmount(pairs) {
 
-	return pairs.reduce((total, [section1, section2]) => {
-		if (doesStartOverlap(section1, section2) || doesStartOverlap(section2, section1)) {
+	return pairs.reduce((total, [[start1, end1], [start2, end2]]) => {
+		// if ranges overlap
+		if (start1 <= end2 && end1 >= start2) {
 			return total + 1
 		}
 		return total
 	}, 0)
-
-	function doesStartOverlap([start1], [start2, end2]) {
-		return start1 >= start2 && start1 <= end2
-	}
 }
 
 
@@ -65,5 +62,6 @@ function parseInput(relativePath) {
 	return lines
 }
 
+console.log(getOverlappingPairAmount(parseInput('input.txt')))
 
 module.exports = { getOverlappingPairAmount, parseInput }
