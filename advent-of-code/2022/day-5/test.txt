@@ -1,0 +1,7 @@
+[C]    
+[P] [V]
+[R] [H]
+ 1   2  
+
+move 1 from 2 to 1
+move 21 from 1 to 2
