@@ -64,7 +64,27 @@ To begin, get your puzzle input.
 //SOLUTION--
 /* 
 */
-function rearrangeStacks(stacks) {
+function rearrangeStacks(stacks, operation) {
+
+	moveCrates(stacks, operation)
+
+	return generateStackTopString(stacks, operation)
+}
+
+function moveCrates(stacks, operation) {
+	if (operation !== undefined) {
+		const { amount, start, end } = operation
+		const startIndex = start - 1
+		const endIndex = end - 1
+
+		for (let i = 0; i < amount; i++) {
+			const stackTop = stacks[startIndex].pop()
+			stacks[endIndex].push(stackTop)
+		}
+	}
+}
+
+function generateStackTopString(stacks) {
 	let stackTopString = ''
 
 	stacks.forEach(stack => {
