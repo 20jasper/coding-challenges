@@ -18,7 +18,10 @@ describe('Get fully contained sum', () => {
 	});
 
 	it('should not add to the section if not fully contained', () => {
+		// no overlap
 		expect(getFullyContainedSum([[[1, 2], [3, 4]]])).toBe(0)
+		// 2nd overlaps partially
+		expect(getFullyContainedSum([[[2, 4], [3, 5]]])).toBe(0)
 	});
 
 	it('should sum multiple pairs', () => {
