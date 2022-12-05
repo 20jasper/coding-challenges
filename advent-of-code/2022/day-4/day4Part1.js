@@ -51,7 +51,7 @@ In how many assignment pairs does one range fully contain the other?
 /* 
 */
 function getFullyContainedSum(pairs) {
-
+	return 1
 }
 
 module.exports = { getFullyContainedSum }
