@@ -1,34 +1,35 @@
 // TODO
 // check for any overlap
 
-const { getFullyContainedSum, parseInput } = require('./day4Part2')
+const { getOverlappingPairAmount, parseInput } = require('./day4Part2')
 
 describe('Get fully contained sum', () => {
 
-	describe('should be fully contained', () => {
+	describe('should overlap', () => {
 		it('starts are equal', () => {
-			expect(getFullyContainedSum([[[1, 2], [1, 3]]])).toBe(1)
+			expect(getOverlappingPairAmount([[[1, 2], [1, 3]]])).toBe(1)
 		});
 		it('ends are equal', () => {
-			expect(getFullyContainedSum([[[2, 2], [1, 2]]])).toBe(1)
+			expect(getOverlappingPairAmount([[[2, 2], [1, 2]]])).toBe(1)
 		});
 		it('start and end are in between', () => {
-			expect(getFullyContainedSum([[[2, 2], [1, 3]]])).toBe(1)
-			expect(getFullyContainedSum([[[1, 3], [2, 2]]])).toBe(1)
+			expect(getOverlappingPairAmount([[[2, 2], [1, 3]]])).toBe(1)
+			expect(getOverlappingPairAmount([[[1, 3], [2, 2]]])).toBe(1)
+		});
+		it('2nd function overlaps, but isn\'t fully contained', () => {
+			expect(getOverlappingPairAmount([[[2, 4], [3, 5]]])).toBe(1)
 		});
 	});
 
-	describe('should not be fully contained', () => {
+	describe('should not overlap', () => {
 		it('no overlap between sections ', () => {
-			expect(getFullyContainedSum([[[1, 2], [3, 4]]])).toBe(0)
-		});
-		it('2nd function overlaps, but isn\'t fully contained', () => {
-			expect(getFullyContainedSum([[[2, 4], [3, 5]]])).toBe(0)
+			expect(getOverlappingPairAmount([[[1, 2], [3, 4]]])).toBe(0)
+			expect(getOverlappingPairAmount([[[3, 4], [1, 2]]])).toBe(0)
 		});
 	});
 
 	it('should sum multiple pairs', () => {
-		expect(getFullyContainedSum([[[2, 2], [1, 2]], [[2, 2], [1, 2]]])).toBe(2)
+		expect(getOverlappingPairAmount([[[2, 2], [1, 2]], [[2, 2], [1, 2]]])).toBe(2)
 	});
 });
 
