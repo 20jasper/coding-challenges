@@ -12,6 +12,9 @@ describe('Get fully contained sum', () => {
 		expect(getFullyContainedSum([[[1, 2], [1, 3]]])).toBe(1)
 		// if ends are equal
 		expect(getFullyContainedSum([[[2, 2], [1, 2]]])).toBe(1)
+		// if start and end are in between
+		expect(getFullyContainedSum([[[2, 2], [1, 3]]])).toBe(1)
+		expect(getFullyContainedSum([[[1, 3], [2, 2]]])).toBe(1)
 	});
 
 	it('should not add to the section if not fully contained', () => {
