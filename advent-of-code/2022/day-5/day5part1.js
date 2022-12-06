@@ -149,8 +149,7 @@ function parseOperations(lines) {
 	const res = []
 
 	lines.forEach(line => {
-		// remove everything but numbers
-		const nums = line.split(/[^0-9]/).filter(line => line.length > 0)
+		const nums = line.match(/[0-9]+/g)
 
 		res.push(createOperation(nums))
 	})
