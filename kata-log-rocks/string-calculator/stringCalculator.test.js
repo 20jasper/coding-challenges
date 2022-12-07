@@ -2,7 +2,7 @@ const { Add } = require('./stringCalculator');
 
 describe('String Calculator', () => {
 
-	describe('Add method', () => {
+	describe('Amount of numbers passed', () => {
 
 		it('should return 0 if given an empty string', () => {
 			expect(Add('')).toBe(0)
@@ -20,6 +20,9 @@ describe('String Calculator', () => {
 		it('should sum an arbitrary amount of numbers', () => {
 			expect(Add('1,2,3,4,5')).toBe(15)
 		});
+	});
+
+	describe('Delimiters', () => {
 
 		it('should allow both commas and newline characters to delimit numbers', () => {
 			expect(Add('1\n2,3')).toBe(6)
@@ -28,6 +31,9 @@ describe('String Calculator', () => {
 		it('should support custom delimiters', () => {
 			expect(Add('//;\n1;2')).toBe(3)
 		});
+	});
+
+	describe('Negative numbers', () => {
 
 		it('should throw an exception if a negative number is passed', () => {
 			expect(Add('-1')).toThrowError('negatives not allowed')
