@@ -63,14 +63,37 @@ function Add(numberString) {
 		numbersArr = numberString.split(/,|\n/)
 	}
 
-	const sum = numbersArr.reduce((total, num) => {
-		if (num.startsWith('-')) {
-			throw Error('negatives not allowed')
-		}
-		return total + Number(num)
-	}, 0)
+	throwIfNegative(numbersArr)
+
+	const sum = numbersArr.reduce((total, num) => total + Number(num)
+		, 0)
 
 	return sum
+}
+
+function throwIfNegative(numbersArr) {
+	const negativesArr = []
+
+	numbersArr.forEach(num => {
+		if (num.startsWith('-')) {
+			negativesArr.push(num)
+		}
+	})
+
+	let errorMessage = 'negatives not allowed'
+
+	if (negativesArr.length === 1) {
+		throw Error(errorMessage)
+	}
+	else if (negativesArr.length > 1) {
+		errorMessage += ' offending numbers are '
+
+		negativesArr.forEach(num => {
+			errorMessage += `${num}, `
+		})
+
+		throw Error(errorMessage)
+	}
 }
 
 module.exports = { Add }
