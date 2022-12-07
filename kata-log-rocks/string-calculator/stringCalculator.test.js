@@ -13,7 +13,7 @@ describe('String Calculator', () => {
 			expect(Add('1000')).toBe(1000)
 		});
 
-		it('should return the sum if two numbers are passed in', () => {
+		it('should sum two numbers', () => {
 			expect(Add('5,7')).toBe(12)
 		});
 
