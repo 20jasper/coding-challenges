@@ -20,5 +20,9 @@ describe('String Calculator', () => {
 		it('should sum an arbitrary amount of numbers', () => {
 			expect(Add('1,2,3,4,5')).toBe(15)
 		});
+
+		it('should allow both commas and newline characters to delimit numbers', () => {
+			expect(Add('1\n2,3')).toBe(6)
+		});
 	});
 });
