@@ -38,5 +38,8 @@ describe('String Calculator', () => {
 		it('should throw an exception if a negative number is passed', () => {
 			expect(() => Add('-1')).toThrow('negatives not allowed')
 		});
+		it('should show negatives in error message if multiple are passed', () => {
+			expect(() => Add('-1,-2')).toThrow('-1, -2')
+		});
 	});
 });
