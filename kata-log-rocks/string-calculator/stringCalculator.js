@@ -65,8 +65,7 @@ function Add(numberString) {
 
 	throwIfNegative(numbersArr)
 
-	const sum = numbersArr.reduce((total, num) => total + Number(num)
-		, 0)
+	const sum = numbersArr.reduce((total, num) => total + Number(num), 0)
 
 	return sum
 }
