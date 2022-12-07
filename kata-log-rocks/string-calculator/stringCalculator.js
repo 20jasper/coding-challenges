@@ -32,9 +32,11 @@ Hints:
 /* 
 */
 function Add(numbers) {
-	if (numbers === "") {
-		return 0
-	}
+	const numbersArr = numbers.split(',')
+
+	const sum = numbersArr.reduce((total, num) => total + Number(num), 0)
+
+	return sum
 }
 
 module.exports = { Add }
