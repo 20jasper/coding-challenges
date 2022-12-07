@@ -50,17 +50,17 @@ if there are multiple negatives, show all of them in the exception message.
 function Add(numberString) {
 	let numbersArr = null
 
+	const delimiter = getDelimiter(numberString)
 	// if custom delimiter
 	if (numberString.startsWith('//')) {
-		const customDelimiter = numberString[2]
 		const numbers = numberString.slice(4)
 
-		numbersArr = numbers.split(customDelimiter)
+		numbersArr = numbers.split(delimiter)
 	}
 
 	else {
 		// split by newline char or comma
-		numbersArr = numberString.split(/,|\n/)
+		numbersArr = numberString.split(delimiter)
 	}
 
 	throwIfNegative(numbersArr)
@@ -68,6 +68,16 @@ function Add(numberString) {
 	const sum = numbersArr.reduce((total, num) => total + Number(num), 0)
 
 	return sum
+}
+
+function getDelimiter(numberString) {
+	// if custom delimiter
+	if (numberString.startsWith('//')) {
+		const customDelimiter = numberString[2]
+		return new RegExp(`,|\n|${customDelimiter}`)
+	}
+
+	return /,|\n/
 }
 
 function throwIfNegative(numbersArr) {
