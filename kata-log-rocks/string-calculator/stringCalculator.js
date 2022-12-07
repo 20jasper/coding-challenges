@@ -63,7 +63,12 @@ function Add(numberString) {
 		numbersArr = numberString.split(/,|\n/)
 	}
 
-	const sum = numbersArr.reduce((total, num) => total + Number(num), 0)
+	const sum = numbersArr.reduce((total, num) => {
+		if (num.startsWith('-')) {
+			throw Error('negatives not allowed')
+		}
+		return total + Number(num)
+	}, 0)
 
 	return sum
 }
