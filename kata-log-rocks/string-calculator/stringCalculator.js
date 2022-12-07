@@ -45,8 +45,20 @@ Hints:
 /* 
 */
 function Add(numberString) {
-	// split by newline char or comma
-	const numbersArr = numberString.split(/,|\n/)
+	let numbersArr = null
+
+	// if custom delimiter
+	if (numberString.startsWith('//')) {
+		const customDelimiter = numberString[2]
+		const numbers = numberString.slice(4)
+
+		numbersArr = numbers.split(customDelimiter)
+	}
+
+	else {
+		// split by newline char or comma
+		numbersArr = numberString.split(/,|\n/)
+	}
 
 	const sum = numbersArr.reduce((total, num) => total + Number(num), 0)
 
