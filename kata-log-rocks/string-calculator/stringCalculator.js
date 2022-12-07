@@ -39,8 +39,9 @@ Hints:
 //SOLUTION--
 /* 
 */
-function Add(numbers) {
-	const numbersArr = numbers.split(',')
+function Add(numberString) {
+	// split by newline char or comma
+	const numbersArr = numberString.split(/,|\n/)
 
 	const sum = numbersArr.reduce((total, num) => total + Number(num), 0)
 
