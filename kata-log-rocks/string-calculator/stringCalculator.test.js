@@ -36,7 +36,7 @@ describe('String Calculator', () => {
 	describe('Negative numbers', () => {
 
 		it('should throw an exception if a negative number is passed', () => {
-			expect(Add('-1')).toThrowError('negatives not allowed')
+			expect(() => Add('-1')).toThrow('negatives not allowed')
 		});
 	});
 });
