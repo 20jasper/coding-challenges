@@ -27,6 +27,13 @@ async function getMaxCalories(relativePath) {
 	return max
 }
 
+
+console.time('test')
+
+getMaxCalories('input.txt')
+
+console.timeEnd('test')
+
 function parseInput(relativePath) {
 	const absolutePath = `${__dirname}/${relativePath}`
 	const data = fs.readFileSync(absolutePath, { encoding: 'utf8' })
