@@ -16,16 +16,23 @@ fn read_file(file_path: &str) -> String {
 }
 
 fn get_max_calories(calories_list: String) -> i32 {
-	let mut sum = 0;
+	let mut max = 0;
 
+	let mut sum = 0;
 	for item in calories_list.lines() {
+		// if we move onto a new elf
+		if item.is_empty() {
+			max = sum;
+			sum = 0;
+			continue;
+		}
 		match item.parse::<i32>() {
 			Ok(calories) => sum += calories,
 			Err(_) => panic!("could not parse string slice '{item}' to an i32"),
 		};
 	}
 
-	sum
+	max
 }
 
 #[cfg(test)]
@@ -42,8 +49,15 @@ mod tests {
 
 	#[test]
 	fn should_sum_one_elfs_calories() {
-		let input = "1\n2\n".to_owned();
+		let input = "1\n2\n\n".to_owned();
 
 		assert_eq!(get_max_calories(input), 3);
+	}
+
+	#[test]
+	fn should_get_the_max_from_two_elves_calories() {
+		let input = "1\n7\n\n5".to_owned();
+
+		assert_eq!(get_max_calories(input), 8);
 	}
 }
