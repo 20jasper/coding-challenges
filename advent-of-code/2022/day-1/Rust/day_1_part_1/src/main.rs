@@ -3,8 +3,9 @@ use std::fs;
 fn main() {
 	let file_path = "input.txt";
 
-	let input = read_file(file_path);
-	println!("{input}");
+	let calories_list = read_file(file_path);
+
+	println!("{}", get_max_calories(calories_list));
 }
 
 fn read_file(file_path: &str) -> String {
@@ -14,9 +15,22 @@ fn read_file(file_path: &str) -> String {
 	}
 }
 
+fn get_max_calories(calories_list: String) -> i32 {
+	let mut sum = 0;
+
+	for item in calories_list.lines() {
+		match item.parse::<i32>() {
+			Ok(calories) => sum += calories,
+			Err(_) => panic!("could not parse string slice '{item}' to an i32"),
+		};
+	}
+
+	sum
+}
+
 #[cfg(test)]
 mod tests {
-	use crate::read_file;
+	use crate::{get_max_calories, read_file};
 
 	#[test]
 	fn should_read_from_file() {
@@ -24,5 +38,12 @@ mod tests {
 		let input = read_file("test_input.txt");
 
 		assert_eq!(input, expected_input)
+	}
+
+	#[test]
+	fn should_sum_one_elfs_calories() {
+		let input = "1\n2\n".to_owned();
+
+		assert_eq!(get_max_calories(input), 3);
 	}
 }
