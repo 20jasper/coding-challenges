@@ -29,7 +29,7 @@ fn get_max_calories(calories_list: String) -> i32 {
 		}
 		match item.parse::<i32>() {
 			Ok(calories) => sum += calories,
-			Err(_) => panic!("could not parse string slice '{item}' to an i32"),
+			Err(e) => panic!("could not parse string slice '{item}' to an i32: {e}"),
 		};
 	}
 
