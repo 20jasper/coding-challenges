@@ -1,3 +1,4 @@
+use std::cmp;
 use std::fs;
 
 fn main() {
@@ -22,7 +23,7 @@ fn get_max_calories(calories_list: String) -> i32 {
 	for item in calories_list.lines() {
 		// if we move onto a new elf
 		if item.is_empty() {
-			max = sum;
+			max = cmp::max(sum, max);
 			sum = 0;
 			continue;
 		}
@@ -32,7 +33,7 @@ fn get_max_calories(calories_list: String) -> i32 {
 		};
 	}
 
-	max
+	cmp::max(sum, max)
 }
 
 #[cfg(test)]
@@ -49,15 +50,22 @@ mod tests {
 
 	#[test]
 	fn should_sum_one_elfs_calories() {
-		let input = "1\n2\n\n".to_owned();
+		let input = "1\n2\n".to_owned();
 
 		assert_eq!(get_max_calories(input), 3);
 	}
 
 	#[test]
 	fn should_get_the_max_from_two_elves_calories() {
-		let input = "1\n7\n\n5".to_owned();
+		let input = "1\n7\n\n5\n".to_owned();
 
 		assert_eq!(get_max_calories(input), 8);
+	}
+
+	#[test]
+	fn should_get_the_max_if_its_last_in_the_list() {
+		let input = "1\n\n999\n".to_owned();
+
+		assert_eq!(get_max_calories(input), 999);
 	}
 }
