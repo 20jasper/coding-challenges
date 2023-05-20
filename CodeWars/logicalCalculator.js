@@ -41,7 +41,6 @@ A Boolean value (True or False).
 /* 
 */
 function logicalCalc(array, op) {
-	console.log(op)
 	let callback
 	if (op === "AND") {
 		callback = and
@@ -57,13 +56,13 @@ function logicalCalc(array, op) {
 
 
 	function and(num1, num2) {
-		return num1 & num2
+		return Boolean(num1 & num2)
 	}
 	function or(num1, num2) {
-		return num1 | num2
+		return Boolean(num1 | num2)
 	}
 	function xor(num1, num2) {
-		return num1 & num2
+		return Boolean(num1 ^ num2)
 	}
 }
 //TESTCASES--

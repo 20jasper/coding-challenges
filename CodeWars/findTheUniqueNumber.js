@@ -17,13 +17,21 @@ The tests contain some very huge arrays, so think about performance.
 If so, I will return that number
 */
 function findUniq(arr) {
-    let uniqueNumber;
-    arr.forEach((num, i, arr) => {
-        if (i == arr.indexOf(num) && i == arr.lastIndexOf(num)) {
-            uniqueNumber = num
-        }
-    });
-    return uniqueNumber
+	let uniqueNumber;
+	arr.forEach((num, i, arr) => {
+		if (i == arr.indexOf(num) && i == arr.lastIndexOf(num)) {
+			uniqueNumber = num
+		}
+	});
+	return uniqueNumber
+}
+
+//SOLUTION--
+/* 
+I will use xor to cancel out each of the duplicate values
+*/
+function findUnique(numbers) {
+	return numbers.reduce((a, b) => a ^ b);
 }
 
 //TESTCASES--

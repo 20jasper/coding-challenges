@@ -105,7 +105,6 @@ const maxSlidingWindow2 = function (nums, k) {
 		else if (hashMap[leftNum] === 0 && leftNum === max) getWindowMax()
 
 		res.push(max)
-		//shift the window right
 	}
 	return res
 
@@ -132,3 +131,89 @@ console.log(maxSlidingWindow2([1, 3, -1, -3, 5, 3, 6, 7, -1], 3), [3, 3, 5, 5, 6
 console.log(maxSlidingWindow2([1], 1), [1]);
 console.log(maxSlidingWindow2([1, -1], 1), [1, -1]);
 console.log(maxSlidingWindow2([-1], 1), [-1]);
+/**
+ * 
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number[]}
+ */
+const maxSlidingWindow3 = function (nums, k) {
+	class Node {
+		constructor(val) {
+			this.val = val
+			this.next = null
+		}
+	}
+	class Queue {
+		constructor(k) {
+			this.first = null
+			this.last = null
+			this.size = 0
+			this.maxSize = k
+		}
+		enqueue(item) {
+			//if the queue is full, dequeue
+			// if (this.size === this.maxSize) this.dequeue()
+
+			const newNode = new Node(item)
+			//  If our list is empty than both our first item and last item is going to point the new node. 
+			if (this.size === 0) {
+				this.first = newNode
+				this.last = newNode
+			}
+			else {
+				this.last.next = newNode
+				this.last = newNode
+			}
+			this.size++
+			return this
+		}
+		dequeue() {
+			//* if our queue is empty we return null 
+			if (this.size === 0) return null
+			//if the the first and last pointers are the same, we removed the last node
+			if (this.first === this.last) {
+				this.last = null
+			}
+			this.first = this.first.next
+			this.size--
+		}
+		peek() {
+			return this.first.val
+		}
+	}
+
+	let i = 0
+	const res = []
+	const queue = new Queue()
+
+	//while the window size is smaller than k
+	while (i < k) {
+		queue.enqueue(nums[i])
+		//dequeue all nodes with vals less than max
+		while (nums[i] > queue.peek()) queue.dequeue()
+
+		i++
+	}
+	res.push(queue.peek())
+
+	while (i < nums.length) {
+		//if the queue is full, 
+		if (queue.size === k) queue.dequeue()
+
+		queue.enqueue(nums[i])
+		//dequeue all nodes with vals less than max
+		while (nums[i] > queue.peek()) queue.dequeue()
+
+		res.push(queue.peek())
+		i++
+	}
+	return res
+};
+//TESTCASES--
+console.log(maxSlidingWindow3([1, 3, -1, -3, 5, 3, 6, 7], 3), [3, 3, 5, 5, 6, 7]);
+console.log(maxSlidingWindow3([1, 3, -1, -3, 5, 3, 6, 7, -1], 3), [3, 3, 5, 5, 6, 7, 7]);
+console.log(maxSlidingWindow3([1], 1), [1]);
+console.log(maxSlidingWindow3([1, -1], 1), [1, -1]);
+console.log(maxSlidingWindow3([-1], 1), [-1]);
+console.log(maxSlidingWindow3([1, 3, 1, 2, 0, 5], 3), [3, 3, 2, 5]);

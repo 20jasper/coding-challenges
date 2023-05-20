@@ -2,5 +2,24 @@
   "dependencies": {
     "@types/jest": "^29.2.3",
     "jest": "^29.3.1"
-  }
+  },
+  "name": "code-wars-and-leet-code",
+  "description": "<a href=\"https://www.codewars.com/users/20jasper\"><img src=\"https://www.codewars.com/users/20jasper/badges/large\" alt=\"codewars badge with score and rank\"></a>",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/20jasper/code-wars.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/20jasper/code-wars/issues"
+  },
+  "homepage": "https://github.com/20jasper/code-wars#readme"
 }

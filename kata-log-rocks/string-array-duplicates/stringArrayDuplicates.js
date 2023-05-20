@@ -13,26 +13,25 @@ Strings will be lowercase only, no spaces
 
 dup(["ccooddddddewwwaaaaarrrrsssss","piccaninny","hubbubbubboo"]),['codewars','picaniny','hubububo'])
 dup(["abracadabra","allottee","assessee"]),['abracadabra','alote','asese'])
-dup(["kelless","keenness"]), ['keles','kenes'])
-*/ 
+*/
 
 //SOLUTION--
 /* 
 Take in array of strings
 return array of strings with duplicate chars in each string removed
 Strings are always lowercase letters only
-*/ 
+*/
 
-function stringArrayDuplicates(arr){
+function stringArrayDuplicates(arr) {
 	return arr.map(removeConsecutiveDuplicates)
 
-	function removeConsecutiveDuplicates(string){
+	function removeConsecutiveDuplicates(string) {
 		let noDuplicates = ''
-		
+
 		for (let i = 0; i < string.length; i++) {
-			
-			if(string[i-1]!==string[i]){
-				noDuplicates+=string[i]
+
+			if (string[i - 1] !== string[i]) {
+				noDuplicates += string[i]
 			}
 		}
 
@@ -40,4 +39,4 @@ function stringArrayDuplicates(arr){
 	}
 }
 
-module.exports = {stringArrayDuplicates}
+module.exports = { stringArrayDuplicates }
