@@ -43,7 +43,7 @@ const buildCorrectSelectionMessage = (name, change) => {
   if (change < 0) {
     return "Not enough money!";
   } else if (change === 0) {
-    return `Vending ${name}.`;
+    return `Vending ${name}`;
   }
   return `Vending ${name} with ${change.toFixed(2)} change.`;
 }

@@ -27,7 +27,7 @@ describe("Vending Machine", () => {
     const vendingMachine = new VendingMachine(items, 0);
     const itemName = "beans";
 
-    expect(vendingMachine.vend("A1", 1)).toBe(`Vending ${itemName}.`);
+    expect(vendingMachine.vend("A1", 1)).toBe(`Vending ${itemName}`);
   });
 
   test('should return "Vending <name of item> with <change> change." if positive change', () => {
