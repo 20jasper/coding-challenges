@@ -27,6 +27,12 @@ const getItem = (selection, items) =>
   items.find(({ code }) => code === selection);
 
 /**
+ * @param {number} money the amount of change in the vending machine
+ */
+const buildInvalidSelectionMessage = (money) =>
+  `Invalid selection! : Money in vending machine = ${money.toFixed(2)}`;
+
+/**
  * @param {string} selection the code entered into the machine
  * @param {number} itemMoney the amount of money the customer put in the machine
  * @returns {string} the message returned by the machine
@@ -35,9 +41,7 @@ VendingMachine.prototype.vend = function (selection, itemMoney) {
   const item = getItem(selection, this._items);
 
   if (item === undefined) {
-    return `Invalid selection! : Money in vending machine = ${this._money.toFixed(
-      2
-    )}`;
+    return buildInvalidSelectionMessage(this._money);
   }
 
   const { price, name, quantity } = item;
