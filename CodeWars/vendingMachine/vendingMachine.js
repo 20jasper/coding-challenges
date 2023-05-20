@@ -33,6 +33,20 @@ const buildInvalidSelectionMessage = (money) =>
   `Invalid selection! : Money in vending machine = ${money.toFixed(2)}`;
 
 /**
+ * @param {string} name name of the item
+ * @param {number} change the difference between the price and amount of money
+ * inserted into the machine
+ */
+const buildCorrectSelectionMessage = (name, change) => {
+  if (change < 0) {
+    return "Not enough money!";
+  } else if (change === 0) {
+    return `Vending ${name}.`;
+  }
+  return `Vending ${name} with ${change.toFixed(2)} change.`;
+}
+
+/**
  * @param {string} selection the code entered into the machine
  * @param {number} itemMoney the amount of money the customer put in the machine
  * @returns {string} the message returned by the machine
@@ -51,12 +65,7 @@ VendingMachine.prototype.vend = function (selection, itemMoney) {
   }
 
   const change = itemMoney - price;
-  if (change < 0) {
-    return "Not enough money!";
-  } else if (change === 0) {
-    return `Vending ${name}.`;
-  }
-  return `Vending ${name} with ${change.toFixed(2)} change.`;
+  return buildCorrectSelectionMessage(name, change)
 };
 
 module.exports = VendingMachine;
