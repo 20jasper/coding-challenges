@@ -73,6 +73,9 @@ VendingMachine.prototype.vend = function (selection, itemMoney) {
   }
 
   const change = itemMoney - price;
+  if(change >= 0){
+    item.quantity -= 1
+  }
   return buildCorrectSelectionMessage(name, change)
 };
 
