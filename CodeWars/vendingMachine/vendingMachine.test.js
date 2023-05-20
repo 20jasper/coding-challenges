@@ -41,4 +41,11 @@ describe("Vending Machine", () => {
 		
     expect(vendingMachine.vend("A2", 1.2)).toBe(`${itemName}: Out of stock!`);
   });
+
+  test('should return "invalid selection" if item not in vending machine', () => {
+    const money = 0;
+    const vendingMachine = new VendingMachine(items, money);
+		
+    expect(vendingMachine.vend("code that doesn't exist", 0)).toBe(`Invalid selection! : Money in vending machine = ${money.toFixed(2)}`);
+  });
 });
