@@ -36,6 +36,8 @@ const buildInvalidSelectionMessage = (money) =>
  * @param {string} name name of the item
  * @param {number} change the difference between the price and amount of money
  * inserted into the machine
+ * 
+ * called when item is in stock
  */
 const buildCorrectSelectionMessage = (name, change) => {
   if (change < 0) {
@@ -45,6 +47,12 @@ const buildCorrectSelectionMessage = (name, change) => {
   }
   return `Vending ${name} with ${change.toFixed(2)} change.`;
 }
+
+/**
+ * @param {string} name name of the item
+ * called when item is out of stock
+ */
+const buildOutOfStockMessage = (name) => `${name}: Out of stock!`;
 
 /**
  * @param {string} selection the code entered into the machine
@@ -61,7 +69,7 @@ VendingMachine.prototype.vend = function (selection, itemMoney) {
   const { price, name, quantity } = item;
 
   if (quantity === 0) {
-    return `${name}: Out of stock!`;
+    return buildOutOfStockMessage(name) 
   }
 
   const change = itemMoney - price;
