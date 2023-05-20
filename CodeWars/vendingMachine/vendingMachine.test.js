@@ -17,7 +17,7 @@ describe("Vending Machine", () => {
       },
       { name: "apple", code: "A2", quantity: 0, price: 1 },
     ];
-    vendingMachine = new VendingMachine(items, 100)
+    vendingMachine = new VendingMachine(items, 100);
   });
 
   test('should return "not enough money!" if not enough money', () => {
@@ -46,7 +46,9 @@ describe("Vending Machine", () => {
 
   test('should return "invalid selection" if item not in vending machine', () => {
     expect(vendingMachine.vend("code that doesn't exist", 0)).toBe(
-      `Invalid selection! : Money in vending machine = ${vendingMachine._money.toFixed(2)}`
+      `Invalid selection! : Money in vending machine = ${vendingMachine._money.toFixed(
+        2
+      )}`
     );
   });
 
@@ -56,5 +58,14 @@ describe("Vending Machine", () => {
 
     const newQuantity = vendingMachine._items[0].quantity;
     expect(newQuantity).toBe(initialQuantity - 1);
+  });
+
+  test("should update change in machine", () => {
+    const initialMoney = vendingMachine._money;
+
+    vendingMachine.vend("A1", 1.2);
+
+    const newMoney = vendingMachine._money;
+    expect(newMoney).toBe(initialMoney + 1);
   });
 });
