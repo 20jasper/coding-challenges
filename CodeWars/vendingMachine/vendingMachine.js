@@ -24,7 +24,7 @@ function VendingMachine(items, money) {
  * @returns {item | undefined} the item selected or `undefined` if it doesn't exist
  */
 const getItem = (selection, items) =>
-  items.find(({ code }) => code === selection);
+  items.find(({ code }) => code.toLowerCase() === selection.toLowerCase());
 
 /**
  * @param {number} money the amount of change in the vending machine

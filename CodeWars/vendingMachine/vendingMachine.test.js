@@ -24,6 +24,10 @@ describe("Vending Machine", () => {
     expect(vendingMachine.vend("A1", 0)).toBe("Not enough money!");
   });
 
+  test('code should be case insensitive', () => {
+    expect(vendingMachine.vend("a1", 0)).toBe("Not enough money!");
+  });
+
   test('should return "Vending <name of item>" if no change', () => {
     const itemName = "beans";
 
