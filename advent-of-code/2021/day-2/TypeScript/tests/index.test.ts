@@ -24,4 +24,15 @@ describe("hi", () => {
   it("should be positive horizontal when going left", () => {
     expect(getPosition([["left", 10]])).toStrictEqual([-10, 0]);
   });
+
+  it("should work with multiple directions", () => {
+    expect(
+      getPosition([
+        ["left", 10],
+        ["right", 5],
+        ["up", 10],
+        ["down", 5],
+      ])
+    ).toStrictEqual([-5, -5]);
+  });
 });

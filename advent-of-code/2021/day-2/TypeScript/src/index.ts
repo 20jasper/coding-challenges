@@ -30,18 +30,23 @@ export function parseInput(text: string): Instruction[] {
 export function getPosition(
   instructions: Instruction[]
 ): [horizontal: number, depth: number] {
-  const position: [number, number] = [0, 0];
-  const [direction, magnitude] = instructions[0];
+  return instructions.reduce(
+    ([horizontal, depth], [direction, magnitude]) => {
+      if (direction === "up") {
+        return [horizontal, depth - magnitude];
+      }
+      if (direction === "down") {
+        return [horizontal, depth + magnitude];
+      }
+      if (direction === "right") {
+        return [horizontal + magnitude, depth];
+      }
+      if (direction === "left") {
+        return [horizontal - magnitude, depth];
+      }
 
-  if (direction === "up") {
-    position[1] -= magnitude;
-  } else if (direction === "down") {
-    position[1] += magnitude;
-  } else if (direction === "right") {
-    position[0] += magnitude;
-  } else if (direction === "left") {
-    position[0] -= magnitude;
-  }
-
-  return position;
+      throw new Error(`Invalid direction: ${direction}`);
+    },
+    [0, 0]
+  );
 }
