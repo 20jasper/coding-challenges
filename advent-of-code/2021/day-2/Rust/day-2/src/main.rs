@@ -1,6 +1,6 @@
 use std::fs;
 
-use day_2::get_position;
+use day_2::try_get_position;
 
 use anyhow::Result;
 
@@ -14,7 +14,7 @@ use anyhow::Result;
 fn main() -> Result<()> {
     let instructions = fs::read_to_string("../../input.txt")?;
 
-    let (horizontal, depth, _) = get_position(instructions)?;
+    let (horizontal, depth, _) = try_get_position(instructions)?;
 
     println!("answer: {}", horizontal * depth);
 

@@ -22,15 +22,15 @@ fn try_parse_instruction(instruction: Option<(&str, &str)>) -> Result<Instructio
     }
 }
 
-fn parse_instructions(text: &str) -> Result<Vec<Instruction>> {
+fn try_parse_instructions(text: &str) -> Result<Vec<Instruction>> {
     text.lines()
         .map(|line| line.split_once(' '))
         .map(try_parse_instruction)
         .collect::<Result<Vec<Instruction>>>()
 }
 
-pub fn get_position(text: String) -> Result<(i32, i32, i32)> {
-    Ok(parse_instructions(&text)?.iter().fold(
+pub fn try_get_position(text: String) -> Result<(i32, i32, i32)> {
+    Ok(try_parse_instructions(&text)?.iter().fold(
         (0, 0, 0),
         |(horizontal, depth, aim), instruction| match instruction {
             Instruction::Down(magnitude) => (horizontal, depth, aim + magnitude),
@@ -48,23 +48,23 @@ mod tests {
 
     #[test]
     fn down_should_increase_aim() {
-        assert_eq!(get_position("down 5".to_owned()).unwrap(), (0, 0, 5));
+        assert_eq!(try_get_position("down 5".to_owned()).unwrap(), (0, 0, 5));
     }
 
     #[test]
     fn up_should_decrease_aim() {
-        assert_eq!(get_position("up 5".to_owned()).unwrap(), (0, 0, -5));
+        assert_eq!(try_get_position("up 5".to_owned()).unwrap(), (0, 0, -5));
     }
 
     #[test]
     fn forward_should_increase_horizontal() {
-        assert_eq!(get_position("forward 5".to_owned()).unwrap(), (5, 0, 0));
+        assert_eq!(try_get_position("forward 5".to_owned()).unwrap(), (5, 0, 0));
     }
 
     #[test]
     fn forward_and_positive_aim_increases_depth() {
         assert_eq!(
-            get_position("forward 5\ndown 5\nforward 5".to_owned()).unwrap(),
+            try_get_position("forward 5\ndown 5\nforward 5".to_owned()).unwrap(),
             (10, 25, 5)
         );
     }
