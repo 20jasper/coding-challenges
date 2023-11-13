@@ -1,4 +1,4 @@
-pub fn get_position(text: String) -> (i32, i32, i32) {
+fn parse_instructions(text: &str) -> Vec<(&str, i32)> {
     text.lines()
         .map(|line| line.split(' '))
         .map(|mut line| {
@@ -13,15 +13,19 @@ pub fn get_position(text: String) -> (i32, i32, i32) {
                 panic!("Invalid input! not enough words on a line");
             }
         })
-        .fold(
-            (0, 0, 0),
-            |(horizontal, depth, aim), (direction, magnitude)| match direction {
-                "down" => (horizontal, depth, aim + magnitude),
-                "up" => (horizontal, depth, aim - magnitude),
-                "forward" => (horizontal + magnitude, depth + aim * magnitude, aim),
-                _ => unreachable!(),
-            },
-        )
+        .collect::<Vec<(&str, i32)>>()
+}
+
+pub fn get_position(text: String) -> (i32, i32, i32) {
+    parse_instructions(&text).iter().fold(
+        (0, 0, 0),
+        |(horizontal, depth, aim), (direction, magnitude)| match *direction {
+            "down" => (horizontal, depth, aim + magnitude),
+            "up" => (horizontal, depth, aim - magnitude),
+            "forward" => (horizontal + magnitude, depth + aim * magnitude, aim),
+            _ => unreachable!(),
+        },
+    )
 }
 
 #[cfg(test)]
