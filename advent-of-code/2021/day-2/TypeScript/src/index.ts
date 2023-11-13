@@ -30,5 +30,14 @@ export function parseInput(text: string): Instruction[] {
 export function getPosition(
   instructions: Instruction[]
 ): [horizontal: number, depth: number] {
-  return [0, -instructions[0][1]];
+  const position: [number, number] = [0, 0];
+  const [direction, magnitude] = instructions[0];
+
+  if (direction === "up") {
+    position[1] -= magnitude;
+  } else {
+    position[1] += magnitude;
+  }
+
+  return position;
 }

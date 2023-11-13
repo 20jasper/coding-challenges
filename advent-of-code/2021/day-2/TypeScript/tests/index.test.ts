@@ -9,7 +9,11 @@ describe("hi", () => {
     ]);
   });
 
-  it("should be negative when going up", () => {
+  it("should be negative depth when going up", () => {
     expect(getPosition([["up", 10]])).toStrictEqual([0, -10]);
+  });
+
+  it("should be positive depth when going down", () => {
+    expect(getPosition([["down", 10]])).toStrictEqual([0, 10]);
   });
 });
