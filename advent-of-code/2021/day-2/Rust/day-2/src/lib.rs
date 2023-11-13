@@ -42,4 +42,9 @@ mod tests {
     fn forward_should_decrease_depth() {
         assert_eq!(get_position("forward 5".to_owned()), (5, 0));
     }
+
+    #[test]
+    fn works_with_multiple_instructions() {
+        assert_eq!(get_position("forward 5\ndown 5".to_owned()), (5, 5));
+    }
 }
