@@ -5,6 +5,7 @@ import url from "url";
 // start 10:35PM
 // fix config 10:52 haha
 // fix ts compilation garbage 11:00
+// parse input 11:09
 
 function readFromFile(): string {
   const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
@@ -19,4 +20,9 @@ function readFromFile(): string {
 
 type Instruction = [direction: string, magnitude: number];
 
-export function parseInput(text: string): Instruction[] {}
+export function parseInput(text: string): Instruction[] {
+  return text
+    .split("\n")
+    .map((line) => line.split(" "))
+    .map(([direction, magnitude]) => [direction, Number(magnitude)]);
+}
