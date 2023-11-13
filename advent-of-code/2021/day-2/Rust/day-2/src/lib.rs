@@ -1,4 +1,4 @@
-pub fn get_position(text: String) -> (i32, i32) {
+pub fn get_position(text: String) -> (i32, i32, i32) {
     text.lines()
         .map(|line| line.split(' '))
         .map(|mut line| {
@@ -14,11 +14,11 @@ pub fn get_position(text: String) -> (i32, i32) {
             }
         })
         .fold(
-            (0, 0),
-            |(horizontal, depth), (direction, magnitude)| match direction {
-                "down" => (horizontal, depth + magnitude),
-                "up" => (horizontal, depth - magnitude),
-                "forward" => (horizontal + magnitude, depth),
+            (0, 0, 0),
+            |(horizontal, depth, aim), (direction, magnitude)| match direction {
+                "down" => (horizontal, depth, aim + magnitude),
+                "up" => (horizontal, depth, aim - magnitude),
+                "forward" => (horizontal + magnitude, depth + aim * magnitude, aim),
                 _ => unreachable!(),
             },
         )
@@ -29,22 +29,25 @@ mod tests {
     use super::*;
 
     #[test]
-    fn down_should_increase_depth() {
-        assert_eq!(get_position("down 5".to_owned()), (0, 5));
+    fn down_should_increase_aim() {
+        assert_eq!(get_position("down 5".to_owned()), (0, 0, 5));
     }
 
     #[test]
-    fn up_should_decrease_depth() {
-        assert_eq!(get_position("up 5".to_owned()), (0, -5));
+    fn up_should_decrease_aim() {
+        assert_eq!(get_position("up 5".to_owned()), (0, 0, -5));
     }
 
     #[test]
-    fn forward_should_decrease_depth() {
-        assert_eq!(get_position("forward 5".to_owned()), (5, 0));
+    fn forward_should_increase_horizontal() {
+        assert_eq!(get_position("forward 5".to_owned()), (5, 0, 0));
     }
 
     #[test]
-    fn works_with_multiple_instructions() {
-        assert_eq!(get_position("forward 5\ndown 5".to_owned()), (5, 5));
+    fn forward_and_positive_aim_increases_depth() {
+        assert_eq!(
+            get_position("forward 5\ndown 5\nforward 5".to_owned()),
+            (10, 25, 5)
+        );
     }
 }
