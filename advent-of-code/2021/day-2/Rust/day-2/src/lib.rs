@@ -49,25 +49,29 @@ mod tests {
     use super::*;
 
     #[test]
-    fn down_should_increase_aim() {
-        assert_eq!(try_get_position("down 5".to_owned()).unwrap(), (0, 0, 5));
+    fn down_should_increase_aim() -> Result<()> {
+        assert_eq!(try_get_position("down 5".to_owned())?, (0, 0, 5));
+        Ok(())
     }
 
     #[test]
-    fn up_should_decrease_aim() {
-        assert_eq!(try_get_position("up 5".to_owned()).unwrap(), (0, 0, -5));
+    fn up_should_decrease_aim() -> Result<()> {
+        assert_eq!(try_get_position("up 5".to_owned())?, (0, 0, -5));
+        Ok(())
     }
 
     #[test]
-    fn forward_should_increase_horizontal() {
-        assert_eq!(try_get_position("forward 5".to_owned()).unwrap(), (5, 0, 0));
+    fn forward_should_increase_horizontal() -> Result<()> {
+        assert_eq!(try_get_position("forward 5".to_owned())?, (5, 0, 0));
+        Ok(())
     }
 
     #[test]
-    fn forward_and_positive_aim_increases_depth() {
+    fn forward_and_positive_aim_increases_depth() -> Result<()> {
         assert_eq!(
-            try_get_position("forward 5\ndown 5\nforward 5".to_owned()).unwrap(),
+            try_get_position("forward 5\ndown 5\nforward 5".to_owned())?,
             (10, 25, 5)
         );
+        Ok(())
     }
 }
