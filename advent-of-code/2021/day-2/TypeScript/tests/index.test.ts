@@ -1,4 +1,4 @@
-import { parseInput } from "../src/index";
+import { getPosition, parseInput } from "../src/index";
 
 describe("hi", () => {
   it("should split into instructions", () => {
@@ -7,5 +7,9 @@ describe("hi", () => {
       ["down", 8],
       ["right", 111],
     ]);
+  });
+
+  it("should be negative when going up", () => {
+    expect(getPosition([["up", 10]])).toStrictEqual([0, -10]);
   });
 });

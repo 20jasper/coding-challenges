@@ -26,3 +26,9 @@ export function parseInput(text: string): Instruction[] {
     .map((line) => line.split(" "))
     .map(([direction, magnitude]) => [direction, Number(magnitude)]);
 }
+
+export function getPosition(
+  instructions: Instruction[]
+): [horizontal: number, depth: number] {
+  return [0, -instructions[0][1]];
+}
