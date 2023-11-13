@@ -35,8 +35,12 @@ export function getPosition(
 
   if (direction === "up") {
     position[1] -= magnitude;
-  } else {
+  } else if (direction === "down") {
     position[1] += magnitude;
+  } else if (direction === "right") {
+    position[0] += magnitude;
+  } else if (direction === "left") {
+    position[0] -= magnitude;
   }
 
   return position;

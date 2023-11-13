@@ -16,4 +16,12 @@ describe("hi", () => {
   it("should be positive depth when going down", () => {
     expect(getPosition([["down", 10]])).toStrictEqual([0, 10]);
   });
+
+  it("should be positive horizontal when going right", () => {
+    expect(getPosition([["right", 10]])).toStrictEqual([10, 0]);
+  });
+
+  it("should be positive horizontal when going left", () => {
+    expect(getPosition([["left", 10]])).toStrictEqual([-10, 0]);
+  });
 });
