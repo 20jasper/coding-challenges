@@ -22,24 +22,24 @@ fn try_parse_instruction(instruction: Option<(&str, &str)>) -> Result<Instructio
     }
 }
 
-fn try_parse_instructions(text: &str) -> Result<Vec<Instruction>> {
+fn try_parse_instructions(text: &str) -> impl Iterator<Item = Result<Instruction>> {
     text.lines()
         .map(|line| line.split_once(' '))
         .map(try_parse_instruction)
-        .collect::<Result<Vec<Instruction>>>()
 }
 
 pub fn try_get_position(text: String) -> Result<(i32, i32, i32)> {
-    Ok(try_parse_instructions(&text)?.iter().fold(
-        (0, 0, 0),
-        |(horizontal, depth, aim), instruction| match instruction {
-            Instruction::Down(magnitude) => (horizontal, depth, aim + magnitude),
-            Instruction::Up(magnitude) => (horizontal, depth, aim - magnitude),
-            Instruction::Forward(magnitude) => {
-                (horizontal + magnitude, depth + aim * magnitude, aim)
+    Ok(
+        try_parse_instructions(&text)?.fold((0, 0, 0), |(horizontal, depth, aim), instruction| {
+            match instruction {
+                Instruction::Down(magnitude) => (horizontal, depth, aim + magnitude),
+                Instruction::Up(magnitude) => (horizontal, depth, aim - magnitude),
+                Instruction::Forward(magnitude) => {
+                    (horizontal + magnitude, depth + aim * magnitude, aim)
+                }
             }
-        },
-    ))
+        }),
+    )
 }
 
 #[cfg(test)]
