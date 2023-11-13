@@ -114,8 +114,6 @@ mod tests {
     fn error_should_say_no_space() -> Result<()> {
         let error_message = try_get_position("hhh".to_owned()).unwrap_err().to_string();
 
-        dbg!(&error_message);
-
         assert!(error_message.contains("no space"));
         assert!(error_message.contains("hhh"));
 
