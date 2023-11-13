@@ -7,8 +7,10 @@ enum Instruction {
     Forward(i32),
 }
 
-fn try_parse_instruction(instruction: Option<(&str, &str)>) -> Result<Instruction> {
-    let (direction, magnitude) = instruction.context("Error parsing instruction")?;
+fn try_parse_instruction(instruction: &str) -> Result<Instruction> {
+    let (direction, magnitude) = instruction
+        .split_once(' ')
+        .context("Error parsing instruction")?;
 
     let magnitude = magnitude
         .parse::<i32>()
@@ -22,23 +24,18 @@ fn try_parse_instruction(instruction: Option<(&str, &str)>) -> Result<Instructio
     }
 }
 
-fn try_parse_instructions(text: &str) -> impl Iterator<Item = Result<Instruction>> + '_ {
-    text.lines()
-        .map(|line| line.split_once(' '))
-        .map(try_parse_instruction)
-}
-
 pub fn try_get_position(text: String) -> Result<(i32, i32, i32)> {
-    try_parse_instructions(&text).try_fold((0, 0, 0), |(horizontal, depth, aim), instruction| {
-        match instruction {
+    text.lines().map(try_parse_instruction).try_fold(
+        (0, 0, 0),
+        |(horizontal, depth, aim), instruction| match instruction {
             Ok(Instruction::Down(magnitude)) => Ok((horizontal, depth, aim + magnitude)),
             Ok(Instruction::Up(magnitude)) => Ok((horizontal, depth, aim - magnitude)),
             Ok(Instruction::Forward(magnitude)) => {
                 Ok((horizontal + magnitude, depth + aim * magnitude, aim))
             }
             Err(e) => Err(e),
-        }
-    })
+        },
+    )
 }
 
 #[cfg(test)]
