@@ -9,13 +9,13 @@ enum Instruction {
 
 fn try_parse_instruction(instruction: (usize, &str)) -> Result<Instruction> {
     let (line_number, text) = instruction;
-    let (direction, magnitude) = text.split_once(' ').context(format!(
-        "Error: no space in instruction on line {line_number}: {text}"
-    ))?;
+    let (direction, magnitude) = text
+        .split_once(' ')
+        .with_context(|| format!("Error: no space in instruction on line {line_number}: {text}"))?;
 
-    let magnitude = magnitude.parse::<i32>().context(format!(
-        "Could not parse magnitude on line number {line_number}: {magnitude}"
-    ))?;
+    let magnitude = magnitude.parse::<i32>().with_context(|| {
+        format!("Could not parse magnitude on line number {line_number}: {magnitude}")
+    })?;
 
     match direction {
         "down" => Ok(Instruction::Down(magnitude)),
