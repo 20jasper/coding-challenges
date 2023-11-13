@@ -7,35 +7,41 @@ enum Instruction {
     Forward(i32),
 }
 
-fn try_parse_instruction(instruction: &str) -> Result<Instruction> {
-    let (direction, magnitude) = instruction
-        .split_once(' ')
-        .context("Error parsing instruction")?;
+fn try_parse_instruction(instruction: (usize, &str)) -> Result<Instruction> {
+    let (line_number, text) = instruction;
+    let (direction, magnitude) = text.split_once(' ').context(format!(
+        "Error parsing instruction on line {line_number}: {text}"
+    ))?;
 
-    let magnitude = magnitude
-        .parse::<i32>()
-        .context("Could not parse magnitude {magnitude}")?;
+    let magnitude = magnitude.parse::<i32>().context(format!(
+        "Could not parse magnitude on line number {line_number}: {magnitude}"
+    ))?;
 
     match direction {
         "down" => Ok(Instruction::Down(magnitude)),
         "up" => Ok(Instruction::Up(magnitude)),
         "forward" => Ok(Instruction::Forward(magnitude)),
-        _ => Err(anyhow!("Invalid direction: {direction}")),
+        _ => Err(anyhow!(format!(
+            "Invalid direction on line {line_number}: {direction}"
+        ))),
     }
 }
 
 pub fn try_get_position(text: String) -> Result<(i32, i32, i32)> {
-    text.lines().map(try_parse_instruction).try_fold(
-        (0, 0, 0),
-        |(horizontal, depth, aim), instruction| match instruction {
-            Ok(Instruction::Down(magnitude)) => Ok((horizontal, depth, aim + magnitude)),
-            Ok(Instruction::Up(magnitude)) => Ok((horizontal, depth, aim - magnitude)),
-            Ok(Instruction::Forward(magnitude)) => {
-                Ok((horizontal + magnitude, depth + aim * magnitude, aim))
-            }
-            Err(e) => Err(e),
-        },
-    )
+    text.lines()
+        .enumerate()
+        .map(try_parse_instruction)
+        .try_fold(
+            (0, 0, 0),
+            |(horizontal, depth, aim), instruction| match instruction {
+                Ok(Instruction::Down(magnitude)) => Ok((horizontal, depth, aim + magnitude)),
+                Ok(Instruction::Up(magnitude)) => Ok((horizontal, depth, aim - magnitude)),
+                Ok(Instruction::Forward(magnitude)) => {
+                    Ok((horizontal + magnitude, depth + aim * magnitude, aim))
+                }
+                Err(e) => Err(e),
+            },
+        )
 }
 
 #[cfg(test)]
