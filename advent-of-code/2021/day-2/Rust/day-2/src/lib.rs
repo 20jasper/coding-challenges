@@ -1,25 +1,25 @@
 use anyhow::{anyhow, Context, Result};
 
+/// A direction and a magnitude
 enum Instruction {
     Down(i32),
     Up(i32),
     Forward(i32),
 }
 
-/// attempts to parse an instruction into a direction and magnitude
 fn try_parse_instruction(instruction: Option<(&str, &str)>) -> Result<Instruction> {
-    instruction.map_or(Err(anyhow!("error")), |(direction, magnitude)| {
-        let magnitude = magnitude
-            .parse::<i32>()
-            .context("Could not parse magnitude {magnitude}")?;
+    let (direction, magnitude) = instruction.context("Error parsing instruction")?;
 
-        match direction {
-            "down" => Ok(Instruction::Down(magnitude)),
-            "up" => Ok(Instruction::Up(magnitude)),
-            "forward" => Ok(Instruction::Forward(magnitude)),
-            _ => Err(anyhow!("Invalid direction: {direction}")),
-        }
-    })
+    let magnitude = magnitude
+        .parse::<i32>()
+        .context("Could not parse magnitude {magnitude}")?;
+
+    match direction {
+        "down" => Ok(Instruction::Down(magnitude)),
+        "up" => Ok(Instruction::Up(magnitude)),
+        "forward" => Ok(Instruction::Forward(magnitude)),
+        _ => Err(anyhow!("Invalid direction: {direction}")),
+    }
 }
 
 fn parse_instructions(text: &str) -> Result<Vec<Instruction>> {
