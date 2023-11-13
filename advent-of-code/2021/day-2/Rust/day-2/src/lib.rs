@@ -22,24 +22,23 @@ fn try_parse_instruction(instruction: Option<(&str, &str)>) -> Result<Instructio
     }
 }
 
-fn try_parse_instructions(text: &str) -> impl Iterator<Item = Result<Instruction>> {
+fn try_parse_instructions(text: &str) -> impl Iterator<Item = Result<Instruction>> + '_ {
     text.lines()
         .map(|line| line.split_once(' '))
         .map(try_parse_instruction)
 }
 
 pub fn try_get_position(text: String) -> Result<(i32, i32, i32)> {
-    Ok(
-        try_parse_instructions(&text)?.fold((0, 0, 0), |(horizontal, depth, aim), instruction| {
-            match instruction {
-                Instruction::Down(magnitude) => (horizontal, depth, aim + magnitude),
-                Instruction::Up(magnitude) => (horizontal, depth, aim - magnitude),
-                Instruction::Forward(magnitude) => {
-                    (horizontal + magnitude, depth + aim * magnitude, aim)
-                }
+    try_parse_instructions(&text).try_fold((0, 0, 0), |(horizontal, depth, aim), instruction| {
+        match instruction {
+            Ok(Instruction::Down(magnitude)) => Ok((horizontal, depth, aim + magnitude)),
+            Ok(Instruction::Up(magnitude)) => Ok((horizontal, depth, aim - magnitude)),
+            Ok(Instruction::Forward(magnitude)) => {
+                Ok((horizontal + magnitude, depth + aim * magnitude, aim))
             }
-        }),
-    )
+            Err(e) => Err(e),
+        }
+    })
 }
 
 #[cfg(test)]
