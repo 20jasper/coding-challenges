@@ -2,10 +2,10 @@ import { getPosition, parseInput } from "../src/index";
 
 describe("hi", () => {
   it("should split into instructions", () => {
-    expect(parseInput("up 7\ndown 8\nright 111")).toStrictEqual([
+    expect(parseInput("up 7\ndown 8\nforward 111")).toStrictEqual([
       ["up", 7],
       ["down", 8],
-      ["right", 111],
+      ["forward", 111],
     ]);
   });
 
@@ -17,22 +17,17 @@ describe("hi", () => {
     expect(getPosition([["down", 10]])).toStrictEqual([0, 10]);
   });
 
-  it("should be positive horizontal when going right", () => {
-    expect(getPosition([["right", 10]])).toStrictEqual([10, 0]);
-  });
-
-  it("should be positive horizontal when going left", () => {
-    expect(getPosition([["left", 10]])).toStrictEqual([-10, 0]);
+  it("should be positive horizontal when going forward", () => {
+    expect(getPosition([["forward", 10]])).toStrictEqual([10, 0]);
   });
 
   it("should work with multiple directions", () => {
     expect(
       getPosition([
-        ["left", 10],
-        ["right", 5],
+        ["forward", 5],
         ["up", 10],
         ["down", 5],
       ])
-    ).toStrictEqual([-5, -5]);
+    ).toStrictEqual([5, -5]);
   });
 });

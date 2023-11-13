@@ -23,13 +23,14 @@ type Instruction = [direction: string, magnitude: number];
 export function parseInput(text: string): Instruction[] {
   return text
     .split("\n")
+    .filter((line) => line.length > 0)
     .map((line) => line.split(" "))
     .map(([direction, magnitude]) => [direction, Number(magnitude)]);
 }
 
-export function getPosition(
-  instructions: Instruction[]
-): [horizontal: number, depth: number] {
+type Position = [horizontal: number, depth: number];
+
+export function getPosition(instructions: Instruction[]): Position {
   return instructions.reduce(
     ([horizontal, depth], [direction, magnitude]) => {
       if (direction === "up") {
@@ -38,11 +39,8 @@ export function getPosition(
       if (direction === "down") {
         return [horizontal, depth + magnitude];
       }
-      if (direction === "right") {
+      if (direction === "forward") {
         return [horizontal + magnitude, depth];
-      }
-      if (direction === "left") {
-        return [horizontal - magnitude, depth];
       }
 
       throw new Error(`Invalid direction: ${direction}`);
@@ -50,3 +48,9 @@ export function getPosition(
     [0, 0]
   );
 }
+
+function multiply([horizontal, depth]: Position): number {
+  return horizontal * depth;
+}
+
+// console.log(multiply(getPosition(parseInput(readFromFile()))));
