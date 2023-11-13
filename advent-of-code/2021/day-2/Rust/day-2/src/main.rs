@@ -2,6 +2,8 @@ use std::fs;
 
 use day_2::get_position;
 
+use anyhow::Result;
+
 // start 12:10
 // read file (they are relative to src) 12:23
 // split magnitude and direction 12:35
@@ -9,10 +11,12 @@ use day_2::get_position;
 // done part 2 12:58
 // refactor 1:06
 // total time 0:54
-fn main() {
-    let instructions = fs::read_to_string("../../input.txt").unwrap();
+fn main() -> Result<()> {
+    let instructions = fs::read_to_string("../../input.txt")?;
 
-    let (horizontal, depth, _) = get_position(instructions);
+    let (horizontal, depth, _) = get_position(instructions)?;
 
     println!("answer: {}", horizontal * depth);
+
+    Ok(())
 }
