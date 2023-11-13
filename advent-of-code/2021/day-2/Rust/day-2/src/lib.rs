@@ -10,7 +10,7 @@ enum Instruction {
 fn try_parse_instruction(instruction: (usize, &str)) -> Result<Instruction> {
     let (line_number, text) = instruction;
     let (direction, magnitude) = text.split_once(' ').context(format!(
-        "Error parsing instruction on line {line_number}: {text}"
+        "Error: no space in instruction on line {line_number}: {text}"
     ))?;
 
     let magnitude = magnitude.parse::<i32>().context(format!(
@@ -72,6 +72,53 @@ mod tests {
             try_get_position("forward 5\ndown 5\nforward 5".to_owned())?,
             (10, 25, 5)
         );
+        Ok(())
+    }
+
+    #[test]
+    fn error_should_contain_line_number() -> Result<()> {
+        let error_message = try_get_position("forward 5\ndown ERROR!\nforward 5".to_owned())
+            .unwrap_err()
+            .to_string();
+
+        assert!(error_message.contains('1'));
+        assert!(error_message.contains("line number"));
+
+        Ok(())
+    }
+
+    #[test]
+    fn error_should_contain_direction() -> Result<()> {
+        let error_message = try_get_position("BADDIRECTION 5".to_owned())
+            .unwrap_err()
+            .to_string();
+
+        assert!(error_message.contains("direction"));
+
+        Ok(())
+    }
+
+    #[test]
+    fn error_should_contain_magnitude() -> Result<()> {
+        let error_message = try_get_position("up NOT_A_DIRECTION".to_owned())
+            .unwrap_err()
+            .to_string();
+
+        assert!(error_message.contains("magnitude"));
+        assert!(error_message.contains("NOT_A_DIRECTION"));
+
+        Ok(())
+    }
+
+    #[test]
+    fn error_should_say_no_space() -> Result<()> {
+        let error_message = try_get_position("hhh".to_owned()).unwrap_err().to_string();
+
+        dbg!(&error_message);
+
+        assert!(error_message.contains("no space"));
+        assert!(error_message.contains("hhh"));
+
         Ok(())
     }
 }
