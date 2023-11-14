@@ -1,8 +1,6 @@
-use std::fs;
-
-use day_2::try_get_position;
-
 use anyhow::Result;
+use day_2::try_get_position;
+use std::fs;
 
 // start 12:10
 // read file (they are relative to src) 12:23
