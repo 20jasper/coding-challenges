@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"strings"
 )
 
 // start 7:18
@@ -16,5 +17,9 @@ func main() {
 
 	str := string(bytes)
 
-	fmt.Println(str)
+	lines := strings.Split(str, "\n")
+
+	for _, line := range lines {
+		fmt.Println(line)
+	}
 }
