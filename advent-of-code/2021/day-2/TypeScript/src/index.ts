@@ -28,7 +28,7 @@ export function parseInput(text: string): Instruction[] {
     .split("\n")
     .filter((line) => line.length > 0)
     .map((line) => line.split(" "))
-    .map(([direction, magnitude]) => [direction, Number(magnitude)]);
+    .map(([direction, magnitude]) => [direction!, Number(magnitude)]);
 }
 
 type Position = [horizontal: number, depth: number, aim: number];

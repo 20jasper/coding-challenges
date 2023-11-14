@@ -1,4 +1,4 @@
-import { getPosition, parseInput } from "../src/index";
+import { getPosition, parseInput } from "../src/index.js";
 
 describe("hi", () => {
   it("should split into instructions", () => {
