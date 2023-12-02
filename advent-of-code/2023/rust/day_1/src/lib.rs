@@ -3,8 +3,7 @@ use anyhow::{Context, Result};
 pub fn parse_calibration_value((i, line): (usize, &str)) -> Result<u64> {
     let format_line_err = || format!("could not parse digit in line {i}: {line}");
 
-    let line = compact_digits(line);
-    println!("{line}");
+    let line = expand_digits(line);
 
     let first_digit = line
         .chars()
@@ -20,18 +19,18 @@ pub fn parse_calibration_value((i, line): (usize, &str)) -> Result<u64> {
         .with_context(format_line_err)
 }
 
-/// replace "one" with "1", "two" with "2" and so in the range 1..=9
-fn compact_digits(line: &str) -> String {
+/// replace "one" with "one1one", "two" with "two2two" and so in the range 1..=9
+fn expand_digits(line: &str) -> String {
     [
-        ("one", "1"),
-        ("two", "2"),
-        ("three", "3"),
-        ("four", "4"),
-        ("five", "5"),
-        ("six", "6"),
-        ("seven", "7"),
-        ("eight", "8"),
-        ("nine", "9"),
+        ("one", "one1one"),
+        ("two", "two2two"),
+        ("three", "three3three"),
+        ("four", "four4four"),
+        ("five", "five5five"),
+        ("six", "six6six"),
+        ("seven", "seven7seven"),
+        ("eight", "eight8eight"),
+        ("nine", "nine9nine"),
     ]
     .iter()
     .fold(line.to_string(), |acc, (to_replace, replacement)| {
@@ -76,6 +75,32 @@ mod tests {
     #[test]
     fn should_work_with_spelled_out_digits() -> Result<()> {
         assert_eq!(parse_calibration_value((0, "one5three"))?, 13);
+
+        Ok(())
+    }
+
+    #[test]
+    fn should_count_overlapping_letters() -> Result<()> {
+        assert_eq!(parse_calibration_value((0, "eightwo"))?, 82);
+
+        Ok(())
+    }
+
+    #[test]
+    fn should_work_with_example_test_cases() -> Result<()> {
+        let test_cases = [
+            ("two1nine", 29),
+            ("eightwothree", 83),
+            ("abcone2threexyz", 13),
+            ("xtwone3four", 24),
+            ("4nineeightseven2", 42),
+            ("zoneight234", 14),
+            ("7pqrstsixteen", 76),
+        ];
+
+        for (input, result) in test_cases {
+            assert_eq!(parse_calibration_value((0, input))?, result);
+        }
 
         Ok(())
     }
