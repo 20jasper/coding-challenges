@@ -1,4 +1,4 @@
-use std::collections::HashSet;
+use day_4::run;
 
 fn main() {
     run();
