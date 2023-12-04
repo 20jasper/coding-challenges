@@ -1,10 +1,18 @@
+use rayon::prelude::*;
 use std::collections::HashSet;
 
 pub fn run() -> i32 {
     let file = include_str!("../input.txt");
     let card_count = file.lines().count();
 
-    let matching = file.lines().enumerate().map(parse_line);
+    let matching = file
+        .lines()
+        .enumerate()
+        .collect::<Vec<(usize, &str)>>()
+        .into_par_iter()
+        .map(parse_line)
+        .collect::<Vec<usize>>()
+        .into_iter();
 
     get_total_card_count(matching, card_count)
 }
