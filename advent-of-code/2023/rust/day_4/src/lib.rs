@@ -1,8 +1,9 @@
 use rayon::prelude::*;
-use std::collections::HashSet;
+use std::{collections::HashSet, fs::read_to_string};
 
 pub fn run() -> i32 {
     let file = include_str!("../input.txt");
+    // let file = read_to_string("./input.txt").unwrap();
     let card_count = file.lines().count();
 
     let matching = file
@@ -55,13 +56,20 @@ fn parse_line((i, line): (usize, &str)) -> usize {
 
     let scratch_cards = line.split_once('|').expect("invalid format, no |");
 
-    parse_scratch_card(scratch_cards.0)
-        .intersection(&parse_scratch_card(scratch_cards.1))
-        .count()
+    get_matches(
+        parse_scratch_card(scratch_cards.0),
+        parse_scratch_card(scratch_cards.1),
+    )
 }
 
-fn parse_scratch_card(scratch_card: &str) -> HashSet<&str> {
-    scratch_card.split_whitespace().collect::<HashSet<&str>>()
+fn get_matches(x: Vec<&str>, y: Vec<&str>) -> usize {
+    x.par_iter()
+        .fold(|| 0, |acc, val| if y.contains(val) { acc + 1 } else { acc })
+        .sum()
+}
+
+fn parse_scratch_card(scratch_card: &str) -> Vec<&str> {
+    scratch_card.split_whitespace().collect::<Vec<&str>>()
 }
 
 #[cfg(test)]
@@ -72,7 +80,7 @@ mod tests {
     fn should_parse_scratch_card_with_variable_spacing() {
         assert_eq!(
             parse_scratch_card("41 48  9 10 18"),
-            HashSet::from(["41", "48", "9", "10", "18"])
+            Vec::from(["41", "48", "9", "10", "18"])
         )
     }
 
